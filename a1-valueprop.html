@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer × A1 — Value Proposition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .no-break{page-break-inside:avoid}
+}
+
+:root{
+  --bg:#0d0f14;
+  --bg-2:#13161e;
+  --bg-3:#1a1e28;
+  --bg-4:#222636;
+  --accent:#f59e0b;
+  --accent-dim:rgba(245,158,11,.12);
+  --accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;
+  --text-2:#9ba3b8;
+  --text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);
+  --border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;
+  --red-dim:rgba(239,68,68,.1);
+  --red-border:rgba(239,68,68,.2);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,.1);
+  --green-border:rgba(34,197,94,.2);
+  --blue:#3b82f6;
+  --blue-dim:rgba(59,130,246,.1);
+  --blue-border:rgba(59,130,246,.2);
+  --purple:#a855f7;
+  --purple-dim:rgba(168,85,247,.1);
+  --purple-border:rgba(168,85,247,.2);
+  --torq:#ff4e00;
+  --torq-dim:rgba(255,78,0,.1);
+  --torq-border:rgba(255,78,0,.25);
+}
+
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:900px;margin:0 auto;padding:48px 44px 80px}
+
+/* HEADER */
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px}
+.logo-pair{display:flex;align-items:center;gap:14px}
+.logo-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#000;flex-shrink:0}
+.logo-x{font-size:16px;color:var(--text-3);font-weight:300}
+.a1-mark{width:32px;height:32px;background:var(--torq);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0}
+.logo-name{font-size:15px;font-weight:700;line-height:1.2}
+.logo-sub{font-size:11px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.8}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* HERO */
+.hero{margin-bottom:36px}
+.doc-label{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:26px;font-weight:900;line-height:1.2;margin-bottom:10px}
+h1 span{color:var(--accent)}
+.hero-sub{font-size:14px;color:var(--text-2);line-height:1.7;max-width:720px}
+
+/* CORE VALUE PROP */
+.vp-block{background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:12px;padding:22px 26px;margin-bottom:32px}
+.vp-block p{font-size:14px;color:var(--text);line-height:1.75;font-weight:500}
+.vp-block strong{color:var(--accent)}
+
+/* COVERAGE MAP */
+.coverage-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px}
+.cov-card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px}
+.cov-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.cov-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:12px;color:var(--text-2);line-height:1.5}
+.cov-row:last-child{margin-bottom:0}
+.cov-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+
+/* USE CASE CARDS */
+.uc-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.uc-card{border-radius:12px;overflow:hidden;border:1px solid var(--border-2)}
+.uc-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.uc-num{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.uc-title{font-size:13px;font-weight:700;line-height:1.3}
+.uc-body{background:var(--bg-2);padding:14px 18px}
+.uc-section{margin-bottom:12px}
+.uc-section:last-child{margin-bottom:0}
+.uc-section-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.uc-row{display:flex;align-items:flex-start;gap:7px;font-size:11px;color:var(--text-2);line-height:1.5;margin-bottom:4px}
+.uc-row:last-child{margin-bottom:0}
+.uc-arrow{font-size:10px;flex-shrink:0;margin-top:1px}
+
+/* INTEGRATION FLOW */
+.flow{display:flex;align-items:center;gap:0;margin-bottom:32px;background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;overflow:hidden}
+.flow-step{flex:1;padding:16px 14px;text-align:center;position:relative}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:14px;z-index:1}
+.flow-icon{font-size:20px;margin-bottom:6px}
+.flow-name{font-size:11px;font-weight:700;line-height:1.3;margin-bottom:3px}
+.flow-sub{font-size:10px;color:var(--text-3);line-height:1.4}
+.flow-step.sl{background:var(--accent-dim);border-right:1px solid var(--accent-border)}
+.flow-step.torq{background:var(--torq-dim)}
+.flow-step.defender{background:var(--blue-dim)}
+.flow-step.teams{background:var(--purple-dim)}
+.flow-step.outcome{background:var(--green-dim)}
+
+/* KPI STRIP */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:32px}
+.kpi-card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:14px;text-align:center}
+.kpi-num{font-size:22px;font-weight:900;line-height:1;margin-bottom:4px}
+.kpi-label{font-size:10px;color:var(--text-3);line-height:1.4}
+
+/* BLIND SPOT */
+.blindspot{background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:16px 20px;margin-bottom:32px}
+.blindspot h3{font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px}
+.bs-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:6px}
+.bs-row:last-child{margin-bottom:0}
+
+/* FOOTER */
+.doc-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo-pair">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security Platform</div>
+      </div>
+      <div class="logo-x">×</div>
+      <div class="a1-mark">A1</div>
+      <div>
+        <div class="logo-name">A1 — Torq SOAR</div>
+        <div class="logo-sub">Security Orchestration &amp; Response</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>Partnership Value Proposition</strong><br/>
+      Classification: Internal · Pre-Sales<br/>
+      May 2026 · SecureLayer Stealth Stage
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="doc-label">◎ Value Proposition</div>
+    <h1>A1 + Torq closes the SOC loop on<br/><span>human threats. SecureLayer closes it<br/>on AI agent threats.</span></h1>
+    <p class="hero-sub">A1's Torq platform orchestrates world-class response to identity and email threats — the attack vectors that Splunk, Defender, and Group-IB have mature signatures for. SecureLayer adds the one threat class none of those tools can see: AI agents acting as attack vectors, or being compromised as victims. Together, the stack has full-spectrum coverage.</p>
+  </div>
+
+  <!-- CORE VALUE PROP -->
+  <div class="vp-block">
+    <p>
+      <strong>The one-line case:</strong> Every SMB running Claude Code, GitHub Copilot, Cursor, or MCP integrations has introduced a new class of identity — AI agents that authenticate, access systems, and execute actions autonomously. When those agents are compromised via <strong>credential theft</strong> or <strong>prompt injection</strong>, no Splunk alert fires, no Defender signal triggers, no Group-IB rule matches. SecureLayer is the detection and enforcement layer for that gap — and it speaks Torq's language: it fires events via webhook into the same SOAR workflow A1 already runs, feeding the same SLA timers and KPI dashboards.
+    </p>
+  </div>
+
+  <!-- COVERAGE MAP -->
+  <div style="margin-bottom:10px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em">Coverage map — what each layer sees</div>
+  <div class="coverage-grid" style="margin-bottom:32px">
+    <div class="cov-card" style="border-color:var(--torq-border)">
+      <div class="cov-label" style="color:var(--torq)">A1 + Torq today — human &amp; endpoint threats</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>Impossible travel / anomalous human login (Splunk → Torq)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>Phishing and malicious email (Splunk / Defender → Torq)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>IOC enrichment via Group-IB, Defender signals</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>Human analyst-in-the-loop approval (Teams)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>Entra ID suspension, mailbox containment</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--green)"></div>SLA / KPI tracking: TTA, TTT, TTR</div>
+    </div>
+    <div class="cov-card" style="border-color:var(--accent-border)">
+      <div class="cov-label" style="color:var(--accent)">SecureLayer adds — AI agent threats (blind spot today)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>AI agent anomalous behavior (agent acting outside normal scope)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>Prompt injection detection (AI phishing — external instruction manipulation)</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>MCP server compromise / data exfiltration via AI tool calls</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>Credential theft by AI agents (not human) — no Splunk signature</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>AI agent office-hours enforcement — block outside defined windows</div>
+      <div class="cov-row"><div class="cov-dot" style="background:var(--accent)"></div>Compliance artifact: signed AI agent access log for auditors</div>
+    </div>
+  </div>
+
+  <!-- USE CASE EXTENSIONS -->
+  <div style="margin-bottom:12px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em">How SecureLayer extends each A1 use case</div>
+
+  <div class="uc-pair no-break">
+
+    <!-- UC1 -->
+    <div class="uc-card">
+      <div class="uc-header" style="background:var(--blue-dim)">
+        <div class="uc-num" style="color:var(--blue)">Use Case 1 — Extended</div>
+        <div class="uc-title">Impossible Travel → AI Agent Anomalous Behavior</div>
+      </div>
+      <div class="uc-body">
+        <div class="uc-section">
+          <div class="uc-section-label" style="color:var(--torq)">A1 / Torq today</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Splunk fires on human login anomaly</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Torq creates case, Socrates enriches via Splunk + Defender</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Teams notification → user responds → Entra ID suspension</div>
+        </div>
+        <div class="uc-section">
+          <div class="uc-section-label" style="color:var(--accent)">SecureLayer extends</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>AI agent (Claude Code / Cursor) authenticates outside office hours, or accesses repos, APIs, and file paths it has never touched — no Splunk signature exists</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>SecureLayer scores the anomaly (10-dimension risk model), fires webhook to Torq</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>Torq creates a case — same SLA timers, same KPI pipeline — and suspends the agent's MCP server access or blocks via RMM policy</div>
+        </div>
+        <div class="uc-section" style="background:var(--accent-dim);border-radius:6px;padding:8px 10px;margin-top:4px">
+          <div style="font-size:11px;color:var(--accent);font-weight:600">Net new coverage: the AI agent is the impossible traveler. Splunk never fires. Only SecureLayer catches it.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UC2 -->
+    <div class="uc-card">
+      <div class="uc-header" style="background:var(--red-dim)">
+        <div class="uc-num" style="color:var(--red)">Use Case 2 — Extended</div>
+        <div class="uc-title">Phishing Triage → AI Agent Prompt Injection</div>
+      </div>
+      <div class="uc-body">
+        <div class="uc-section">
+          <div class="uc-section-label" style="color:var(--torq)">A1 / Torq today</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Splunk / Defender alert on malicious email</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Torq extracts IOCs, checks Group-IB, scans affected mailboxes</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Teams one-click approval → containment action</div>
+        </div>
+        <div class="uc-section">
+          <div class="uc-section-label" style="color:var(--accent)">SecureLayer extends</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>Attacker delivers malicious instructions to an AI agent mid-session (prompt injection) — the AI equivalent of a phishing email. Agent begins exfiltrating data via MCP server calls. No email, no Defender signal, no IOC.</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>SecureLayer detects the behavioral anomaly (unexpected tool calls, data volume spike, scope escalation), fires to Torq</div>
+          <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">→</div>Torq creates case → analyst Teams approval → agent session terminated, MCP server isolated</div>
+        </div>
+        <div class="uc-section" style="background:var(--red-dim);border-radius:6px;padding:8px 10px;margin-top:4px">
+          <div style="font-size:11px;color:var(--red);font-weight:600">Net new coverage: prompt injection is AI phishing. It produces no email artifact, no IOC. Group-IB has no signature. Only SecureLayer sees it.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WHAT TOOLS ARE BLIND TO -->
+  <div class="blindspot no-break">
+    <h3>⚠ What Splunk, Defender, and Group-IB are blind to today</h3>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An AI agent authenticating with stolen credentials — generates no human login event, no geolocation anomaly</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>A prompt injection attack — no email header, no URL, no file hash. No IOC for Group-IB to match.</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An MCP server silently exfiltrating database records via tool calls — no network anomaly at the CASB layer; traffic looks like normal API usage</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An AI agent running at 2am on a client endpoint — Splunk sees no login, Defender sees no process anomaly, the agent is whitelisted</div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--red-border);font-size:12px;color:var(--text-2)">These are not theoretical vectors. Credential theft via AI agents and prompt injection attacks are documented in 2025–2026 enterprise incident reports. The attack surface is live and unmonitored in every SMB environment running AI coding tools.</div>
+  </div>
+
+  <!-- INTEGRATION FLOW -->
+  <div style="margin-bottom:12px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em">Unified response flow — SecureLayer feeds Torq, same workflow</div>
+  <div class="flow no-break" style="margin-bottom:32px">
+    <div class="flow-step sl">
+      <div class="flow-icon">⬡</div>
+      <div class="flow-name" style="color:var(--accent)">SecureLayer</div>
+      <div class="flow-sub">Detects AI agent anomaly, scores risk, fires webhook</div>
+    </div>
+    <div class="flow-step torq">
+      <div class="flow-icon">⚡</div>
+      <div class="flow-name" style="color:var(--torq)">Torq</div>
+      <div class="flow-sub">Creates case, starts SLA timer, runs Socrates enrichment</div>
+    </div>
+    <div class="flow-step defender">
+      <div class="flow-icon">🛡</div>
+      <div class="flow-name" style="color:var(--blue)">Defender + Splunk</div>
+      <div class="flow-sub">Cross-referenced for related human signals on same tenant</div>
+    </div>
+    <div class="flow-step teams">
+      <div class="flow-icon">💬</div>
+      <div class="flow-name" style="color:var(--purple)">Teams</div>
+      <div class="flow-sub">Analyst-in-the-loop: one-click approval to contain</div>
+    </div>
+    <div class="flow-step outcome">
+      <div class="flow-icon">✓</div>
+      <div class="flow-name" style="color:var(--green)">Containment</div>
+      <div class="flow-sub">Agent blocked, MCP server isolated, compliance log generated</div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div style="margin-bottom:12px;font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em">KPI coverage — AI agent incidents feed the same dashboards</div>
+  <div class="kpi-strip no-break">
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--accent)">TTA</div>
+      <div class="kpi-label">Time-to-Acknowledge<br/>SecureLayer fires → Torq case in &lt;30s</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--accent)">TTT</div>
+      <div class="kpi-label">Time-to-Triage<br/>Risk score + agent context pre-populated in case</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--accent)">TTR</div>
+      <div class="kpi-label">Time-to-Respond<br/>RMM block or MCP isolation — no manual steps</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:var(--green)">Log</div>
+      <div class="kpi-label">Compliance artifact<br/>Signed AI agent access log exported per incident</div>
+    </div>
+  </div>
+
+  <!-- CLOSING STATEMENT -->
+  <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;padding:22px 26px;margin-bottom:16px">
+    <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">The partnership case in three sentences</div>
+    <p style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:10px">
+      A1 and Torq have built the most capable SOAR response workflow in the SMB/MSSP market — but it is only as good as the signals it receives. Splunk, Defender, and Group-IB cannot generate signals for AI agent threats. SecureLayer is the signal source for that threat class, built to speak Torq's webhook language and feed directly into the response workflows A1's customers already trust.
+    </p>
+    <p style="font-size:13px;color:var(--text-2);line-height:1.8">
+      Every SMB running AI coding agents today is running an unmonitored attack surface alongside a well-monitored one. <strong style="color:var(--text)">SecureLayer + A1/Torq closes both sides of that gap.</strong> No other combination does.
+    </p>
+  </div>
+
+  <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:16px">
+    <div style="font-size:24px">🔗</div>
+    <div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:2px">See the SecureLayer product live</div>
+      <div class="mono" style="color:var(--accent)">https://sharon19x1-ops.github.io/securelayer-demo/</div>
+    </div>
+    <div style="margin-left:auto;font-size:11px;color:var(--text-2);text-align:right;line-height:1.6">Full interactive prototype<br/>All 8 views · MSSP/SMB toggle · No login</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>SecureLayer × A1 — Partnership Value Proposition — Confidential</div>
+    <div>securelayer.io · a1.com · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
