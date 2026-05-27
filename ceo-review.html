@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SecureLayer — CEO Concept Review</title>
+<title>SecureLayer — CEO Concept Review (Final)</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -120,9 +120,7 @@ tr:last-child td{border-bottom:none}
 .card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 
 /* VERDICT */
-.verdict-block{
-  border-radius:12px;padding:22px 26px;margin-bottom:4px;
-}
+.verdict-block{border-radius:12px;padding:22px 26px;margin-bottom:12px}
 .verdict-go{background:var(--green-dim);border:1px solid var(--green-border)}
 .verdict-go h3{color:var(--green);font-size:15px;font-weight:800;margin-bottom:8px}
 .verdict-risk{background:var(--accent-dim);border:1px solid var(--accent-border)}
@@ -140,17 +138,40 @@ tr:last-child td{border-bottom:none}
 .d-num{
   width:24px;height:24px;border-radius:6px;
   display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:800;background:var(--bg-4);color:var(--text-2);
+  font-size:11px;font-weight:800;background:var(--green);color:#000;
 }
 .decision-head h4{font-size:13px;font-weight:700}
 .decision-body{
-  display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);
 }
 .d-col{padding:12px 14px;font-size:12px;color:var(--text-2);line-height:1.5}
 .d-col:not(:last-child){border-right:1px solid var(--border)}
 .d-col-label{font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
 .decision-rec{padding:10px 14px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
-.rec-tag{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px}
+.rec-tag{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;flex-shrink:0;padding-top:1px}
+
+/* PHASE BLOCKS */
+.phase-block{border-radius:12px;overflow:hidden;margin-bottom:20px}
+.phase-header{padding:14px 20px;display:flex;align-items:center;gap:14px}
+.phase-num{font-size:28px;font-weight:900;line-height:1}
+.phase-meta{}
+.phase-meta h3{font-size:15px;font-weight:800;line-height:1.2;margin-bottom:2px}
+.phase-meta p{font-size:11px;opacity:.8}
+.phase-badge{margin-left:auto;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px}
+.phase-body{padding:0}
+.phase-sprint{
+  display:grid;grid-template-columns:120px 1fr;border-top:1px solid rgba(255,255,255,.06);
+}
+.ps-label{
+  padding:14px 16px;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em;
+  border-right:1px solid rgba(255,255,255,.06);
+}
+.ps-content{padding:14px 18px}
+.ps-content h4{font-size:12px;font-weight:700;margin-bottom:4px}
+.ps-content p{font-size:12px;color:var(--text-2);line-height:1.5}
+.ps-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.ps-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.05);color:var(--text-3)}
 
 /* TIMELINE */
 .timeline{display:flex;flex-direction:column;gap:0}
@@ -181,6 +202,17 @@ tr:last-child td{border-bottom:none}
   font-size:11px;color:var(--text-3);
 }
 .mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* DECISION SUMMARY BAR */
+.decision-summary{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;
+}
+.ds-item{
+  background:var(--bg-2);border:1px solid var(--green-border);
+  border-radius:8px;padding:10px 12px;
+}
+.ds-label{font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.ds-value{font-size:11px;font-weight:700;color:var(--text);line-height:1.4}
 </style>
 </head>
 <body>
@@ -196,21 +228,59 @@ tr:last-child td{border-bottom:none}
       </div>
     </div>
     <div class="doc-meta">
-      <strong>CEO Concept Review</strong><br/>
+      <strong>CEO Concept Review — Final</strong><br/>
       Classification: Internal — Founder Only<br/>
-      Date: May 2026<br/>
-      Status: Pre-Design / Pre-Seed
+      Date: May 2026 · Revision 2 (Post Decision Session)<br/>
+      Status: GO — Decisions D1–D5 Locked
     </div>
   </div>
 
   <!-- TITLE -->
   <div class="title-block">
-    <div class="doc-label">◎ CEO Review</div>
-    <h1>SecureLayer —<br/><span>Go / No-Go Before Design</span></h1>
-    <p class="title-sub">This document frames the key questions a CEO must answer before committing engineering and design resources to SecureLayer. It consolidates the concept, the market evidence, the business model, the risk register, and the four decisions that need an owner before work begins.</p>
+    <div class="doc-label">◎ CEO Review · Final</div>
+    <h1>SecureLayer —<br/><span>Go Confirmed. Two-Phase MVP Locked.</span></h1>
+    <p class="title-sub">This is the final CEO review following the founder decision session. All five architecture and strategy decisions (D1–D5) are resolved. This document is the authoritative reference for engineering, design, and discovery calls. Do not commission any sprint work that contradicts the decisions recorded here.</p>
   </div>
 
-  <!-- 1. CONCEPT IN ONE PAGE -->
+  <!-- 0. DECISION SUMMARY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num" style="background:var(--green);color:#000">✓</div>
+      <h2>Five Decisions — All Resolved</h2>
+      <span class="tag tag-green">Locked · No Reopening</span>
+    </div>
+
+    <div class="decision-summary">
+      <div class="ds-item">
+        <div class="ds-label">D1 · Go-to-market scope</div>
+        <div class="ds-value">Selective Expansion — MSSP primary, PLG supporting wedge</div>
+      </div>
+      <div class="ds-item">
+        <div class="ds-label">D2 · Pricing</div>
+        <div class="ds-value">$20–30/tenant flat — hold for market penetration</div>
+      </div>
+      <div class="ds-item">
+        <div class="ds-label">D3 · MCP detection</div>
+        <div class="ds-value">Manifest scan in Phase 1 · Full behavioral analysis in Phase 2</div>
+      </div>
+      <div class="ds-item">
+        <div class="ds-label">D4 · Runtime sensor</div>
+        <div class="ds-value">Phase 2 · API hook built in Phase 1 · Upgrade via RMM toggle</div>
+      </div>
+      <div class="ds-item">
+        <div class="ds-label">D5 · Platform partnerships</div>
+        <div class="ds-value">Deferred · Approach Anthropic/Microsoft after 10 paying MSSPs</div>
+      </div>
+    </div>
+
+    <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:14px 18px">
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7">
+        <strong style="color:var(--green)">Verdict: GO.</strong> The concept is sound, the timing is right, the enforcement gap is open. The market signal is real — auditors are asking, vendors are acquiring, active credential theft and prompt injection attacks are documented. SecureLayer's window is measured in months not years. Start the clock.
+      </p>
+    </div>
+  </div>
+
+  <!-- 1. CONCEPT -->
   <div class="section">
     <div class="section-head">
       <div class="section-num">1</div>
@@ -221,11 +291,11 @@ tr:last-child td{border-bottom:none}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
       <div class="card">
         <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">The Problem</div>
-        <p style="font-size:13px;color:var(--text-2);line-height:1.7">AI coding agents — Claude Code, GitHub Copilot, Cursor, MCP servers — are installed on developer endpoints across SMB environments. They have broad file-system and shell access. They run during and after business hours. No MSSP has visibility into them. No tool governs what they can do. And auditors are already asking for evidence of AI agent access controls.</p>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7">AI coding agents — Claude Code, GitHub Copilot, Cursor, MCP servers — are deployed across SMB environments. They have broad file-system, shell, and API access. They run during and after business hours. No MSSP has visibility into them. No tool governs what they can do. Auditors are already asking for evidence of AI agent access controls. Active attacks via stolen credentials and prompt injection are documented in enterprise incident reports.</p>
       </div>
       <div class="card">
         <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">The Solution</div>
-        <p style="font-size:13px;color:var(--text-2);line-height:1.7">SecureLayer is the enforcement layer between AI agents and the environments they can reach. It delivers: <strong style="color:var(--text)">real-time risk scoring per agent skill</strong> (10-dimension model), <strong style="color:var(--text)">office hours enforcement</strong> (block all agent activity outside defined windows), and a <strong style="color:var(--text)">compliance artifact</strong> (audit-ready access log) — all delivered through the MSSP's existing ConnectWise or NinjaOne stack.</p>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7">SecureLayer is the enforcement layer between AI agents and the environments they reach. Phase 1 delivers: <strong style="color:var(--text)">real-time risk scoring per agent skill</strong> (10-dimension model), <strong style="color:var(--text)">MCP server detection</strong> (manifest scan), <strong style="color:var(--text)">office hours enforcement</strong> (block outside defined windows), and a <strong style="color:var(--text)">compliance artifact</strong> (audit-ready access log). Phase 2 adds a lightweight runtime sensor for mid-session threat detection.</p>
       </div>
     </div>
 
@@ -236,29 +306,343 @@ tr:last-child td{border-bottom:none}
       </div>
       <div class="card" style="border-color:var(--blue-border)">
         <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Primary Channel</div>
-        <p style="font-size:12px;color:var(--text-2)">MSSP vCISO. Sold as a per-tenant add-on, white-label ready, invoiced directly to SMB clients at QBR. $20–30/tenant/month.</p>
+        <p style="font-size:12px;color:var(--text-2)">MSSP vCISO. Per-tenant add-on, white-label ready, invoiced to SMB clients at QBR. $20–30/tenant/month flat — no negotiation until 10 customers.</p>
       </div>
       <div class="card" style="border-color:var(--green-border)">
-        <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">PLG Lane</div>
-        <p style="font-size:12px;color:var(--text-2)">GitHub org scan — free AI agent inventory, self-serve. Upgrade trigger: enforcement + compliance log. SMB direct at $30/month flat.</p>
+        <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">PLG Supporting Wedge</div>
+        <p style="font-size:12px;color:var(--text-2)">GitHub OAuth scan → free AI agent + MCP inventory → enforce? upgrade trigger. Feeds MSSP inbound. Not a competing channel.</p>
       </div>
     </div>
 
-    <!-- Live demo callout -->
     <div style="background:var(--bg-3);border:1px solid var(--border-2);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px">
       <span style="font-size:16px">🔗</span>
       <div>
         <div style="font-size:12px;font-weight:700;margin-bottom:2px">Interactive prototype is live</div>
         <div class="mono" style="color:var(--accent)">https://sharon19x1-ops.github.io/securelayer-demo/</div>
       </div>
-      <div style="margin-left:auto;font-size:11px;color:var(--text-3)">No login · All 8 views working · Dark theme</div>
+      <div style="margin-left:auto;font-size:11px;color:var(--text-3)">No login · All 8 views · MSSP/SMB toggle</div>
     </div>
   </div>
 
-  <!-- 2. MARKET EVIDENCE -->
-  <div class="section">
+  <!-- 2. PHASE 1 MVP -->
+  <div class="section page-break">
     <div class="section-head">
       <div class="section-num">2</div>
+      <h2>Phase 1 MVP — Weeks 1–12</h2>
+      <span class="tag tag-green">Build Now · No Endpoint Agent</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px;line-height:1.7">Phase 1 is entirely API-based — no endpoint agent required. It discovers what is running, scores risk, surfaces compliance gaps, and enforces policy via the MSSP's existing RMM/PSA stack. The API is designed from day one with a clean hook for the Phase 2 runtime sensor so no retrofit is needed when MSSPs want to upgrade.</p>
+
+    <!-- Phase 1 block -->
+    <div class="phase-block" style="border:1px solid var(--green-border)">
+      <div class="phase-header" style="background:var(--green-dim)">
+        <div class="phase-num" style="color:var(--green)">1</div>
+        <div class="phase-meta">
+          <h3 style="color:var(--green)">Phase 1 — Discovery, Enforcement &amp; Compliance</h3>
+          <p style="color:var(--green)">Weeks 1–12 · No endpoint agent · 4 sprints · Market penetration pricing</p>
+        </div>
+        <div class="phase-badge" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)">Target: 10 MSSP customers</div>
+      </div>
+
+      <div class="phase-body" style="background:var(--bg-2)">
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--green)">Sprint 1<br/>Weeks 1–3</div>
+          <div class="ps-content">
+            <h4>GitHub OAuth scan — AI agent + MCP inventory</h4>
+            <p>Scan org repos for AI agent configs (.claude, .cursor, MCP manifests, copilot settings). Output: risk inventory with 10-dimension scores per agent skill. MCP server detection is included in scope — manifest-based, not runtime. No RMM, no credit card. This validates assumption B1 (shadow AI discovery) and gives real usage data before any MSSP pilot request lands. Target: 2–3 weeks, one engineer.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">PLG wedge</span>
+              <span class="ps-tag">MCP manifest scan</span>
+              <span class="ps-tag">10-dim risk score</span>
+              <span class="ps-tag">No endpoint agent</span>
+              <span class="ps-tag">Assumption B1 validation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--accent)">Sprint 2<br/>Weeks 4–6</div>
+          <div class="ps-content">
+            <h4>ConnectWise Manage integration — MSSP ticket auto-create</h4>
+            <p>On any SecurityEvent with severity ≥ high, auto-create a ConnectWise ticket with tenant, agent, severity, and recommended remediation pre-filled. This is the single integration that makes the MSSP motion real — every vCISO uses ConnectWise or NinjaOne. Build target: 2 weeks, one engineer with ConnectWise sandbox access.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">ConnectWise integration</span>
+              <span class="ps-tag">NinjaOne integration</span>
+              <span class="ps-tag">Auto-ticket creation</span>
+              <span class="ps-tag">MSSP motion activated</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--blue)">Sprint 3<br/>Weeks 7–9</div>
+          <div class="ps-content">
+            <h4>Office Hours enforcement — real policy push via RMM</h4>
+            <p>Replace the mock toggle with a real policy that blocks AI agent access outside the configured schedule. Delivered as an RMM endpoint policy (Group Policy or MDM profile). The Phase 2 sensor hook is wired at this point — a stub in the API that future runtime traffic inspection will call. The UI shows a "Deep Inspection Mode" toggle, greyed out, labelled "Phase 2 — Coming." This signals the roadmap to MSSPs from day one.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">Office hours enforcement</span>
+              <span class="ps-tag">RMM policy push</span>
+              <span class="ps-tag">Phase 2 API hook stub</span>
+              <span class="ps-tag">Deep Inspection Mode UI (greyed)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--purple)">Sprint 4<br/>Weeks 10–12</div>
+          <div class="ps-content">
+            <h4>Compliance log export — SOC 2 / CMMC audit artifact</h4>
+            <p>Every blocked event formatted as a signed, timestamped audit log exportable as PDF or JSON. This closes assumption A1 (audit requirement) and turns the product from a security tool into a compliance tool — two separate budget lines in an MSSP's client invoice. This is the unlock for the compliance Motion C from the GTM brief.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">SOC 2 artifact</span>
+              <span class="ps-tag">CMMC ready</span>
+              <span class="ps-tag">Signed + timestamped log</span>
+              <span class="ps-tag">PDF / JSON export</span>
+              <span class="ps-tag">Assumption A1 closed</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Phase 1 constraints callout -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card" style="border-color:var(--green-border)">
+        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px">Phase 1 is deliberately narrow</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> No endpoint agent — nothing to install on SMB machines</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> No runtime traffic inspection — manifest-level only</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> Prices held flat — no upsell pressure on first 10 MSSPs</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> API designed with Phase 2 hook stub from Week 9</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:var(--accent-border)">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px">Phase 1 unlock conditions for Phase 2</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--accent)">→</span> 10 paying MSSP customers live on Phase 1</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--accent)">→</span> At least 1 MSSP requesting mid-session detection</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--accent)">→</span> Phase 2 API hook verified working in staging</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--accent)">→</span> Seed round closed (funding the sensor engineering)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PHASE 2 MVP -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Phase 2 MVP — Month 4+ (After 10 MSSP Customers)</h2>
+      <span class="tag tag-purple">Runtime Detection · Platform Partnerships</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px;line-height:1.7">Phase 2 adds the lightweight runtime sensor. Existing Phase 1 MSSPs upgrade via a single RMM toggle — the Phase 2 hook stub in the Phase 1 API makes this seamless. No re-architecture required. Platform vendor partnerships (Anthropic, Microsoft) are also initiated in Phase 2, using MSSP traction as the proof point.</p>
+
+    <!-- Phase 2 block -->
+    <div class="phase-block" style="border:1px solid var(--purple-border)">
+      <div class="phase-header" style="background:var(--purple-dim)">
+        <div class="phase-num" style="color:var(--purple)">2</div>
+        <div class="phase-meta">
+          <h3 style="color:var(--purple)">Phase 2 — Runtime Sensor + MCP Behavioral Analysis</h3>
+          <p style="color:var(--purple)">Month 4+ · Triggered by 10 MSSP customers · Upgrade path via RMM toggle</p>
+        </div>
+        <div class="phase-badge" style="background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)">Unlocks mid-session detection</div>
+      </div>
+
+      <div class="phase-body" style="background:var(--bg-2)">
+
+        <div class="phase-sprint" style="border-top:1px solid rgba(255,255,255,.06)">
+          <div class="ps-label" style="color:var(--purple)">Phase 2.1<br/>Sensor deploy</div>
+          <div class="ps-content">
+            <h4>Lightweight runtime sensor — RMM-deployed, zero friction upgrade</h4>
+            <p>Existing MSSP flips the "Deep Inspection Mode" toggle in the Phase 1 dashboard. Conductor pushes the sensor to all managed endpoints via the MSSP's existing RMM. The Phase 2 API hook (stubbed in Sprint 3) activates. No new rollout conversation — the MSSP has already agreed to the scope during Phase 1 onboarding. Sensor is lightweight by design: reads agent session metadata, intercepts MCP traffic, reports to SecureLayer cloud. No kernel-level access required.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">RMM toggle upgrade</span>
+              <span class="ps-tag">Zero re-architecture</span>
+              <span class="ps-tag">Phase 1 API hook activated</span>
+              <span class="ps-tag">Lightweight — no kernel access</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--purple)">Phase 2.2<br/>MCP behavioral</div>
+          <div class="ps-content">
+            <h4>Full MCP behavioral analysis — traffic inspection + anomaly detection</h4>
+            <p>Phase 1 detected MCP servers from manifests. Phase 2 inspects what those servers actually do: traffic patterns, tool call frequency, data volume, unusual access sequences. Anomaly scores are added as a new dimension to the existing 10-dimension skill score model. This is the most defensible position — MCP traffic is invisible to all existing security tools (CrowdStrike, Palo Alto, CASB). SecureLayer is the only layer that sees it.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">MCP traffic inspection</span>
+              <span class="ps-tag">Anomaly detection</span>
+              <span class="ps-tag">11th risk dimension</span>
+              <span class="ps-tag">Invisible to all incumbents</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--purple)">Phase 2.3<br/>Mid-session</div>
+          <div class="ps-content">
+            <h4>Mid-session attack detection — credential theft + prompt injection</h4>
+            <p>Runtime sensor enables detection of attacks that happen during an active agent session — not just at policy enforcement time. Credential exfiltration patterns (agent accessing secrets outside normal scope), prompt injection sequences (sudden instruction change mid-session), and privilege escalation attempts. These are the documented active threats from the market evidence section. Phase 2 is the only product that catches them.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">Credential theft detection</span>
+              <span class="ps-tag">Prompt injection detection</span>
+              <span class="ps-tag">Privilege escalation alert</span>
+              <span class="ps-tag">Active threat — documented</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase-sprint">
+          <div class="ps-label" style="color:var(--blue)">Phase 2.4<br/>Partnerships</div>
+          <div class="ps-content">
+            <h4>Platform partnerships — Anthropic, Microsoft, GitHub as distribution channels</h4>
+            <p>Approach Anthropic, Microsoft (GitHub Copilot/Azure), and GitHub with 10 MSSP customer proof points. Pitch: SecureLayer as the recommended governance layer for enterprise/MSSP deployments of their agent platforms. These partnerships are not integrations — they are distribution agreements where the platform recommends SecureLayer to their customers. Not viable without traction evidence. Do not pursue in Phase 1.</p>
+            <div class="ps-tags">
+              <span class="ps-tag">Anthropic partnership</span>
+              <span class="ps-tag">Microsoft/GitHub channel</span>
+              <span class="ps-tag">Distribution — not integration</span>
+              <span class="ps-tag">Requires 10 MSSP proof points</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DECISION LOG -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Decision Log — D1 Through D5</h2>
+      <span class="tag tag-green">All Resolved · Locked</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">These decisions were made in the founder decision session and are not open for debate until the defined trigger conditions are met. Any engineering or design work that contradicts these decisions requires explicit CEO sign-off before proceeding.</p>
+
+    <!-- D1 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D1</div>
+        <h4>GTM scope: MSSP primary with PLG as supporting wedge — not parallel motions</h4>
+        <span class="tag tag-green">Selective Expansion · Locked</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">What was decided</div>
+          SELECTIVE EXPANSION. MSSP channel is the primary revenue motion. PLG (GitHub OAuth scan) exists to generate inbound signal and real usage data — it is not a competing revenue stream. All engineering and marketing energy points at MSSP first.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">What this prevents</div>
+          Building two parallel go-to-market motions with equal resource allocation before either is validated. PLG is a wedge and proof-of-product, not a business model of its own until MSSP motion is proven.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Trigger to revisit:</span>
+        <span style="font-size:12px;color:var(--text-2)">PLG self-serve reaches 50 paying companies before 10 MSSP partners close. At that point, reassess whether PLG deserves its own motion and resource allocation.</span>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D2</div>
+        <h4>Pricing: $20–30/tenant/month flat — hold for market penetration</h4>
+        <span class="tag tag-green">Market Penetration · Locked</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">What was decided</div>
+          Hold $20–30/tenant/month flat. No tiering, no negotiation with first 10 MSSP customers. The price is a market penetration play — getting in the door and establishing reference customers matters more than extracting maximum margin right now.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">What this prevents</div>
+          Two-tier pricing (visibility-only vs. enforcement+compliance) adds friction to the pitch before you have proof the basic model works. MSSP has to choose. Early discovery calls confirmed compliance is equally valued — bundle it at flat price.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Trigger to revisit:</span>
+        <span style="font-size:12px;color:var(--text-2)">After 10 paying MSSP customers, review whether a Phase 2 premium tier ($45–60) for runtime sensor + behavioral analysis is warranted. Discovery calls from those 10 will define the ceiling.</span>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D3</div>
+        <h4>MCP detection: manifest scan in Phase 1, full behavioral analysis in Phase 2</h4>
+        <span class="tag tag-green">Phased · Locked</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">What was decided</div>
+          MCP server detection is included in Sprint 1 scope — but manifest-based only. Parse .mcp.json, MCP config files, and tool declaration manifests to identify what servers are present and what tools they expose. Score them on the existing 10-dimension model. Full traffic inspection and behavioral anomaly detection are Phase 2.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Why this matters</div>
+          MCP servers are the most defensible threat surface — they are invisible to all existing security tools. Even manifest-level detection in Phase 1 gives SecureLayer a unique claim no incumbent can match. Full behavioral analysis (Phase 2) is the moat.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Engineering note:</span>
+        <span style="font-size:12px;color:var(--text-2)">Do not delay Sprint 1 trying to build Phase 2 MCP inspection. Manifest scan is the wedge. Full behavioral analysis requires the Phase 2 runtime sensor. Build in that order.</span>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D4</div>
+        <h4>Runtime sensor: Phase 2 component — Phase 1 API must include clean hook stub</h4>
+        <span class="tag tag-green">Architecture Lock · Sprint 3</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">What was decided</div>
+          Phase 1 has no endpoint agent. Phase 2 introduces a lightweight runtime sensor. The Phase 1 API must be designed with a clean, documented hook for the Phase 2 sensor from day one (wired in Sprint 3). When an MSSP wants Phase 2, they flip a toggle — no re-architecture, no new sales conversation. The sensor deploys via their existing RMM.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">What Phase 2 sensor enables</div>
+          Mid-session attack detection: credential theft patterns, prompt injection sequences, privilege escalation. These are the documented active threats. No Phase 1 product can catch them — requires runtime presence. The sensor is lightweight by design (no kernel access, session metadata + MCP traffic only).
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Sprint 3 requirement:</span>
+        <span style="font-size:12px;color:var(--text-2)">The Phase 2 API hook stub must be implemented in Sprint 3 alongside Office Hours enforcement. The "Deep Inspection Mode" toggle must appear in the Phase 1 UI, greyed out, labelled "Phase 2." This is not optional — it signals the roadmap and reduces Phase 2 upgrade friction with every MSSP from day one.</span>
+      </div>
+    </div>
+
+    <!-- D5 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D5</div>
+        <h4>Platform partnerships: defer until 10 MSSP customers — use traction as proof point</h4>
+        <span class="tag tag-green">Phase 2 Only · Locked</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">What was decided</div>
+          Anthropic, Microsoft (GitHub/Azure), and GitHub should eventually be distribution channels — recommending SecureLayer to their enterprise and MSSP customers. This is a Phase 2 motion only. Do not pursue vendor partnerships in Phase 1. They distract from the MSSP motion and there are no proof points to bring to the table.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">The Phase 2 pitch</div>
+          "We protect your enterprise customers' deployments of your agents. We currently secure [X] MSSP environments covering [Y] SMBs running Claude Code / Copilot / Cursor. A recommended integration from your platform means your customers can adopt agents without security risk." That conversation only works with 10+ live customers.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Trigger to act:</span>
+        <span style="font-size:12px;color:var(--text-2)">10 paying MSSP customers live on Phase 1. Initiate partnership conversations with Anthropic and Microsoft simultaneously. Use customer logos and incident-prevention data as the proof point. The pitch is distribution, not technical integration.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. MARKET EVIDENCE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
       <h2>Market Evidence — What We Know vs. What We're Assuming</h2>
       <span class="tag tag-amber">Validated Partial</span>
     </div>
@@ -266,95 +650,95 @@ tr:last-child td{border-bottom:none}
     <div class="tbl-wrap">
       <table>
         <thead>
-          <tr><th>Signal</th><th>Status</th><th>Evidence Quality</th><th>CEO Implication</th></tr>
+          <tr><th>Signal</th><th>Status</th><th>Evidence Quality</th><th>Action Required</th></tr>
         </thead>
         <tbody>
           <tr>
             <td>Auditors are asking for AI agent governance logs</td>
             <td style="color:var(--green);font-weight:700">Confirmed</td>
             <td style="color:var(--text-2)">Adjacent experience + peer conversations. Not yet from a direct auditor interview.</td>
-            <td>Strong enough to lead with in discovery calls. Verify with one auditor before month-end.</td>
+            <td>Interview one auditor before Discovery Call 2. One confirmed answer closes this permanently.</td>
           </tr>
           <tr>
             <td>MSSPs are extending cloud security to cover AI agents</td>
             <td style="color:var(--green);font-weight:700">Confirmed</td>
             <td style="color:var(--text-2)">Palo Alto, CrowdStrike, Cisco in active acquisition mode for AI agent observability startups.</td>
-            <td>Big vendor acquisitions validate the category. The enforcement gap is the wedge before they ship.</td>
+            <td>Big vendor acquisitions validate the category. The enforcement gap is the wedge. Use in MSSP pitch.</td>
           </tr>
           <tr>
             <td>Credential theft and prompt injection are active threats</td>
             <td style="color:var(--green);font-weight:700">Confirmed</td>
-            <td style="color:var(--text-2)">Documented in enterprise security incident reports. Not theoretical.</td>
-            <td>Replaces the need for a reference incident in the sales motion. Use documented cases directly.</td>
+            <td style="color:var(--text-2)">Documented in enterprise security incident reports. Not theoretical. Active in 2025–2026.</td>
+            <td>Use documented cases directly in the sales motion. Phase 2 is the only product that catches these.</td>
+          </tr>
+          <tr>
+            <td>Cloud security tools being extended to cover AI agents</td>
+            <td style="color:var(--green);font-weight:700">Confirmed</td>
+            <td style="color:var(--text-2)">Validated via buyer behavior. Most MSSP clients already use cloud security tools and will extend coverage.</td>
+            <td>SecureLayer extends naturally from cloud security posture. Frame as the AI agent layer of CSPM.</td>
           </tr>
           <tr>
             <td>MSSP vCISO will pay $20–30/tenant/month</td>
             <td style="color:var(--red);font-weight:700">Unconfirmed</td>
-            <td style="color:var(--text-2)">Price was modeled, not validated. No prospect has been asked.</td>
-            <td>Do not anchor on this number until at least 2 of 3 discovery calls confirm it or adjust it.</td>
-          </tr>
-          <tr>
-            <td>An MSSP vCISO has been blamed for an AI agent incident</td>
-            <td style="color:var(--red);font-weight:700">Unconfirmed</td>
-            <td style="color:var(--text-2)">No direct evidence. Framing is near-miss / "who would find out?" rather than confirmed incident.</td>
-            <td>Urgency still works via audit pressure and documented external incidents. Q1 strengthens but isn't required.</td>
+            <td style="color:var(--text-2)">Price was modeled, not validated. No prospect has been asked directly.</td>
+            <td>Do not anchor on this number. Let discovery calls 1–3 surface the real number. Hold flat until confirmed.</td>
           </tr>
           <tr>
             <td>GitHub scan surfaces shadow AI that users didn't know was running</td>
             <td style="color:var(--accent);font-weight:700">Assumed</td>
             <td style="color:var(--text-2)">PLG wedge depends on this. Not tested on real orgs yet.</td>
-            <td>First engineering validation: run the scan on 5 friendly orgs before building the PLG flow.</td>
+            <td>Sprint 1 validation: run the scan on 5 friendly orgs before any MSSP pilot request arrives.</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- 3. COMPETITIVE POSITION -->
+  <!-- 6. COMPETITIVE POSITION -->
   <div class="section page-break">
     <div class="section-head">
-      <div class="section-num">3</div>
+      <div class="section-num">6</div>
       <h2>Competitive Position — The Enforcement Gap</h2>
-      <span class="tag tag-green">Favorable Window</span>
+      <span class="tag tag-green">Favorable Window · Time-Bounded</span>
     </div>
 
-    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Every major security vendor is acquiring AI agent visibility capabilities. None has shipped enforcement. That gap is SecureLayer's entire reason to exist — and it is time-bounded.</p>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Every major security vendor is acquiring AI agent visibility capabilities. None has shipped enforcement. That gap is SecureLayer's entire reason to exist — and it is time-bounded to approximately late 2026 / mid-2027 based on M&amp;A integration timelines.</p>
 
     <div class="tbl-wrap" style="margin-bottom:16px">
       <table>
         <thead>
-          <tr><th>Competitor Type</th><th>What They Have</th><th>What They Lack</th><th>SecureLayer Advantage</th></tr>
+          <tr><th>Competitor</th><th>What They Have</th><th>What They Lack</th><th>SecureLayer Advantage</th></tr>
         </thead>
         <tbody>
           <tr>
             <td>CrowdStrike / SentinelOne (XDR)</td>
             <td>Process telemetry, AI executable monitoring</td>
-            <td>Semantic enforcement — can't block based on what an agent is doing, only that it's running</td>
-            <td>Skill-level risk scoring + session-level block policy</td>
+            <td>Semantic enforcement — cannot block based on what an agent is doing, only that it's running</td>
+            <td>Skill-level risk scoring + session-level block policy + MCP behavioral analysis</td>
           </tr>
           <tr>
             <td>Palo Alto / Prisma (CNAPP)</td>
             <td>Cloud AI workload inventory, model catalogues</td>
             <td>Developer endpoint enforcement; no MSSP multi-tenant model</td>
-            <td>MSSP-native multi-tenant, RMM/PSA integration, no endpoint agent</td>
+            <td>MSSP-native multi-tenant, RMM/PSA integration, Phase 1 requires no endpoint agent</td>
           </tr>
           <tr>
             <td>Microsoft Purview / Defender</td>
             <td>DLP for prompts, M365 Copilot policy</td>
-            <td>Non-Microsoft agents (Claude, Cursor, MCP servers) — completely blind</td>
-            <td>Cross-agent coverage regardless of vendor</td>
+            <td>Non-Microsoft agents (Claude Code, Cursor, MCP servers) — completely blind to them</td>
+            <td>Cross-agent coverage regardless of vendor. Claude, Cursor, Copilot — all in one pane.</td>
           </tr>
           <tr>
             <td>Observability startups (being acquired)</td>
             <td>Agent inventory, usage logging, dashboards</td>
-            <td>Enforcement — they alert but cannot block; no compliance artifact</td>
-            <td>Block + alert + audit log in one layer</td>
+            <td>Enforcement — they alert but cannot block; no compliance artifact; no MCP behavioral analysis</td>
+            <td>Block + alert + audit log + MCP inspection in one enforcement layer</td>
           </tr>
           <tr>
             <td>CASB vendors (Netskope, Zscaler)</td>
             <td>Network-level AI SaaS usage visibility</td>
             <td>Agentic behavior — autonomous multi-step actions bypass network controls entirely</td>
-            <td>Enforcement at the agent policy layer, not network layer</td>
+            <td>Enforcement at the agent policy layer, not network layer. MCP traffic is invisible to CASB.</td>
           </tr>
         </tbody>
       </table>
@@ -362,14 +746,14 @@ tr:last-child td{border-bottom:none}
 
     <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;padding:16px 20px">
       <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Strategic Window</div>
-      <p style="font-size:12px;color:var(--text-2);line-height:1.6">Based on typical M&A integration timelines (18–36 months), the enforcement gap stays open until approximately <strong style="color:var(--text)">late 2026 to mid-2027</strong>. SecureLayer needs to reach 20+ paying MSSP customers and establish the enforcement standard before platform vendors bundle a competing feature. The window is real and the clock is running.</p>
+      <p style="font-size:12px;color:var(--text-2);line-height:1.6">The enforcement gap stays open until approximately <strong style="color:var(--text)">late 2026 to mid-2027</strong>. SecureLayer must reach 20+ paying MSSP partners and establish the enforcement standard before platform vendors bundle a competing feature. The MCP behavioral analysis layer (Phase 2) is the long-term moat — MCP traffic is invisible to every existing security tool. That defensibility compounds as MCP adoption grows.</p>
     </div>
   </div>
 
-  <!-- 4. UNIT ECONOMICS -->
+  <!-- 7. UNIT ECONOMICS -->
   <div class="section">
     <div class="section-head">
-      <div class="section-num">4</div>
+      <div class="section-num">7</div>
       <h2>Unit Economics — Modeled, Not Validated</h2>
       <span class="tag tag-amber">Assumptions Inside</span>
     </div>
@@ -378,7 +762,7 @@ tr:last-child td{border-bottom:none}
       <div class="econ-card">
         <div class="econ-num">$25</div>
         <div class="econ-label">Average revenue per tenant per month</div>
-        <div class="econ-sub">Midpoint of $20–30 MSSP range</div>
+        <div class="econ-sub">Midpoint of $20–30 range. Held flat.</div>
       </div>
       <div class="econ-card">
         <div class="econ-num">35</div>
@@ -397,229 +781,39 @@ tr:last-child td{border-bottom:none}
       </div>
     </div>
 
-    <div class="tbl-wrap" style="margin-bottom:12px">
+    <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Milestone</th><th>MSSP Partners</th><th>Avg Tenants Each</th><th>MRR</th><th>ARR</th></tr></thead>
+        <thead><tr><th>Milestone</th><th>MSSP Partners</th><th>Avg Tenants</th><th>MRR</th><th>ARR</th><th>Phase</th></tr></thead>
         <tbody>
           <tr>
-            <td>Design Partners (Month 3)</td>
-            <td>3–5</td>
-            <td>15 (smaller MSSPs first)</td>
-            <td style="color:var(--accent)">~$1,875</td>
-            <td style="color:var(--accent)">~$22.5K</td>
+            <td>Design Partners (Month 3)</td><td>3–5</td><td>15</td>
+            <td style="color:var(--accent)">~$1,875</td><td style="color:var(--accent)">~$22.5K</td>
+            <td style="color:var(--green);font-weight:600">Phase 1</td>
           </tr>
           <tr>
-            <td>Early Traction (Month 6)</td>
-            <td>10</td>
-            <td>25</td>
-            <td style="color:var(--accent)">~$6,250</td>
-            <td style="color:var(--accent)">~$75K</td>
+            <td>Phase 1 Complete (Month 6)</td><td>10</td><td>25</td>
+            <td style="color:var(--accent)">~$6,250</td><td style="color:var(--accent)">~$75K</td>
+            <td style="color:var(--green);font-weight:600">Phase 1 → Phase 2 unlock</td>
           </tr>
           <tr>
-            <td>Growth (Month 12)</td>
-            <td>30</td>
-            <td>35</td>
-            <td style="color:var(--accent)">~$26,250</td>
-            <td style="color:var(--accent)">~$315K</td>
+            <td>Phase 2 Rollout (Month 12)</td><td>30</td><td>35</td>
+            <td style="color:var(--accent)">~$26,250</td><td style="color:var(--accent)">~$315K</td>
+            <td style="color:var(--purple);font-weight:600">Phase 2</td>
           </tr>
           <tr>
-            <td>Scale (Month 18)</td>
-            <td>75</td>
-            <td>40</td>
-            <td style="color:var(--accent)">~$75,000</td>
-            <td style="color:var(--accent)">~$900K</td>
+            <td>Scale (Month 18)</td><td>75</td><td>40</td>
+            <td style="color:var(--accent)">~$75,000</td><td style="color:var(--accent)">~$900K</td>
+            <td style="color:var(--purple);font-weight:600">Phase 2 + Partnerships</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="card" style="border-color:var(--green-border)">
-        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px">MSSP economics are favorable</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> Low churn: MSSP invoices clients monthly, compliance stickiness</li>
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> Natural expansion: each new client tenant is incremental ARR</li>
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> White-label margin: MSSP absorbs the cost, marks up to client</li>
-        </ul>
-      </div>
-      <div class="card" style="border-color:var(--red-border)">
-        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px">Risks in the model</div>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> Price unconfirmed — could be $15 or $40, not $25</li>
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> Tenants-per-MSSP may be lower for early design partners</li>
-          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> MSSP sales cycle is 60–90 days — slow to first revenue</li>
-        </ul>
-      </div>
-    </div>
   </div>
 
-  <!-- 5. BUILD SEQUENCE -->
+  <!-- 8. RISK SUMMARY -->
   <div class="section page-break">
     <div class="section-head">
-      <div class="section-num">5</div>
-      <h2>Recommended Build Sequence</h2>
-      <span class="tag tag-blue">Engineering Priority</span>
-    </div>
-    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">The current prototype is a mock UI. The build sequence below is ordered to generate the fastest real signal with the least engineering investment before fundraising or design partner commitments.</p>
-
-    <div class="timeline">
-      <div class="tl-row">
-        <div class="tl-label" style="color:var(--green)">Sprint 1<br/>Weeks 1–3</div>
-        <div class="tl-dot" style="background:var(--green)"></div>
-        <div class="tl-content">
-          <h4>GitHub OAuth scan — PLG wedge</h4>
-          <p>Scan repos for AI agent configs, MCP manifests, <span class="mono">.claude</span> directories. Output: risk inventory with scores. No RMM, no PSA, no credit card. This validates assumption B1 (shadow AI discovery) and gives you real usage data before any MSSP call asks for a pilot. Build target: 2–3 weeks, one engineer.</p>
-        </div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-label" style="color:var(--accent)">Sprint 2<br/>Weeks 4–6</div>
-        <div class="tl-dot" style="background:var(--accent)"></div>
-        <div class="tl-content">
-          <h4>ConnectWise Manage integration — MSSP ticket auto-create</h4>
-          <p>On any SecurityEvent with severity ≥ high, auto-create a ConnectWise ticket with tenant, agent, severity, and recommended action pre-filled. This is the single integration that makes the MSSP motion real — every vCISO uses ConnectWise. Build target: 2 weeks, one engineer with ConnectWise sandbox access.</p>
-        </div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-label" style="color:var(--blue)">Sprint 3<br/>Weeks 7–9</div>
-        <div class="tl-dot" style="background:var(--blue)"></div>
-        <div class="tl-content">
-          <h4>Office Hours enforcement — real policy push</h4>
-          <p>Replace the mock toggle with a real policy that blocks AI agent access outside the configured schedule. Delivery: RMM endpoint policy or local agent (TBD based on design partner feedback from Weeks 1–6). This is the narrowest wedge with the highest demo credibility — "we just blocked Cursor on your client's machine at 11pm."</p>
-        </div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-label" style="color:var(--purple)">Sprint 4<br/>Weeks 10–12</div>
-        <div class="tl-dot" style="background:var(--purple)"></div>
-        <div class="tl-content">
-          <h4>Compliance log export — SOC 2 / CMMC artifact</h4>
-          <p>Every blocked event formatted as a signed, timestamped audit log exportable as PDF or JSON. This closes assumption A1 (audit requirement) and turns the product from a security tool into a compliance tool — two separate budget lines in an MSSP's client invoice.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. KEY DECISIONS -->
-  <div class="section">
-    <div class="section-head">
-      <div class="section-num">6</div>
-      <h2>Four Decisions That Need an Owner Before Work Begins</h2>
-      <span class="tag tag-red">CEO Action Required</span>
-    </div>
-    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Each of these decisions blocks a downstream action. They cannot be deferred past the first design partner call.</p>
-
-    <!-- D1 -->
-    <div class="decision no-break">
-      <div class="decision-head">
-        <div class="d-num">D1</div>
-        <h4>Build order: PLG wedge first or MSSP integration first?</h4>
-        <span class="tag tag-amber">Decide Week 1</span>
-      </div>
-      <div class="decision-body">
-        <div class="d-col">
-          <div class="d-col-label">Option A — PLG First</div>
-          GitHub scan → real product in 3 weeks → SMB users validate assumption B1 → case studies for MSSP calls. Risk: MSSP prospects ask for ConnectWise integration you don't have.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Option B — MSSP First</div>
-          ConnectWise integration → real MSSP pilot in 6 weeks → first paying customer sooner. Risk: no PLG flywheel, slower inbound, engineering is heavier.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Option C — Parallel</div>
-          One engineer on GitHub scan, one on ConnectWise. Faster but requires two engineers from day one. Only viable if funded.
-        </div>
-      </div>
-      <div class="decision-rec">
-        <span class="rec-tag">Recommendation:</span>
-        <span style="font-size:12px;color:var(--text-2)">PLG first (Option A). GitHub scan is 3 weeks vs. 6, produces real usage data, and closes assumption A6 (product reality) before MSSP pilot requests land. Present GitHub scan results in MSSP discovery calls as proof of the product working in the wild.</span>
-      </div>
-    </div>
-
-    <!-- D2 -->
-    <div class="decision no-break">
-      <div class="decision-head">
-        <div class="d-num">D2</div>
-        <h4>Pricing: validate $20–30 MSSP tier or set two-tier model now?</h4>
-        <span class="tag tag-amber">Decide Before Call 1</span>
-      </div>
-      <div class="decision-body">
-        <div class="d-col">
-          <div class="d-col-label">Option A — Single tier</div>
-          $25/tenant/month flat. Simple to explain, easy to invoice. Risk: leaves money on the table if compliance adds significant value to some buyers.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Option B — Two tiers</div>
-          $15/tenant visibility only, $30/tenant enforcement + compliance log. Mirrors how SIEM vendors price. Risk: adds friction to the pitch; MSSP has to choose.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Option C — Let prospects name it</div>
-          Don't anchor in the first three calls. Ask: "What would you charge your client for this?" Use the answer as the price. Risk: no anchor may stall the conversation.
-        </div>
-      </div>
-      <div class="decision-rec">
-        <span class="rec-tag">Recommendation:</span>
-        <span style="font-size:12px;color:var(--text-2)">Option C for calls 1–3. Let prospects define the value. After three calls, pick the tier model that matches what they said. Never anchor before you have evidence. If asked directly, say "design partner pricing is flexible — let's talk about what makes sense for your client base."</span>
-      </div>
-    </div>
-
-    <!-- D3 -->
-    <div class="decision no-break">
-      <div class="decision-head">
-        <div class="d-num">D3</div>
-        <h4>Channel boundary: where does PLG self-serve end and MSSP begin?</h4>
-        <span class="tag tag-amber">Decide Before PLG Launch</span>
-      </div>
-      <div class="decision-body">
-        <div class="d-col">
-          <div class="d-col-label">The Risk</div>
-          If PLG has no ceiling, MSSPs will see it as competitive. A 30-person software company paying $30/month direct is a client an MSSP could be billing $500+/month for managed security. Channel conflict kills the MSSP motion.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Proposed Boundary</div>
-          Self-serve: companies with &lt;50 employees and &lt;5 "tenant" profiles. Above either threshold, the product gates and routes to MSSP or enterprise pricing. The gate is enforced in-product, not by sales.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">MSSP Messaging</div>
-          "SecureLayer self-serve exists for companies too small for managed security. When they grow, we route them to you. You get a warm inbound lead — not a lost client."
-        </div>
-      </div>
-      <div class="decision-rec">
-        <span class="rec-tag">Recommendation:</span>
-        <span style="font-size:12px;color:var(--text-2)">Define the boundary (&lt;50 employees / &lt;5 tenants) before PLG launches and surface it explicitly in every MSSP discovery call. Show MSSPs the in-product gate. Absence of a clear boundary is the single biggest channel conflict risk.</span>
-      </div>
-    </div>
-
-    <!-- D4 -->
-    <div class="decision no-break">
-      <div class="decision-head">
-        <div class="d-num">D4</div>
-        <h4>Funding: bootstrap through design partners or raise a pre-seed round?</h4>
-        <span class="tag tag-red">Decide Month 2</span>
-      </div>
-      <div class="decision-body">
-        <div class="d-col">
-          <div class="d-col-label">Bootstrap Path</div>
-          3–5 design partners at $500–1,000/month each (early access fee). Covers one engineer for 6 months. Slower but no dilution. Requires closing design partners before engineering starts.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Pre-Seed Path</div>
-          $500K–$1.5M at idea stage on the strength of the market thesis and founding team. Runs parallel engineering (PLG + MSSP). Requires a compelling pitch before product evidence.
-        </div>
-        <div class="d-col">
-          <div class="d-col-label">Hybrid Path</div>
-          Bootstrap to first 3 paying design partners → use revenue + traction as evidence for a seed round. Stronger position, longer runway before dilution.
-        </div>
-      </div>
-      <div class="decision-rec">
-        <span class="rec-tag">Recommendation:</span>
-        <span style="font-size:12px;color:var(--text-2)">Hybrid path. Use the GitHub scan (Sprint 1) as the proof point. Close 2–3 MSSP design partners with a nominal early-access fee while the MSSP integration is being built (Sprints 2–3). Arrive at seed fundraising with: live PLG product, 2–3 signed MSSP design partners, documented active threat signals, and a validated price point. That story closes a seed round at significantly better terms than an idea-stage pitch.</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. RISK SUMMARY -->
-  <div class="section page-break">
-    <div class="section-head">
-      <div class="section-num">7</div>
+      <div class="section-num">8</div>
       <h2>Top Risks — CEO View</h2>
       <span class="tag tag-red">Prioritized</span>
     </div>
@@ -632,100 +826,100 @@ tr:last-child td{border-bottom:none}
         <tbody>
           <tr>
             <td style="color:var(--red);font-weight:800">1</td>
-            <td>Product doesn't exist — pilot request arrives before anything is deployable</td>
-            <td style="color:var(--red)">High (certain without sprint 1)</td>
+            <td>Pilot request arrives before anything deployable — GitHub scan not built</td>
+            <td style="color:var(--red)">High (certain without Sprint 1)</td>
             <td style="color:var(--red)">Kills MSSP credibility</td>
-            <td>Build GitHub scan first. Have something real before call 3.</td>
+            <td>Build Sprint 1 (GitHub scan + MCP manifest detection) before Discovery Call 3.</td>
           </tr>
           <tr>
             <td style="color:var(--red);font-weight:800">2</td>
             <td>Auditor accepts a policy doc instead of enforcement logs — compliance narrative fails</td>
             <td style="color:var(--accent)">Medium</td>
             <td style="color:var(--red)">Removes primary close argument</td>
-            <td>Interview one auditor before call 2. One confirmed answer closes this permanently.</td>
+            <td>Interview one auditor before Call 2. One confirmed answer closes this permanently.</td>
           </tr>
           <tr>
             <td style="color:var(--accent);font-weight:800">3</td>
             <td>MSSP solves the problem by banning AI tools — market shrinks</td>
             <td style="color:var(--accent)">Medium</td>
             <td style="color:var(--accent)">Reduces TAM to companies that cannot ban</td>
-            <td>Big vendor acquisitions suggest "manage not ban." Probe in every call.</td>
+            <td>Vendor acquisition wave suggests "manage not ban." Probe Q3 in every discovery call.</td>
           </tr>
           <tr>
             <td style="color:var(--accent);font-weight:800">4</td>
-            <td>PLG free-to-paid conversion stalls — user sees risk but can't unilaterally enforce</td>
-            <td style="color:var(--accent)">Medium-High</td>
-            <td style="color:var(--accent)">PLG motion doesn't generate revenue</td>
-            <td>Add "share report" upgrade trigger alongside "enforce." Creates internal champion.</td>
+            <td>Phase 2 API hook not designed cleanly — Phase 2 upgrade requires re-architecture</td>
+            <td style="color:var(--accent)">Medium if deferred</td>
+            <td style="color:var(--red)">Phase 2 upgrade costs spike, MSSP churn risk</td>
+            <td>D4 is locked — hook stub must be built in Sprint 3. Engineering lead owns this spec.</td>
           </tr>
           <tr>
             <td style="color:var(--accent);font-weight:800">5</td>
-            <td>Platform vendor (CrowdStrike, Palo Alto) ships enforcement before SecureLayer scales</td>
-            <td style="color:var(--text-3)">Low (18–36 month integration lag)</td>
-            <td style="color:var(--red)">Existential if SecureLayer has &lt;20 customers</td>
+            <td>Platform vendor (CrowdStrike, Palo Alto) ships enforcement before 20 MSSPs signed</td>
+            <td style="color:var(--text-3)">Low (18–36 month M&A integration lag)</td>
+            <td style="color:var(--red)">Existential if &lt;20 customers</td>
             <td>Speed to 20 paying MSSP partners is the only mitigation. Window is open — use it.</td>
           </tr>
           <tr>
             <td style="color:var(--text-3);font-weight:800">6</td>
-            <td>EDR positioning creates false expectations in technical buyers</td>
-            <td style="color:var(--accent)">Medium</td>
-            <td style="color:var(--text-3)">Objection in sales calls, not existential</td>
-            <td>A/B test "AI-SPM" vs "EDR for AI agents" framing across first 3 calls.</td>
+            <td>PLG free-to-paid conversion stalls — user sees risk but can't enforce unilaterally</td>
+            <td style="color:var(--accent)">Medium-High</td>
+            <td style="color:var(--text-3)">PLG wedge doesn't generate MSSP inbound</td>
+            <td>Add "share report with MSSP" upgrade trigger alongside "enforce?". Creates internal champion.</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- 8. CEO VERDICT -->
+  <!-- 9. VERDICT -->
   <div class="section">
     <div class="section-head">
-      <div class="section-num">8</div>
-      <h2>CEO Verdict</h2>
-      <span class="tag tag-green">Go — With Conditions</span>
+      <div class="section-num">9</div>
+      <h2>CEO Verdict — Final</h2>
+      <span class="tag tag-green">Go — Unconditional</span>
     </div>
 
-    <div class="verdict-block verdict-go" style="margin-bottom:12px">
-      <h3>✓ Go — The concept is sound and the timing is right</h3>
+    <div class="verdict-block verdict-go">
+      <h3>✓ Go — Concept is sound, timing is right, decisions are locked</h3>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px">
         The market signal is real. Auditors are asking. Vendors are acquiring. Active threats are documented. The MSSP channel is confirmed as the right distribution motion. The enforcement gap is open and the window is measured in months, not years.
       </p>
       <p style="font-size:13px;color:var(--text-2);line-height:1.7">
-        The concept passes the fundamental test: <strong style="color:var(--text)">there is a real problem, a specific buyer who feels it, a credible product that solves it, and a business model that makes the unit economics work.</strong> That is not obvious for most early-stage security concepts — it is here.
+        The concept passes the fundamental test: <strong style="color:var(--text)">there is a real problem, a specific buyer who feels it, a credible product that solves it, and a business model with working unit economics.</strong> Five architecture and strategy decisions have been made and locked. Two-phase MVP is defined. The next action is the 30-day execution plan below — not further planning.
       </p>
     </div>
 
     <div class="verdict-block verdict-risk">
-      <h3>⚠ Conditions — Three gates before committing design resources</h3>
+      <h3>⚠ Three actions before committing design resources</h3>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
         <div style="display:flex;gap:10px;align-items:flex-start">
           <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">1.</span>
-          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Run the 3 MSSP discovery calls first.</strong> Come out knowing whether Q1 (incident?) and Q3 (price?) are confirmed. Do not commission design work before at least 2 of 3 calls validate the core pain. The GTM brief and outreach templates are ready — use them.</div>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Lock the Phase 2 sensor API hook spec before Sprint 3 engineering begins.</strong> One clean interface, not a retrofit. Engineering lead must own this document before any Sprint 3 code is written.</div>
         </div>
         <div style="display:flex;gap:10px;align-items:flex-start">
           <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">2.</span>
-          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Interview one auditor before call 2.</strong> A single auditor interview either confirms Motion C as a door opener or reframes it as a supporting argument. The entire compliance narrative depends on this one conversation.</div>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Add MCP manifest detection to Sprint 1 scope explicitly.</strong> It is not a Sprint 2 feature. The GitHub scan must surface MCP servers in the same risk inventory output as agent configs. This is the unique claim no incumbent can match at launch.</div>
         </div>
         <div style="display:flex;gap:10px;align-items:flex-start">
           <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">3.</span>
-          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Build the GitHub scan (Sprint 1) before any design sprint begins.</strong> It is a 3-week engineering task that converts the prototype from a demo to a product. It also produces real usage data that makes every subsequent design decision evidence-based rather than assumption-based.</div>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Run 3 MSSP discovery calls using the outreach templates that are already written.</strong> Do not commission design work before at least 2 of 3 calls confirm price and pain. The GTM brief, outreach templates, one-pager, and live demo are all ready — use them.</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 9. NEXT 30 DAYS -->
+  <!-- 10. NEXT 30 DAYS -->
   <div class="section">
     <div class="section-head">
-      <div class="section-num">9</div>
-      <h2>Next 30 Days — Owner and Due Date for Each Action</h2>
-      <span class="tag tag-blue">Execution</span>
+      <div class="section-num">10</div>
+      <h2>Next 30 Days — Owner and Due Date</h2>
+      <span class="tag tag-blue">Execution · Clock Is Running</span>
     </div>
 
     <div class="tbl-wrap">
       <table>
         <thead>
-          <tr><th>Action</th><th>Owner</th><th>Due</th><th>Output</th></tr>
+          <tr><th>Action</th><th>Owner</th><th>Due</th><th>Output</th><th>Phase Gate</th></tr>
         </thead>
         <tbody>
           <tr>
@@ -733,48 +927,70 @@ tr:last-child td{border-bottom:none}
             <td>Sharon (Founder)</td>
             <td>Week 1</td>
             <td>3 discovery calls booked</td>
+            <td style="color:var(--green)">Phase 1</td>
+          </tr>
+          <tr>
+            <td>Lock Phase 2 sensor API hook spec</td>
+            <td>Engineering Lead</td>
+            <td>Week 1</td>
+            <td>Written spec — one clean interface</td>
+            <td style="color:var(--purple)">Phase 2 prep</td>
           </tr>
           <tr>
             <td>Interview one SOC 2 / CMMC auditor</td>
             <td>Sharon</td>
-            <td>Before call 2</td>
+            <td>Before Call 2</td>
             <td>A1 assumption confirmed or reframed</td>
+            <td style="color:var(--green)">Phase 1</td>
           </tr>
           <tr>
-            <td>Decide D1: PLG first vs. MSSP first</td>
-            <td>CEO</td>
-            <td>Week 1</td>
-            <td>Engineering sprint plan locked</td>
+            <td>Build GitHub org scan + MCP manifest detection (Sprint 1)</td>
+            <td>Engineering</td>
+            <td>Week 3</td>
+            <td>Live PLG product, first 5 orgs scanned, MCP servers surfaced</td>
+            <td style="color:var(--green)">Phase 1</td>
           </tr>
           <tr>
             <td>Run 3 MSSP discovery calls</td>
             <td>Sharon + Sales Lead</td>
             <td>Week 2–3</td>
-            <td>Q1 and Q3 confirmed or adjusted</td>
+            <td>Price and pain confirmed, Q1 and Q3 resolved</td>
+            <td style="color:var(--green)">Phase 1</td>
           </tr>
           <tr>
-            <td>Build GitHub org scan (Sprint 1)</td>
+            <td>Build ConnectWise / NinjaOne integration (Sprint 2)</td>
             <td>Engineering</td>
-            <td>Week 3</td>
-            <td>Live PLG product, first 5 test orgs scanned</td>
+            <td>Week 6</td>
+            <td>Auto-ticket creation on high-severity events</td>
+            <td style="color:var(--green)">Phase 1</td>
           </tr>
           <tr>
-            <td>Define PLG channel boundary (D3)</td>
-            <td>CEO</td>
-            <td>Before PLG launch</td>
-            <td>In-product gate spec written</td>
-          </tr>
-          <tr>
-            <td>Close 2–3 MSSP design partners (nominal fee)</td>
+            <td>Close 2–3 MSSP design partners (nominal early-access fee)</td>
             <td>Sharon</td>
             <td>Week 4–6</td>
             <td>First revenue, seed round evidence</td>
+            <td style="color:var(--green)">Phase 1</td>
           </tr>
           <tr>
-            <td>Decide D4: funding path</td>
-            <td>CEO</td>
-            <td>Week 6</td>
-            <td>Bootstrap / pre-seed / hybrid — committed</td>
+            <td>Wire Phase 2 API hook stub + "Deep Inspection Mode" UI toggle (Sprint 3)</td>
+            <td>Engineering</td>
+            <td>Week 9</td>
+            <td>Hook stub in API, greyed-out toggle in dashboard — "Phase 2"</td>
+            <td style="color:var(--purple)">Phase 2 prep</td>
+          </tr>
+          <tr>
+            <td>Compliance log export — SOC 2 / CMMC artifact (Sprint 4)</td>
+            <td>Engineering</td>
+            <td>Week 12</td>
+            <td>Signed + timestamped PDF/JSON export live</td>
+            <td style="color:var(--green)">Phase 1 complete</td>
+          </tr>
+          <tr>
+            <td>Reach 10 paying MSSP customers → unlock Phase 2 build + Anthropic/Microsoft outreach</td>
+            <td>Sharon + Sales</td>
+            <td>Month 6</td>
+            <td>Phase 2 engineering starts, platform partnership conversations initiated</td>
+            <td style="color:var(--purple)">Phase 2 trigger</td>
           </tr>
         </tbody>
       </table>
@@ -783,8 +999,8 @@ tr:last-child td{border-bottom:none}
 
   <!-- FOOTER -->
   <div class="doc-footer">
-    <div>SecureLayer — CEO Concept Review — Founder Confidential</div>
-    <div>Pre-Design · Pre-Seed · May 2026</div>
+    <div>SecureLayer — CEO Concept Review Final — Founder Confidential</div>
+    <div>Decisions D1–D5 Locked · Two-Phase MVP Defined · May 2026</div>
   </div>
 
 </div>
