@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — GTM Discovery Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .page-break{page-break-before:always}
+}
+
+:root{
+  --bg:#0d0f14;
+  --bg-2:#13161e;
+  --bg-3:#1a1e28;
+  --bg-4:#222636;
+  --accent:#f59e0b;
+  --accent-dim:rgba(245,158,11,.12);
+  --accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;
+  --text-2:#9ba3b8;
+  --text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);
+  --border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;
+  --red-dim:rgba(239,68,68,.1);
+  --red-border:rgba(239,68,68,.2);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,.1);
+  --green-border:rgba(34,197,94,.2);
+  --blue:#3b82f6;
+  --blue-dim:rgba(59,130,246,.1);
+  --blue-border:rgba(59,130,246,.2);
+  --purple:#a855f7;
+  --purple-dim:rgba(168,85,247,.1);
+  --purple-border:rgba(168,85,247,.2);
+}
+
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  font-size:13px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:900px;margin:0 auto;padding:48px 44px 72px}
+
+/* ── HEADER ── */
+.doc-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:32px;height:32px;background:var(--accent);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:16px;color:#000;flex-shrink:0;
+}
+.logo-name{font-size:15px;font-weight:700;line-height:1.2}
+.logo-sub{font-size:11px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.7}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* ── TITLE BLOCK ── */
+.title-block{margin-bottom:36px}
+.doc-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;
+  color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.title-block h1{font-size:30px;font-weight:900;line-height:1.15;margin-bottom:10px}
+.title-block h1 span{color:var(--accent)}
+.title-block p{font-size:14px;color:var(--text-2);line-height:1.6;max-width:680px}
+
+/* ── SECTION HEADERS ── */
+.section{margin-bottom:36px}
+.section-head{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+.section-num{
+  width:24px;height:24px;border-radius:6px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#000;flex-shrink:0;
+}
+.section-head h2{font-size:16px;font-weight:700}
+.section-tag{
+  margin-left:auto;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:99px;
+}
+.tag-confirmed{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.tag-open{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+.tag-strategy{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.tag-action{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)}
+
+/* ── SIGNAL MAP ── */
+.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+.signal-card{
+  border-radius:10px;padding:16px 18px;border:1px solid;
+}
+.signal-card.confirmed{
+  background:var(--green-dim);border-color:var(--green-border);
+}
+.signal-card.open{
+  background:var(--red-dim);border-color:var(--red-border);
+}
+.signal-card-top{
+  display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.signal-q{
+  font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+}
+.signal-q.confirmed{color:var(--green)}
+.signal-q.open{color:var(--red)}
+.signal-status{
+  margin-left:auto;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:99px;
+}
+.status-confirmed{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.status-open{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+.signal-card h4{font-size:12px;font-weight:700;margin-bottom:4px}
+.signal-card p{font-size:12px;color:var(--text-2);line-height:1.5}
+.signal-card .implication{
+  margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);
+  font-size:11px;font-style:italic;
+}
+.signal-card.confirmed .implication{color:var(--green)}
+.signal-card.open .implication{color:var(--red)}
+
+/* ── MOTION CARDS ── */
+.motion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.motion-card{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:10px;padding:16px 18px;
+}
+.motion-card.primary{
+  border-color:var(--accent-border);background:var(--accent-dim);
+}
+.motion-card.secondary{
+  border-color:var(--blue-border);background:var(--blue-dim);
+}
+.motion-card.defer{opacity:.6}
+.motion-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.motion-letter{
+  width:24px;height:24px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;flex-shrink:0;
+}
+.motion-letter.primary{background:var(--accent);color:#000}
+.motion-letter.secondary{background:var(--blue);color:#fff}
+.motion-letter.defer{background:var(--bg-4);color:var(--text-3)}
+.motion-card h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.motion-card .motion-sub{font-size:11px;color:var(--text-2);margin-bottom:10px}
+.motion-verdict{
+  font-size:11px;font-weight:600;padding:6px 10px;
+  border-radius:6px;margin-top:8px;
+}
+.verdict-primary{background:rgba(245,158,11,.15);color:var(--accent)}
+.verdict-secondary{background:rgba(59,130,246,.15);color:var(--blue)}
+.verdict-defer{background:var(--bg-3);color:var(--text-3)}
+
+/* ── TABLE ── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{
+  text-align:left;padding:8px 12px;font-size:10px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);
+  border-bottom:1px solid var(--border-2);
+}
+td{
+  padding:9px 12px;border-bottom:1px solid var(--border);
+  vertical-align:top;color:var(--text-2);line-height:1.5;
+}
+td:first-child{color:var(--text);font-weight:500}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:10px;overflow:hidden;margin-bottom:8px;
+}
+
+/* ── CALL FLOW ── */
+.call-flow{display:flex;flex-direction:column;gap:0}
+.call-step{
+  display:grid;grid-template-columns:100px 1fr;gap:16px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.call-step:last-child{border-bottom:none}
+.call-phase{
+  font-size:10px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding-top:2px;
+}
+.phase-a{color:var(--accent)}
+.phase-c{color:var(--blue)}
+.call-content h4{font-size:12px;font-weight:700;margin-bottom:3px}
+.call-content p{font-size:12px;color:var(--text-2)}
+.call-content .quote{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--text-2);background:var(--bg-3);
+  border-left:2px solid var(--accent);
+  padding:6px 10px;border-radius:0 6px 6px 0;margin-top:6px;
+  font-style:italic;
+}
+
+/* ── PROBE ROWS ── */
+.probe-list{display:flex;flex-direction:column;gap:8px}
+.probe{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:8px;padding:12px 14px;
+}
+.probe-q{font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px}
+.probe-why{font-size:11px;color:var(--text-3)}
+
+/* ── CLOSE BLOCK ── */
+.close-block{
+  background:var(--bg-2);border:1px solid var(--accent-border);
+  border-radius:12px;padding:24px 28px;margin-top:4px;
+}
+.close-block h3{font-size:14px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.close-quote{
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  color:var(--text);line-height:1.7;
+  border-left:3px solid var(--accent);
+  padding:10px 16px;border-radius:0 8px 8px 0;
+  background:var(--bg-3);
+}
+.close-breakdown{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;
+}
+.close-pill{
+  text-align:center;padding:10px 12px;border-radius:8px;font-size:11px;font-weight:600;
+}
+.cp-a{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.cp-c{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)}
+.cp-stack{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
+
+/* ── SEQUENCE ── */
+.sequence{display:flex;flex-direction:column;gap:0}
+.seq-row{
+  display:grid;grid-template-columns:120px 1fr;gap:16px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.seq-row:last-child{border-bottom:none}
+.seq-phase{
+  font-size:10px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;padding-top:2px;
+}
+.seq-phase.now{color:var(--accent)}
+.seq-phase.parallel{color:var(--blue)}
+.seq-phase.then{color:var(--purple)}
+.seq-content h4{font-size:12px;font-weight:700;margin-bottom:4px}
+.seq-content p{font-size:12px;color:var(--text-2);line-height:1.5}
+
+/* ── FOOTER ── */
+.doc-footer{
+  margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--text-3);
+}
+
+/* ── UTIL ── */
+.mono{font-family:'JetBrains Mono',monospace}
+.amber{color:var(--accent)}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.blue{color:var(--blue)}
+.mt8{margin-top:8px}
+.mt16{margin-top:16px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security Platform</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>GTM Discovery Brief</strong><br/>
+      Prepared for: Sales Team<br/>
+      Date: May 2026<br/>
+      Status: Pre-Discovery — 3 MSSP Calls Pending
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="doc-label">◎ Go-To-Market</div>
+    <h1>Sales Discovery Brief:<br/><span>MSSP Channel Strategy</span></h1>
+    <p>This brief summarizes our GTM analysis, confirmed assumptions, and the open questions the sales team must validate in the first three MSSP vCISO discovery calls. Two signals are confirmed. Two are still open. Every meeting should close at least one.</p>
+  </div>
+
+  <!-- 1. SIGNAL MAP -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>Signal Map — What We Know vs. What We Need</h2>
+    </div>
+    <div class="signal-grid">
+
+      <div class="signal-card confirmed">
+        <div class="signal-card-top">
+          <span class="signal-q confirmed">Q2</span>
+          <span class="signal-status status-confirmed">Confirmed</span>
+        </div>
+        <h4>Are auditors asking about AI agent access logs?</h4>
+        <p>Yes — auditors are already asking for evidence of AI tool governance ahead of SOC 2 and CMMC reviews. MSSPs have no answer today.</p>
+        <div class="implication">Motion C is a door opener, not just a defense layer. Lead with the audit gap.</div>
+      </div>
+
+      <div class="signal-card confirmed">
+        <div class="signal-card-top">
+          <span class="signal-q confirmed">Q4</span>
+          <span class="signal-status status-confirmed">Confirmed</span>
+        </div>
+        <h4>Who do MSSPs call for cloud security gaps?</h4>
+        <p>MSSPs are already using cloud security tools (Sentinel, Splunk, NinjaOne) and are looking to extend that coverage to AI agents and tools.</p>
+        <div class="implication">Buying motion is "extend existing stack" — not a net-new category sale. Lead with integrations.</div>
+      </div>
+
+      <div class="signal-card open">
+        <div class="signal-card-top">
+          <span class="signal-q open">Q1</span>
+          <span class="signal-status status-open">Open — Must Validate</span>
+        </div>
+        <h4>Has any vCISO been blamed for an AI agent incident?</h4>
+        <p>Unknown. If yes, urgency is emotional and the deal closes fast. If not yet, we rely on Q2 (audit pressure) to drive urgency instead.</p>
+        <div class="implication">Determines whether this is a need-now or nice-to-have sale. Probe with near-miss framing.</div>
+      </div>
+
+      <div class="signal-card open">
+        <div class="signal-card-top">
+          <span class="signal-q open">Q3</span>
+          <span class="signal-status status-open">Open — Must Validate</span>
+        </div>
+        <h4>Will they pay $20–30/tenant/month today?</h4>
+        <p>Unknown. Price sensitivity depends on whether they frame this as a cost center or a pass-through margin opportunity to bill clients.</p>
+        <div class="implication">Frame as a billable line item on client invoices, not an internal cost. Anchor on pass-through margin.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. GTM MOTIONS -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>GTM Motions — Prioritized</h2>
+      <span class="section-tag tag-strategy">Strategy</span>
+    </div>
+    <div class="motion-grid">
+
+      <div class="motion-card primary">
+        <div class="motion-top">
+          <div class="motion-letter primary">A</div>
+          <div>
+            <h4>Direct MSSP vCISO</h4>
+            <div class="motion-sub">Primary motion — run now</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-2)">Warm outreach to vCISOs at mid-size MSSPs (10–100 clients). Target the person who gets blamed when a client has an AI incident. Three discovery calls are already scheduled.</p>
+        <div class="motion-verdict verdict-primary">Primary. Start here. Highest urgency, fastest signal.</div>
+      </div>
+
+      <div class="motion-card secondary">
+        <div class="motion-top">
+          <div class="motion-letter secondary">C</div>
+          <div>
+            <h4>Compliance-led</h4>
+            <div class="motion-sub">Defense layer — run in parallel</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-2)">Lead with SOC 2 / CMMC AI agent clause. Target compliance consultants as referrers. The audit log SecureLayer produces satisfies the auditor's question that MSSPs currently cannot answer.</p>
+        <div class="motion-verdict verdict-secondary">Parallel. Strengthens every Motion A deal. Attach to every follow-up.</div>
+      </div>
+
+      <div class="motion-card defer">
+        <div class="motion-top">
+          <div class="motion-letter defer">B</div>
+          <div>
+            <h4>PSA Marketplace</h4>
+            <div class="motion-sub">Defer — needs proof first</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-2)">Listing on ConnectWise / Autotask marketplace. Valuable as channel amplification but takes 3–6 months and requires reference customers before anyone trusts an empty listing.</p>
+        <div class="motion-verdict verdict-defer">Defer until 2–3 reference customers exist from Motion A.</div>
+      </div>
+
+      <div class="motion-card defer">
+        <div class="motion-top">
+          <div class="motion-letter defer">D</div>
+          <div>
+            <h4>Developer Bottom-up</h4>
+            <div class="motion-sub">Discard — wrong buyer</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-2)">Free tier targeting individual developers. Fails the forcing question — developers want fewer restrictions, not more. Security controls are imposed top-down by the vCISO, not adopted by developers.</p>
+        <div class="motion-verdict verdict-defer">Discard. Wrong buyer profile for a security enforcement product.</div>
+      </div>
+
+      <!-- Motion E — PLG -->
+      <div class="motion-card" style="grid-column:1/-1;border-color:var(--green-border);background:var(--green-dim);">
+        <div class="motion-top">
+          <div class="motion-letter" style="background:var(--green);color:#000">E</div>
+          <div>
+            <h4>Product-Led Growth — GitHub Org Scan</h4>
+            <div class="motion-sub">New motion — SMB direct lane, parallel to A+C</div>
+          </div>
+          <span style="margin-left:auto;font-size:10px;font-weight:700;background:var(--green-dim);color:var(--green);border:1px solid var(--green-border);padding:3px 10px;border-radius:99px">Added</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:12px">
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Buyer</div>
+            <p style="font-size:12px;color:var(--text-2)">SMB IT lead or DevOps manager at a 20–50 person software company — not the MSSP. Hears a developer is using Claude Code on production, wants to understand the risk today, has no procurement cycle to wait for.</p>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Free Wedge</div>
+            <p style="font-size:12px;color:var(--text-2)">GitHub OAuth → scan org repos for AI agent config files, MCP server manifests, <span class="mono" style="font-size:11px">.claude</span> directories. Delivers a risk inventory in under 2 minutes. No RMM, no PSA, no sales call required.</p>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Upgrade Trigger</div>
+            <p style="font-size:12px;color:var(--text-2)">"You have 3 agents with credential-access permissions running outside business hours. Enforce?" → paid enforcement tier. Natural, product-driven, no cold outreach needed.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap">
+          <div class="motion-verdict" style="background:rgba(34,197,94,.15);color:var(--green);flex:1;min-width:200px">Opens SMB direct lane Motion A cannot reach efficiently. Generates product-qualified leads (PQLs) for sales with less friction than cold outreach.</div>
+          <div style="background:var(--bg-3);border:1px solid var(--border-2);border-radius:6px;padding:8px 12px;font-size:11px;color:var(--text-2);flex:1;min-width:200px"><strong style="color:var(--accent)">MSSP referral loop:</strong> SMB PLG users who grow past self-serve ask "do you have an IT partner?" — hands off to Motion A pipeline as a warm inbound lead, not a cold call.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. COMBINED THESIS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Why A + C Together</h2>
+      <span class="section-tag tag-strategy">Positioning</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Motion A opens the door</div>
+        <p style="font-size:12px;color:var(--text-2);line-height:1.6">A vCISO who has been — or fears being — blamed for an AI agent incident will move fast. Urgency is emotional and real. Office Hours enforcement is the narrowest wedge: one policy, one client, 15-minute deploy.</p>
+      </div>
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Motion C closes and defends</div>
+        <p style="font-size:12px;color:var(--text-2);line-height:1.6">The risk scorecard and event log are compliance artifacts. They turn a discretionary security purchase into a justifiable invoice line item that survives every budget review and QBR conversation.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. DISCOVERY CALL FLOW -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Discovery Call Flow</h2>
+      <span class="section-tag tag-action">Run This in Every Call</span>
+    </div>
+    <div class="tbl-wrap">
+      <div class="call-flow" style="padding:0 4px">
+
+        <div class="call-step">
+          <div class="call-phase phase-a">Open<br/>Motion A</div>
+          <div class="call-content">
+            <h4>Establish the visibility gap</h4>
+            <div class="quote">"Walk me through how you currently track AI agents across your client base."</div>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-a">Pain Probe<br/>Motion A</div>
+          <div class="call-content">
+            <h4>Surface the incident or near-miss (Q1)</h4>
+            <div class="quote">"Has any client ever asked you what's monitoring their Copilot or Cursor? Have you had to explain an AI tool to an auditor?"</div>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-a">Blame Frame<br/>Motion A</div>
+          <div class="call-content">
+            <h4>Make accountability personal</h4>
+            <div class="quote">"If a client's Copilot accessed something it shouldn't have tonight — who finds out first, and how?"</div>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-c">Compliance<br/>Pivot</div>
+          <div class="call-content">
+            <h4>Connect to audit pressure (Q2 — already confirmed)</h4>
+            <div class="quote">"Do your clients have SOC 2 or CMMC obligations? What do you tell your auditor when they ask about AI agent access logs?"</div>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-a">Demo</div>
+          <div class="call-content">
+            <h4>Show the dashboard + Office Hours + event log</h4>
+            <p>Lead with the compliance artifact view — every blocked event formatted as an audit-ready log. Then show Office Hours enforcement. Emphasize 15-minute deploy.</p>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-c">Stack<br/>Extension</div>
+          <div class="call-content">
+            <h4>Connect to their existing security stack (Q4 — confirmed)</h4>
+            <div class="quote">"What are you using today for cloud SIEM? SecureLayer pushes directly into Sentinel and Splunk — it's one more signal source in your existing workflow."</div>
+          </div>
+        </div>
+
+        <div class="call-step">
+          <div class="call-phase phase-a">Price<br/>Motion A</div>
+          <div class="call-content">
+            <h4>Frame as pass-through margin (Q3 — open)</h4>
+            <div class="quote">"Most MSSPs charge clients $15–40/month for cloud security add-ons. If you could add an AI agent risk report to your standard monthly deliverable — what would that be worth as a client line item?"</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. PROBES FOR Q1 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>How to Resolve Q1 — The Incident Question</h2>
+      <span class="section-tag tag-open" style="background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)">Open</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">Don't ask "has there been an incident?" directly — vCISOs won't volunteer liability. Ask sideways using these four probes. Any "yes" or "we had a situation" is your Q1 signal.</p>
+    <div class="probe-list">
+      <div class="probe">
+        <div class="probe-q">"Has any client ever asked you what's monitoring their Copilot or Cursor?"</div>
+        <div class="probe-why">Surfaces the accountability gap without implicating them in a past incident.</div>
+      </div>
+      <div class="probe">
+        <div class="probe-q">"Have you ever had to explain an AI tool to an auditor — or had a client get a finding about it?"</div>
+        <div class="probe-why">Connects naturally to Q2 (auditor pressure) and frames the incident as a compliance event, not a security failure.</div>
+      </div>
+      <div class="probe">
+        <div class="probe-q">"In the last 12 months, have any developers — yours or a client's — surprised you with an AI tool you didn't know was running?"</div>
+        <div class="probe-why">Near-miss framing. Much easier to admit than a full incident. Shadow IT discovery is the most common form.</div>
+      </div>
+      <div class="probe">
+        <div class="probe-q">"If a client's Copilot accessed something it shouldn't have tonight — who finds out first, and how?"</div>
+        <div class="probe-why">Forces them to trace the detection gap in real time. Silence is the answer — and silence is your demo opening.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. PROBES FOR Q3 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2>How to Resolve Q3 — Price Sensitivity</h2>
+      <span class="section-tag tag-open" style="background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)">Open</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">Don't quote $20–30 and wait. Frame it as a pass-through margin opportunity first. The goal is to make SecureLayer a revenue line, not a cost line, on the MSSP's P&amp;L.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>What They Say</th>
+            <th>What It Means</th>
+            <th>Your Response</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="green">Strong signal</td>
+            <td>"Can we white-label it?"</td>
+            <td>They want to own the margin and present it as their own service</td>
+            <td>Confirm white-label is on roadmap. Ask what they'd charge clients.</td>
+          </tr>
+          <tr>
+            <td class="green">Good signal</td>
+            <td>"We mark up our tools 30–40%"</td>
+            <td>They'll absorb $25–30 easily and bill clients $35–45</td>
+            <td>Anchor at $30/tenant. Offer volume tier at 50+ tenants.</td>
+          </tr>
+          <tr>
+            <td class="amber">Neutral</td>
+            <td>"We pass cloud security through at cost"</td>
+            <td>Price sensitivity is real — they don't markup tooling</td>
+            <td>Anchor at $20. Lead with compliance artifact as the value driver.</td>
+          </tr>
+          <tr>
+            <td class="red">Weak signal</td>
+            <td>"Our clients don't pay for security add-ons"</td>
+            <td>Budget-constrained MSSP or wrong prospect profile</td>
+            <td>Deprioritize. Ask for a referral to a larger MSSP in their network.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. THE CLOSE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2>The Closing Statement</h2>
+      <span class="section-tag tag-strategy">Use in Every Call</span>
+    </div>
+    <div class="close-block">
+      <h3>One sentence that ties Motion A + Motion C + Stack Extension together</h3>
+      <div class="close-quote">
+        "Right now your auditor is already asking and you have no answer. SecureLayer gives you the log, the risk score, and the enforcement — in 15 minutes, inside your existing Sentinel and ConnectWise workflow — before the incident that makes it urgent."
+      </div>
+      <div class="close-breakdown">
+        <div class="close-pill cp-a">Motion A<br/>Urgency &amp; enforcement</div>
+        <div class="close-pill cp-c">Motion C<br/>Audit log &amp; compliance</div>
+        <div class="close-pill cp-stack">Q4 Confirmed<br/>Extends existing stack</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SEQUENCING -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <h2>Execution Sequence</h2>
+      <span class="section-tag tag-action">Work Plan</span>
+    </div>
+    <div class="tbl-wrap" style="padding:4px 16px">
+      <div class="sequence">
+        <div class="seq-row">
+          <div class="seq-phase now">Now<br/>0–30 days</div>
+          <div class="seq-content">
+            <h4>Run 3 MSSP vCISO discovery calls</h4>
+            <p>Use the call flow in Section 4. Goal: close Q1 (incident?) and Q3 (price?) from at least 2 of 3 calls. Send the one-pager and a compliance evidence sample in every follow-up. Ask each prospect who they use for SOC 2 / CMMC — that's the Motion C referral path.</p>
+          </div>
+        </div>
+        <div class="seq-row">
+          <div class="seq-phase parallel">Parallel<br/>30–60 days</div>
+          <div class="seq-content">
+            <h4>Run 2–3 compliance consultant conversations</h4>
+            <p>Ask: is "AI agent access log" becoming a SOC 2 / CMMC artifact? Would you reference a tool that produces this automatically? If yes from 2 consultants, Motion C becomes a co-sell channel alongside Motion A.</p>
+          </div>
+        </div>
+        <div class="seq-row">
+          <div class="seq-phase parallel">Parallel<br/>0–60 days</div>
+          <div class="seq-content">
+            <h4>Build PLG wedge — GitHub org scan (Motion E)</h4>
+            <p>Ship a GitHub OAuth integration that scans repos for AI agent artifacts and delivers a risk inventory in under 2 minutes. This is the first real integration — it forces a shippable product before any pilot request from Motion A calls lands. SMB users who self-serve become the first case studies.</p>
+          </div>
+        </div>
+        <div class="seq-row">
+          <div class="seq-phase then">Then<br/>60–120 days</div>
+          <div class="seq-content">
+            <h4>PSA marketplace listing (Motion B)</h4>
+            <p>Only after 2–3 reference customers from Motion A. Use validated demand and real proof points as the listing copy. Empty marketplace listings with no reviews do more harm than good.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. WHAT EACH CALL MUST PRODUCE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">9</div>
+      <h2>What Each Call Must Produce</h2>
+      <span class="section-tag tag-action">Sales Team Checklist</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">Leave every call knowing the answers to these four questions. Document them immediately after. We need 2-of-3 to validate each assumption.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Question</th><th>Status</th><th>How to Probe</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Q1</td>
+            <td>Has anyone been blamed for an AI agent incident — or had a near-miss?</td>
+            <td class="red">Open</td>
+            <td>Near-miss framing — "surprised by an AI tool you didn't know was running?"</td>
+          </tr>
+          <tr>
+            <td>Q2</td>
+            <td>Are auditors already asking about AI agent governance?</td>
+            <td class="green">Confirmed YES</td>
+            <td>Use to open — "What do you tell your auditor when they ask?"</td>
+          </tr>
+          <tr>
+            <td>Q3</td>
+            <td>Will they pay $20–30/tenant/month — or pass it through to clients?</td>
+            <td class="red">Open</td>
+            <td>Pass-through framing — "What would an AI risk report be worth on a client invoice?"</td>
+          </tr>
+          <tr>
+            <td>Q4</td>
+            <td>Are they already using cloud SIEM/RMM and looking to extend it to AI?</td>
+            <td class="green">Confirmed YES</td>
+            <td>Use to anchor integrations — "SecureLayer pushes into Sentinel/Splunk natively."</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PLG MOTION E — DETAIL -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num" style="background:var(--green);color:#000">E</div>
+      <h2>Motion E — PLG Funnel Detail</h2>
+      <span class="section-tag" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)">Product-Led Growth</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:20px">PLG reaches the <strong style="color:var(--text)">SMB direct buyer</strong> that Motion A cannot reach efficiently, and generates warm inbound leads for the MSSP channel. The GitHub scan wedge is also the first real integration that needs to be built — making it the right engineering starting point.</p>
+
+    <!-- Funnel -->
+    <div style="margin-bottom:24px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px">PLG Funnel</div>
+      <div style="display:flex;flex-direction:column;gap:0">
+
+        <div style="display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000;flex-shrink:0">1</div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;margin-bottom:3px">Awareness → GitHub OAuth signup</h4>
+            <p style="font-size:12px;color:var(--text-2)">vCISO or DevOps lead hears about AI agent risk (blog post, conference talk, peer referral). Lands on securelayer.io. Clicks "Scan my org free." GitHub OAuth — 30 seconds, no credit card.</p>
+          </div>
+          <div style="font-size:11px;color:var(--text-3);padding-top:2px;white-space:nowrap">Time to value: &lt;2 min</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000;flex-shrink:0">2</div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;margin-bottom:3px">Activation → AI agent risk inventory</h4>
+            <p style="font-size:12px;color:var(--text-2)">Scan surfaces: which AI agents are configured, which MCP servers are loaded, which have credential-access or network permissions. Risk score per agent. This is the "aha" moment — they see something they didn't know was running.</p>
+          </div>
+          <div style="font-size:11px;color:var(--text-3);padding-top:2px;white-space:nowrap">Activation event</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000;flex-shrink:0">3</div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;margin-bottom:3px">Upgrade trigger → enforcement &amp; compliance log</h4>
+            <p style="font-size:12px;color:var(--text-2)">"You have 3 agents with credential-access permissions running outside business hours. <strong style="color:var(--accent)">Enforce? →</strong>" Clicking enforce requires the paid tier. Natural in-product upgrade, no sales call needed. Alternatively: "Export this as a SOC 2 artifact → upgrade."</p>
+          </div>
+          <div style="font-size:11px;color:var(--accent);padding-top:2px;font-weight:700;white-space:nowrap">Monetisation gate</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">4</div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;margin-bottom:3px">Expansion → MSSP referral loop</h4>
+            <p style="font-size:12px;color:var(--text-2)">SMB user grows past self-serve needs (multiple clients, PSA integration, multi-tenant dashboard). In-product prompt: "Do you manage security for other companies? Talk to us about MSSP pricing." Hands off to Motion A pipeline as a warm, product-qualified inbound lead.</p>
+          </div>
+          <div style="font-size:11px;color:var(--blue);padding-top:2px;font-weight:700;white-space:nowrap">Motion A handoff</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:14px 0">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">5</div>
+          <div>
+            <h4 style="font-size:12px;font-weight:700;margin-bottom:3px">Virality → developer word-of-mouth</h4>
+            <p style="font-size:12px;color:var(--text-2)">The scan report is shareable. A vCISO who runs the scan and finds a risky agent will forward the report to their CTO. The CTO sends it to the developer. That developer asks "how did you find this?" — organic product discovery within the same org and via peer networks.</p>
+          </div>
+          <div style="font-size:11px;color:var(--purple);padding-top:2px;font-weight:700;white-space:nowrap">Organic loop</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PLG vs Motion A comparison -->
+    <div style="margin-bottom:4px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">PLG vs Motion A — Side by Side</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Motion A — Direct vCISO</th><th>Motion E — PLG</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Buyer</td><td>MSSP vCISO, manages 50+ client tenants</td><td>SMB IT lead / DevOps, 20–50 person company</td></tr>
+            <tr><td>Entry</td><td>Warm outreach, discovery call</td><td>GitHub OAuth, self-serve scan</td></tr>
+            <tr><td>Wedge</td><td>Office Hours enforcement + compliance log</td><td>AI agent inventory + risk score (free)</td></tr>
+            <tr><td>Sales motion</td><td>Vendor-assisted, 2–4 week cycle</td><td>Self-serve → PQL → inside sales close</td></tr>
+            <tr><td>First integration required</td><td>ConnectWise / NinjaOne RMM</td><td>GitHub OAuth only</td></tr>
+            <tr><td>Revenue model</td><td>$20–30/tenant/month via MSSP channel</td><td>$30/month flat (SMB) → MSSP pricing on expansion</td></tr>
+            <tr><td>Time to first paying customer</td><td>60–90 days (sales cycle)</td><td>Days (if GitHub scan ships)</td></tr>
+            <tr><td>Case study value</td><td>High (MSSP validates market)</td><td>High (SMB proves self-serve, produces scan data)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PLG engineering note -->
+    <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:16px 18px;margin-top:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Why build PLG first</div>
+      <p style="font-size:12px;color:var(--text-2);line-height:1.6">The GitHub scan is the smallest real integration that ships a working product. Building it before the MSSP discovery calls return pilot requests means you have something real to show — not just a demo. SMB users who self-serve during the build phase become your first case studies, closing assumption risk A6 (product reality) with real usage data instead of a design partner conversation.</p>
+    </div>
+  </div>
+
+  <!-- 10. MARKET CONTEXT -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">10</div>
+      <h2>Market Context — The Acquisition Wave &amp; Emerging Threat Signals</h2>
+      <span class="section-tag tag-strategy">Competitive Intelligence</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:20px">
+      Two parallel forces are converging that directly shape SecureLayer's window of opportunity. The sales team should be fluent in both — they will come up in every sophisticated vCISO conversation.
+    </p>
+
+    <!-- Two col intro -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px">
+        <div style="font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Force 1 — The Acquisition Wave</div>
+        <p style="font-size:12px;color:var(--text-2);line-height:1.6">
+          Major global cyber vendors — Palo Alto Networks, Cisco, CrowdStrike, SentinelOne, Microsoft — are in active acquisition mode targeting AI agent observability and management startups. Every major platform is acquiring a "prepare" capability: visibility into what AI tools are running, basic policy controls, and usage logging. None yet deliver runtime threat enforcement against active attacks.
+        </p>
+      </div>
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px">
+        <div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Force 2 — Active Threat Signals</div>
+        <p style="font-size:12px;color:var(--text-2);line-height:1.6">
+          Early enterprise breach indicators are already surfacing: credential theft via AI agent context windows, and prompt injection attacks that manipulate agent behavior to exfiltrate data or pivot laterally. These are not theoretical — they are documented in enterprise security incident reports. The gap between "prepare" platforms and actual threat response is where SecureLayer sits.
+        </p>
+      </div>
+    </div>
+
+    <!-- Acquisition landscape -->
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">What the Big Vendors Are Buying (and What They're Missing)</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Vendor Category</th>
+              <th>Acquisition Focus</th>
+              <th>What They Cover</th>
+              <th>What They Still Miss</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CNAPP / Cloud Security</td>
+              <td>AI workload visibility, model inventory</td>
+              <td>Which AI tools are deployed in cloud infra</td>
+              <td>What those agents actually do at runtime on developer endpoints</td>
+            </tr>
+            <tr>
+              <td>EDR / XDR Platforms</td>
+              <td>AI process telemetry, LLM API call logging</td>
+              <td>Process-level activity of AI agent executables</td>
+              <td>Semantic threat detection — prompt injection, credential leakage in context windows</td>
+            </tr>
+            <tr>
+              <td>SIEM / SOAR</td>
+              <td>AI event ingestion, alert correlation</td>
+              <td>Aggregation of AI tool logs into existing pipelines</td>
+              <td>Enforcement — they detect but cannot block; no access governance layer</td>
+            </tr>
+            <tr>
+              <td>CASB / SaaS Security</td>
+              <td>AI app shadow IT discovery, DLP for prompts</td>
+              <td>Network-level visibility of AI SaaS usage</td>
+              <td>Agentic behavior — autonomous multi-step agent actions that bypass network controls</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Threat signals -->
+    <div style="margin-bottom:8px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">Active Threat Signals Already Observed in Enterprises</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+        <div style="background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:16px 18px">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px">⚠ Credential Theft via Agent Context</div>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:8px">
+            AI coding agents (Claude Code, Cursor, Copilot) are granted broad file-system and shell access. Malicious or compromised MCP servers, supply-chain-poisoned extensions, and social-engineered prompts have been used to exfiltrate <span class="mono" style="font-size:11px">.env</span> files, SSH keys, API tokens, and cloud credentials directly through the agent's context window — bypassing DLP tools that monitor network traffic but not LLM context.
+          </p>
+          <div style="font-size:11px;color:var(--red);font-weight:600">SecureLayer defense: Skill Risk Score flags credential-access permissions. Office Hours blocks out-of-hours exfiltration attempts.</div>
+        </div>
+
+        <div style="background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:16px 18px">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px">⚠ Prompt Injection &amp; Agent Manipulation</div>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;margin-bottom:8px">
+            Adversarial content embedded in codebases, documentation, or web pages fetched by agents has been used to override system prompts — redirecting agents to execute unintended commands, exfiltrate conversation history, or silently modify code before commit. These attacks require no malware and leave no traditional IOCs in endpoint or network logs.
+          </p>
+          <div style="font-size:11px;color:var(--red);font-weight:600">SecureLayer defense: Prompt Injection rule flag (PI-003) in Skill Registry. Policy Engine blocks unapproved tool invocations mid-session.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Strategic implication -->
+    <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;padding:18px;margin-top:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Strategic Window</div>
+      <p style="font-size:12px;color:var(--text-2);line-height:1.6">
+        The big vendors are all acquiring "prepare" capabilities — observability, inventory, and logging. They will take 18–36 months to ship cohesive enforcement products through their acquisition integration cycles. The active threats (credential theft, prompt injection) are happening <em style="color:var(--text)">now</em>, before any of those acquisitions ship. SecureLayer's opportunity is the enforcement gap: the window between "threats are real" and "the platform vendors have responded." That window is open today. It closes when CrowdStrike or Palo Alto ships a native AI agent enforcement module — likely 2026–2027.
+      </p>
+      <div style="margin-top:12px;font-size:12px;font-weight:700;color:var(--accent)">
+        Use this in every vCISO call: "Every major vendor is preparing for this threat. None of them enforce against it yet. SecureLayer does."
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. ASSUMPTION RISK REGISTER -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">11</div>
+      <h2>Assumption Risk Register</h2>
+      <span class="section-tag tag-open" style="background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)">Adversarial Review</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">
+      Every GTM assumption was stress-tested against its strongest counter-argument. The table below shows what we believe, why we might be wrong, and exactly what evidence resolves each risk. Sales team: treat red assumptions as live hypotheses, not facts.
+    </p>
+
+    <!-- Risk cards -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+
+      <!-- A1 -->
+      <div style="background:var(--bg-2);border:1px solid var(--red-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A1 — Audit Pressure</div>
+            <div style="display:inline-block;background:var(--red-dim);color:var(--red);border:1px solid var(--red-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">High Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">Auditors require runtime enforcement logs — a policy doc alone won't satisfy the AI agent governance question.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">A $200 policy template may fully satisfy the auditor today. If so, Motion C loses its forcing function and becomes a nice-to-have.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">One direct auditor interview. Ask: "Does a written AI use policy satisfy your current AI access control requirement, or do you require evidence of runtime enforcement?" One answer closes this risk permanently.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--accent)">Market update:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Credential theft and prompt injection incidents already being cited in SOC 2 Type II reviews — increases probability that auditors will require evidence of agent-level controls, not just policy documentation.</span>
+        </div>
+      </div>
+
+      <!-- A2 -->
+      <div style="background:var(--bg-2);border:1px solid var(--red-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A2 — Stack Extension</div>
+            <div style="display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid var(--accent-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">Medium Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">MSSPs will extend existing cloud security tooling to cover AI agents rather than blocking AI tools entirely.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">MSSPs may solve the problem by banning AI tools via endpoint policy. If "block it" is cheaper than "manage it," SecureLayer's market shrinks to organizations that cannot ban the tools.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Ask in every call: "Have clients pushed back when you tried to block Copilot or Cursor?" Developer pressure to keep AI tools is the counter-force to banning. Software companies and dev shops cannot competitively ban AI coding tools in 2025.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--accent)">Market update:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Big vendor acquisitions confirm the "manage it" thesis — if banning were sufficient, CrowdStrike and Palo Alto would not be acquiring AI agent management startups. They are betting the market wants governance, not prohibition.</span>
+        </div>
+      </div>
+
+      <!-- A3 -->
+      <div style="background:var(--bg-2);border:1px solid var(--red-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A3 — Urgency</div>
+            <div style="display:inline-block;background:var(--red-dim);color:var(--red);border:1px solid var(--red-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">High Risk → Reduced</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">Fear of blame creates enough urgency to close deals. No burning platform forces action now.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">vCISOs prioritize threats that have already hurt peers. Without a widely-known AI agent incident, this remains a future-threat sale — slow to close, easy to defer.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Use documented credential theft and prompt injection incidents as the burning platform. These are not theoretical — name them. Ask: "Have you seen the GitHub Copilot credential exfiltration case?" Concrete incidents close the urgency gap.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--green)">Market update — risk reduced:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Credential theft via agent context windows and prompt injection are already documented enterprise incidents. This is no longer a "might happen" threat — it is a "is happening" threat. Use this to replace the urgency that Q1 was supposed to provide.</span>
+        </div>
+      </div>
+
+      <!-- A4 -->
+      <div style="background:var(--bg-2);border:1px solid rgba(245,158,11,.3);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A4 — Pricing</div>
+            <div style="display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid var(--accent-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">Medium Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">$20–30/tenant/month is the right price point. MSSP will pass it through as a client line item.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">Price was invented, not derived. May be too low if compliance is the driver (undervalues the product). May be too high if MSSP margins are thin and the pass-through story doesn't land.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Ask every prospect: "If you were adding this as a client line item, what would you call it and what would you charge?" Do not anchor with your price first. Let them name the number — it will be more accurate than your model.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--accent)">Market update:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Vendor acquisitions in this space are pricing at $5–15/seat/month for observability-only tiers. An enforcement layer with compliance artifacts justifies a premium. Consider a two-tier model: $15/tenant (visibility) and $30/tenant (enforcement + compliance log).</span>
+        </div>
+      </div>
+
+      <!-- A5 -->
+      <div style="background:var(--bg-2);border:1px solid rgba(245,158,11,.3);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A5 — Positioning</div>
+            <div style="display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid var(--accent-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">Medium Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">"EDR for the Agentic Era" is the right frame for vCISO buyers. Familiar enough to land, novel enough to differentiate.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">EDR implies an endpoint agent. SecureLayer has no endpoint agent. A technical buyer will immediately ask "where does your agent sit?" and the answer erodes trust. Closer to CASB or PAM than EDR.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">A/B test two framings across the three calls. Use "EDR for AI agents" in one call, "AI agent access governance — like CASB for your Copilot" in another. Note which frame generates engagement vs. objections.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--accent)">Market update:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Vendors acquiring in this space are using terms like "AI Security Posture Management (AI-SPM)" and "Agentic AI Governance." Consider testing "AI Agent Security Posture" as a third framing — it aligns with emerging analyst vocabulary.</span>
+        </div>
+      </div>
+
+      <!-- A6 -->
+      <div style="background:var(--bg-2);border:1px solid var(--red-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">A6 — Product Reality</div>
+            <div style="display:inline-block;background:var(--red-dim);color:var(--red);border:1px solid var(--red-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">High Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">The demo credibly represents a deployable product. "15 minutes to deploy" is achievable.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">The current demo is a mock UI with no live integrations. If any prospect asks for a pilot, there is nothing to deploy. Overselling the demo into a pilot request creates a credibility crisis.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Be explicit: "We're selecting 3–5 design partners who will shape the integration model with us." Reframe pilot requests as design partner conversations. Prospects who say yes to that are higher-quality early customers than those who want a finished product.</span>
+        </div>
+        <div style="padding:8px 14px;background:var(--bg-3);border-top:1px solid var(--border)">
+          <span style="font-size:11px;font-weight:600;color:var(--red)">Critical note for sales team:</span>
+          <span style="font-size:11px;color:var(--text-2)"> Do not promise a deployment timeline. Do not describe the demo as a live product. The demo at <span class="mono" style="font-size:10px">sharon19x1-ops.github.io/securelayer-demo</span> is a design prototype. If a prospect asks "can we start a trial?" — the answer is "let's talk about a design partnership."</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PLG assumption cards -->
+    <div style="margin-top:4px;display:flex;flex-direction:column;gap:12px">
+
+      <div style="background:var(--bg-2);border:1px solid var(--green-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">B1 — PLG Wedge Value</div>
+            <div style="display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid var(--accent-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">Medium Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">A GitHub org scan delivers enough standalone value to activate a self-serve user — they see something they didn't know was running and immediately understand the risk.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">Most orgs using AI coding tools already know they're using them — it's not a secret. If the scan surfaces no surprises, the "aha" moment doesn't land and activation fails. The value depends on finding shadow AI, not confirmed AI.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Run the scan on 5 orgs before launch (design partners). Measure: did the scan surface agents or MCP servers the user didn't know about? If 3 of 5 find something new, activation assumption holds. If not, the wedge needs to shift — e.g., risk scoring of known agents rather than discovery.</span>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-2);border:1px solid var(--green-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">B2 — Free-to-Paid Conversion</div>
+            <div style="display:inline-block;background:var(--red-dim);color:var(--red);border:1px solid var(--red-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">High Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">Seeing a risky agent in the scan is enough of an upgrade trigger to convert a free user to paid enforcement. The "enforce?" prompt drives a self-serve checkout without sales involvement.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">Security buyers rarely self-serve on enforcement tools. Putting a policy on a developer's machine requires IT or security team approval — even at a 30-person company, the DevOps lead can't unilaterally block Copilot. The purchase decision may stall at the enforcement step regardless of the scan result.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Offer two upgrade triggers, not one. (1) Enforce — for users with decision authority. (2) "Share this report with your security team" — for users who need approval. The second trigger creates an internal champion who pulls the purchase from above. Track which trigger converts more.</span>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-2);border:1px solid var(--green-border);border-radius:10px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr;border-bottom:1px solid var(--border)">
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">B3 — MSSP Referral Loop</div>
+            <div style="display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid var(--accent-border);border-radius:99px;font-size:10px;font-weight:700;padding:2px 8px">Medium Risk</div>
+          </div>
+          <div style="padding:12px 14px;border-right:1px solid var(--border)">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ASSUMPTION</div>
+            <div style="font-size:12px;color:var(--text-2)">SMB PLG users who outgrow self-serve will ask for an MSSP referral, feeding warm leads into Motion A's pipeline. PLG and Motion A are self-reinforcing rather than competing.</div>
+          </div>
+          <div style="padding:12px 14px">
+            <div style="font-size:10px;font-weight:700;color:var(--text-3);margin-bottom:4px">ADVERSARIAL CHALLENGE</div>
+            <div style="font-size:12px;color:var(--text-2)">SMB users who find value in self-serve don't naturally refer upward — they just keep using the self-serve tier. MSSPs will also see PLG as competitive ("my client is buying direct") rather than as a referral source. Channel conflict is a real risk at any scale.</div>
+          </div>
+        </div>
+        <div style="padding:10px 14px;display:flex;align-items:flex-start;gap:8px">
+          <span style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px">Resolves via:</span>
+          <span style="font-size:12px;color:var(--text-2)">Define the channel boundary explicitly before PLG launches: SMB (&lt;50 employees, &lt;5 tenants) is self-serve; above that threshold the product gates and routes to MSSP pricing. Show MSSPs the boundary in Motion A calls so they see PLG as a lead source, not a competitor. Never let a client outgrow self-serve silently.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Summary table -->
+    <div style="margin-top:20px">
+      <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">Risk Summary</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Assumption</th><th>Risk</th><th>Market Intel Impact</th><th>Priority</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A1</td>
+              <td>Auditors require runtime logs</td>
+              <td class="red">High</td>
+              <td style="color:var(--accent)">Incidents strengthen this — auditors will follow</td>
+              <td>Interview 1 auditor before call 2</td>
+            </tr>
+            <tr>
+              <td>A2</td>
+              <td>MSSPs manage AI tools vs. ban them</td>
+              <td class="amber">Medium</td>
+              <td class="green">Big vendor acquisitions confirm "manage" thesis</td>
+              <td>Probe in every discovery call</td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>Urgency without a public incident</td>
+              <td class="green">Reduced</td>
+              <td class="green">Credential theft + prompt injection are active now</td>
+              <td>Lead with documented incidents, not fear</td>
+            </tr>
+            <tr>
+              <td>A4</td>
+              <td>$20–30/tenant/month pricing</td>
+              <td class="amber">Medium</td>
+              <td style="color:var(--accent)">Consider two-tier: $15 visibility / $30 enforcement</td>
+              <td>Let prospects name the price first</td>
+            </tr>
+            <tr>
+              <td>A5</td>
+              <td>"EDR for Agentic Era" framing</td>
+              <td class="amber">Medium</td>
+              <td style="color:var(--accent)">Test "AI-SPM" as emerging analyst vocabulary</td>
+              <td>A/B test across 3 calls</td>
+            </tr>
+            <tr>
+              <td>A6</td>
+              <td>Demo represents deployable product</td>
+              <td class="red">High</td>
+              <td style="color:var(--text-3)">No change — product is still a prototype</td>
+              <td>Frame as design partner program, always</td>
+            </tr>
+            <tr style="border-top:2px solid var(--green-border)">
+              <td style="color:var(--green)">B1</td>
+              <td>GitHub scan delivers "aha" moment via shadow AI discovery</td>
+              <td class="amber">Medium</td>
+              <td style="color:var(--green)">PLG motion — new assumption</td>
+              <td>Validate on 5 orgs before launch; measure surprise rate</td>
+            </tr>
+            <tr>
+              <td style="color:var(--green)">B2</td>
+              <td>Free-to-paid conversion via in-product "enforce?" prompt</td>
+              <td class="red">High</td>
+              <td style="color:var(--green)">PLG motion — new assumption</td>
+              <td>Add "share report" trigger alongside enforce; track which converts</td>
+            </tr>
+            <tr>
+              <td style="color:var(--green)">B3</td>
+              <td>PLG SMB users feed warm leads into MSSP Motion A pipeline</td>
+              <td class="amber">Medium</td>
+              <td style="color:var(--green)">PLG motion — new assumption</td>
+              <td>Define hard channel boundary (&lt;50 employees = self-serve) before PLG launch</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>SecureLayer — GTM Discovery Brief — Confidential</div>
+    <div>EDR for the Agentic Era &nbsp;·&nbsp; securelayer.io</div>
+  </div>
+
+</div>
+</body>
+</html>

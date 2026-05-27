@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — Internal Documents</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.12);--accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;--text-2:#9ba3b8;--text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);--border-2:rgba(255,255,255,0.1);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.1);--green-border:rgba(34,197,94,.2);
+  --blue:#3b82f6;--blue-dim:rgba(59,130,246,.1);--blue-border:rgba(59,130,246,.2);
+  --red:#ef4444;--red-dim:rgba(239,68,68,.1);--red-border:rgba(239,68,68,.2);
+  --purple:#a855f7;--purple-dim:rgba(168,85,247,.1);--purple-border:rgba(168,85,247,.2);
+}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:56px 40px 80px}
+
+/* HEADER */
+.header{display:flex;align-items:center;gap:14px;margin-bottom:48px}
+.logo-mark{width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#000;flex-shrink:0}
+.logo-name{font-size:18px;font-weight:800;line-height:1.2}
+.logo-sub{font-size:12px;color:var(--text-3)}
+.header-right{margin-left:auto;text-align:right}
+.stealth-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.header-date{font-size:11px;color:var(--text-3);margin-top:4px}
+
+/* HERO */
+.hero{margin-bottom:48px}
+.hero h1{font-size:32px;font-weight:900;line-height:1.15;margin-bottom:10px}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:15px;color:var(--text-2);max-width:600px;line-height:1.65}
+
+/* DOC CARDS */
+.docs-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:48px}
+.doc-card{
+  display:grid;grid-template-columns:48px 1fr auto;gap:0;
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:12px;overflow:hidden;
+  text-decoration:none;color:inherit;
+  transition:border-color 0.15s,background 0.15s;
+}
+.doc-card:hover{border-color:var(--accent-border);background:var(--bg-3)}
+.doc-icon{
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;border-right:1px solid var(--border);
+  background:var(--bg-3);
+}
+.doc-body{padding:18px 20px}
+.doc-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 8px;border-radius:99px;margin-bottom:7px;
+}
+.doc-body h3{font-size:15px;font-weight:700;margin-bottom:4px;line-height:1.3}
+.doc-body p{font-size:12px;color:var(--text-2);line-height:1.5}
+.doc-arrow{
+  display:flex;align-items:center;padding:0 20px;
+  font-size:18px;color:var(--text-3);border-left:1px solid var(--border);
+  transition:color 0.15s;
+}
+.doc-card:hover .doc-arrow{color:var(--accent)}
+
+/* DEMO CARD */
+.demo-card{
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  border-radius:12px;padding:22px 24px;
+  display:flex;align-items:center;gap:20px;
+  text-decoration:none;color:inherit;
+  transition:background 0.15s;
+}
+.demo-card:hover{background:rgba(245,158,11,.18)}
+.demo-icon{font-size:28px;flex-shrink:0}
+.demo-card h3{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:3px}
+.demo-card p{font-size:12px;color:var(--text-2)}
+.demo-arrow{margin-left:auto;font-size:20px;color:var(--accent)}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border-2);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="logo-mark">S</div>
+    <div>
+      <div class="logo-name">SecureLayer</div>
+      <div class="logo-sub">AI Agent Security Platform</div>
+    </div>
+    <div class="header-right">
+      <div class="stealth-badge">⬡ Stealth Stage</div>
+      <div class="header-date">Internal documents · May 2026</div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>EDR for the<br/><span>Agentic Era</span></h1>
+    <p>Internal reference documents for the SecureLayer founding team. All documents are confidential — share only with authorised team members.</p>
+  </div>
+
+  <div class="docs-grid">
+
+    <a class="doc-card" href="ceo-review.html">
+      <div class="doc-icon">📋</div>
+      <div class="doc-body">
+        <div class="doc-tag" style="background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)">CEO Review</div>
+        <h3>Concept Review — Go / No-Go Before Design</h3>
+        <p>Market evidence, unit economics, build sequence, four key decisions, risk table, verdict, and the 30-day execution plan. Start here before any design or engineering commitment.</p>
+      </div>
+      <div class="doc-arrow">→</div>
+    </a>
+
+    <a class="doc-card" href="gtm-brief.html">
+      <div class="doc-icon">🎯</div>
+      <div class="doc-body">
+        <div class="doc-tag" style="background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)">GTM Strategy</div>
+        <h3>GTM Discovery Brief — MSSP Channel Strategy</h3>
+        <p>Signal map, five GTM motions (A–E) including PLG, discovery call flow, probe questions for Q1 and Q3, market context on the acquisition wave, and the full assumption risk register.</p>
+      </div>
+      <div class="doc-arrow">→</div>
+    </a>
+
+    <a class="doc-card" href="outreach-templates.html">
+      <div class="doc-icon">✉️</div>
+      <div class="doc-body">
+        <div class="doc-tag" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)">Sales Outreach</div>
+        <h3>MSSP Outreach Templates — Cold Email &amp; Follow-Up</h3>
+        <p>Three email templates (cold intro, 5-day follow-up, referral variant), subject line A/B options, personalization guide, do/don't list, and response handling for every reply type.</p>
+      </div>
+      <div class="doc-arrow">→</div>
+    </a>
+
+    <a class="doc-card" href="sales-onepager.html">
+      <div class="doc-icon">📄</div>
+      <div class="doc-body">
+        <div class="doc-tag" style="background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)">Sales</div>
+        <h3>Sales One-Pager — EDR for the Agentic Era</h3>
+        <p>Customer-facing one-pager with real app screenshots, product walkthrough, 15-minute setup story, proof points, and integrations grid. Share with prospects after a discovery call.</p>
+      </div>
+      <div class="doc-arrow">→</div>
+    </a>
+
+    <a class="doc-card" href="business-model-research.html">
+      <div class="doc-icon">🔬</div>
+      <div class="doc-body">
+        <div class="doc-tag" style="background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)">Research</div>
+        <h3>Business Model Research — YC Office Hours Q&amp;A</h3>
+        <p>Full Q&amp;A transcript from the office hours business model validation session, signal summary table, proof-of-value loop, pricing recommendation, and discovery call protocol.</p>
+      </div>
+      <div class="doc-arrow">→</div>
+    </a>
+
+  </div>
+
+  <!-- Live demo -->
+  <a class="demo-card" href="https://sharon19x1-ops.github.io/securelayer-demo/" target="_blank">
+    <div class="demo-icon">⬡</div>
+    <div>
+      <h3>Live Interactive Demo →</h3>
+      <p>Full SecureLayer prototype — all 8 views, MSSP/SMB toggle, live event feed. No login required. Share with prospects.</p>
+    </div>
+    <div class="demo-arrow">↗</div>
+  </a>
+
+  <div class="footer" style="margin-top:32px">
+    <div>SecureLayer — Internal Documents — Confidential</div>
+    <div>securelayer.io · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

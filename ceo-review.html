@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — CEO Concept Review</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .no-break{page-break-inside:avoid}
+  .page-break{page-break-before:always}
+}
+
+:root{
+  --bg:#0d0f14;
+  --bg-2:#13161e;
+  --bg-3:#1a1e28;
+  --bg-4:#222636;
+  --accent:#f59e0b;
+  --accent-dim:rgba(245,158,11,.12);
+  --accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;
+  --text-2:#9ba3b8;
+  --text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);
+  --border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;
+  --red-dim:rgba(239,68,68,.1);
+  --red-border:rgba(239,68,68,.2);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,.1);
+  --green-border:rgba(34,197,94,.2);
+  --blue:#3b82f6;
+  --blue-dim:rgba(59,130,246,.1);
+  --blue-border:rgba(59,130,246,.2);
+  --purple:#a855f7;
+  --purple-dim:rgba(168,85,247,.1);
+  --purple-border:rgba(168,85,247,.2);
+}
+
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  font-size:13px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:920px;margin:0 auto;padding:48px 44px 80px}
+
+/* HEADER */
+.doc-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:32px;height:32px;background:var(--accent);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:16px;color:#000;flex-shrink:0;
+}
+.logo-name{font-size:15px;font-weight:700;line-height:1.2}
+.logo-sub{font-size:11px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.8}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* TITLE */
+.title-block{margin-bottom:36px}
+.doc-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;
+  color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+h1{font-size:30px;font-weight:900;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--accent)}
+.title-sub{font-size:14px;color:var(--text-2);line-height:1.6;max-width:700px}
+
+/* SECTIONS */
+.section{margin-bottom:36px}
+.section-head{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+.section-num{
+  width:24px;height:24px;border-radius:6px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#000;flex-shrink:0;
+}
+.section-head h2{font-size:16px;font-weight:700}
+.tag{
+  margin-left:auto;font-size:10px;font-weight:700;
+  padding:2px 9px;border-radius:99px;white-space:nowrap;
+}
+.tag-green{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.tag-amber{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.tag-red{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+.tag-blue{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{
+  text-align:left;padding:8px 12px;font-size:10px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);
+  border-bottom:1px solid var(--border-2);
+}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2);line-height:1.5}
+td:first-child{color:var(--text);font-weight:500}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden;margin-bottom:12px}
+
+/* CARDS */
+.card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px}
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+
+/* VERDICT */
+.verdict-block{
+  border-radius:12px;padding:22px 26px;margin-bottom:4px;
+}
+.verdict-go{background:var(--green-dim);border:1px solid var(--green-border)}
+.verdict-go h3{color:var(--green);font-size:15px;font-weight:800;margin-bottom:8px}
+.verdict-risk{background:var(--accent-dim);border:1px solid var(--accent-border)}
+.verdict-risk h3{color:var(--accent);font-size:15px;font-weight:800;margin-bottom:8px}
+
+/* DECISION LOG */
+.decision{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:10px;overflow:hidden;margin-bottom:10px;
+}
+.decision-head{
+  display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;
+  padding:12px 16px;border-bottom:1px solid var(--border);
+}
+.d-num{
+  width:24px;height:24px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;background:var(--bg-4);color:var(--text-2);
+}
+.decision-head h4{font-size:13px;font-weight:700}
+.decision-body{
+  display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);
+}
+.d-col{padding:12px 14px;font-size:12px;color:var(--text-2);line-height:1.5}
+.d-col:not(:last-child){border-right:1px solid var(--border)}
+.d-col-label{font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.decision-rec{padding:10px 14px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
+.rec-tag{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;flex-shrink:0;padding-top:1px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-row{
+  display:grid;grid-template-columns:130px 16px 1fr;gap:12px;align-items:start;
+  padding:12px 0;
+}
+.tl-label{font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;text-align:right;padding-top:4px}
+.tl-dot{width:14px;height:14px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.tl-content h4{font-size:12px;font-weight:700;margin-bottom:3px}
+.tl-content p{font-size:12px;color:var(--text-2);line-height:1.5}
+.tl-row:not(:last-child) .tl-content{border-bottom:1px solid var(--border);padding-bottom:12px}
+
+/* UNIT ECONOMICS */
+.econ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.econ-card{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:10px;padding:16px;text-align:center;
+}
+.econ-num{font-size:26px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px}
+.econ-label{font-size:11px;color:var(--text-3);line-height:1.4}
+.econ-sub{font-size:10px;color:var(--text-3);margin-top:4px}
+
+/* FOOTER */
+.doc-footer{
+  margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--text-3);
+}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security — Stealth Stage</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>CEO Concept Review</strong><br/>
+      Classification: Internal — Founder Only<br/>
+      Date: May 2026<br/>
+      Status: Pre-Design / Pre-Seed
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="doc-label">◎ CEO Review</div>
+    <h1>SecureLayer —<br/><span>Go / No-Go Before Design</span></h1>
+    <p class="title-sub">This document frames the key questions a CEO must answer before committing engineering and design resources to SecureLayer. It consolidates the concept, the market evidence, the business model, the risk register, and the four decisions that need an owner before work begins.</p>
+  </div>
+
+  <!-- 1. CONCEPT IN ONE PAGE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>The Concept — One Page</h2>
+      <span class="tag tag-green">Foundation</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="card">
+        <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">The Problem</div>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7">AI coding agents — Claude Code, GitHub Copilot, Cursor, MCP servers — are installed on developer endpoints across SMB environments. They have broad file-system and shell access. They run during and after business hours. No MSSP has visibility into them. No tool governs what they can do. And auditors are already asking for evidence of AI agent access controls.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">The Solution</div>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7">SecureLayer is the enforcement layer between AI agents and the environments they can reach. It delivers: <strong style="color:var(--text)">real-time risk scoring per agent skill</strong> (10-dimension model), <strong style="color:var(--text)">office hours enforcement</strong> (block all agent activity outside defined windows), and a <strong style="color:var(--text)">compliance artifact</strong> (audit-ready access log) — all delivered through the MSSP's existing ConnectWise or NinjaOne stack.</p>
+      </div>
+    </div>
+
+    <div class="card-grid-3" style="margin-bottom:16px">
+      <div class="card" style="border-color:var(--accent-border)">
+        <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Positioning</div>
+        <p style="font-size:12px;color:var(--text-2)">EDR for the Agentic Era. The first security product that enforces policy on what AI agents can do — not just logs what they did.</p>
+      </div>
+      <div class="card" style="border-color:var(--blue-border)">
+        <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Primary Channel</div>
+        <p style="font-size:12px;color:var(--text-2)">MSSP vCISO. Sold as a per-tenant add-on, white-label ready, invoiced directly to SMB clients at QBR. $20–30/tenant/month.</p>
+      </div>
+      <div class="card" style="border-color:var(--green-border)">
+        <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">PLG Lane</div>
+        <p style="font-size:12px;color:var(--text-2)">GitHub org scan — free AI agent inventory, self-serve. Upgrade trigger: enforcement + compliance log. SMB direct at $30/month flat.</p>
+      </div>
+    </div>
+
+    <!-- Live demo callout -->
+    <div style="background:var(--bg-3);border:1px solid var(--border-2);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+      <span style="font-size:16px">🔗</span>
+      <div>
+        <div style="font-size:12px;font-weight:700;margin-bottom:2px">Interactive prototype is live</div>
+        <div class="mono" style="color:var(--accent)">https://sharon19x1-ops.github.io/securelayer-demo/</div>
+      </div>
+      <div style="margin-left:auto;font-size:11px;color:var(--text-3)">No login · All 8 views working · Dark theme</div>
+    </div>
+  </div>
+
+  <!-- 2. MARKET EVIDENCE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>Market Evidence — What We Know vs. What We're Assuming</h2>
+      <span class="tag tag-amber">Validated Partial</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Signal</th><th>Status</th><th>Evidence Quality</th><th>CEO Implication</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Auditors are asking for AI agent governance logs</td>
+            <td style="color:var(--green);font-weight:700">Confirmed</td>
+            <td style="color:var(--text-2)">Adjacent experience + peer conversations. Not yet from a direct auditor interview.</td>
+            <td>Strong enough to lead with in discovery calls. Verify with one auditor before month-end.</td>
+          </tr>
+          <tr>
+            <td>MSSPs are extending cloud security to cover AI agents</td>
+            <td style="color:var(--green);font-weight:700">Confirmed</td>
+            <td style="color:var(--text-2)">Palo Alto, CrowdStrike, Cisco in active acquisition mode for AI agent observability startups.</td>
+            <td>Big vendor acquisitions validate the category. The enforcement gap is the wedge before they ship.</td>
+          </tr>
+          <tr>
+            <td>Credential theft and prompt injection are active threats</td>
+            <td style="color:var(--green);font-weight:700">Confirmed</td>
+            <td style="color:var(--text-2)">Documented in enterprise security incident reports. Not theoretical.</td>
+            <td>Replaces the need for a reference incident in the sales motion. Use documented cases directly.</td>
+          </tr>
+          <tr>
+            <td>MSSP vCISO will pay $20–30/tenant/month</td>
+            <td style="color:var(--red);font-weight:700">Unconfirmed</td>
+            <td style="color:var(--text-2)">Price was modeled, not validated. No prospect has been asked.</td>
+            <td>Do not anchor on this number until at least 2 of 3 discovery calls confirm it or adjust it.</td>
+          </tr>
+          <tr>
+            <td>An MSSP vCISO has been blamed for an AI agent incident</td>
+            <td style="color:var(--red);font-weight:700">Unconfirmed</td>
+            <td style="color:var(--text-2)">No direct evidence. Framing is near-miss / "who would find out?" rather than confirmed incident.</td>
+            <td>Urgency still works via audit pressure and documented external incidents. Q1 strengthens but isn't required.</td>
+          </tr>
+          <tr>
+            <td>GitHub scan surfaces shadow AI that users didn't know was running</td>
+            <td style="color:var(--accent);font-weight:700">Assumed</td>
+            <td style="color:var(--text-2)">PLG wedge depends on this. Not tested on real orgs yet.</td>
+            <td>First engineering validation: run the scan on 5 friendly orgs before building the PLG flow.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. COMPETITIVE POSITION -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Competitive Position — The Enforcement Gap</h2>
+      <span class="tag tag-green">Favorable Window</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Every major security vendor is acquiring AI agent visibility capabilities. None has shipped enforcement. That gap is SecureLayer's entire reason to exist — and it is time-bounded.</p>
+
+    <div class="tbl-wrap" style="margin-bottom:16px">
+      <table>
+        <thead>
+          <tr><th>Competitor Type</th><th>What They Have</th><th>What They Lack</th><th>SecureLayer Advantage</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CrowdStrike / SentinelOne (XDR)</td>
+            <td>Process telemetry, AI executable monitoring</td>
+            <td>Semantic enforcement — can't block based on what an agent is doing, only that it's running</td>
+            <td>Skill-level risk scoring + session-level block policy</td>
+          </tr>
+          <tr>
+            <td>Palo Alto / Prisma (CNAPP)</td>
+            <td>Cloud AI workload inventory, model catalogues</td>
+            <td>Developer endpoint enforcement; no MSSP multi-tenant model</td>
+            <td>MSSP-native multi-tenant, RMM/PSA integration, no endpoint agent</td>
+          </tr>
+          <tr>
+            <td>Microsoft Purview / Defender</td>
+            <td>DLP for prompts, M365 Copilot policy</td>
+            <td>Non-Microsoft agents (Claude, Cursor, MCP servers) — completely blind</td>
+            <td>Cross-agent coverage regardless of vendor</td>
+          </tr>
+          <tr>
+            <td>Observability startups (being acquired)</td>
+            <td>Agent inventory, usage logging, dashboards</td>
+            <td>Enforcement — they alert but cannot block; no compliance artifact</td>
+            <td>Block + alert + audit log in one layer</td>
+          </tr>
+          <tr>
+            <td>CASB vendors (Netskope, Zscaler)</td>
+            <td>Network-level AI SaaS usage visibility</td>
+            <td>Agentic behavior — autonomous multi-step actions bypass network controls entirely</td>
+            <td>Enforcement at the agent policy layer, not network layer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:10px;padding:16px 20px">
+      <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Strategic Window</div>
+      <p style="font-size:12px;color:var(--text-2);line-height:1.6">Based on typical M&A integration timelines (18–36 months), the enforcement gap stays open until approximately <strong style="color:var(--text)">late 2026 to mid-2027</strong>. SecureLayer needs to reach 20+ paying MSSP customers and establish the enforcement standard before platform vendors bundle a competing feature. The window is real and the clock is running.</p>
+    </div>
+  </div>
+
+  <!-- 4. UNIT ECONOMICS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Unit Economics — Modeled, Not Validated</h2>
+      <span class="tag tag-amber">Assumptions Inside</span>
+    </div>
+
+    <div class="econ-grid" style="margin-bottom:16px">
+      <div class="econ-card">
+        <div class="econ-num">$25</div>
+        <div class="econ-label">Average revenue per tenant per month</div>
+        <div class="econ-sub">Midpoint of $20–30 MSSP range</div>
+      </div>
+      <div class="econ-card">
+        <div class="econ-num">35</div>
+        <div class="econ-label">Average tenants per MSSP partner</div>
+        <div class="econ-sub">Mid-size MSSP assumption</div>
+      </div>
+      <div class="econ-card">
+        <div class="econ-num">$875</div>
+        <div class="econ-label">MRR per MSSP partner</div>
+        <div class="econ-sub">$25 × 35 tenants</div>
+      </div>
+      <div class="econ-card">
+        <div class="econ-num">$10.5K</div>
+        <div class="econ-label">ARR per MSSP partner</div>
+        <div class="econ-sub">$875 × 12 months</div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-bottom:12px">
+      <table>
+        <thead><tr><th>Milestone</th><th>MSSP Partners</th><th>Avg Tenants Each</th><th>MRR</th><th>ARR</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Design Partners (Month 3)</td>
+            <td>3–5</td>
+            <td>15 (smaller MSSPs first)</td>
+            <td style="color:var(--accent)">~$1,875</td>
+            <td style="color:var(--accent)">~$22.5K</td>
+          </tr>
+          <tr>
+            <td>Early Traction (Month 6)</td>
+            <td>10</td>
+            <td>25</td>
+            <td style="color:var(--accent)">~$6,250</td>
+            <td style="color:var(--accent)">~$75K</td>
+          </tr>
+          <tr>
+            <td>Growth (Month 12)</td>
+            <td>30</td>
+            <td>35</td>
+            <td style="color:var(--accent)">~$26,250</td>
+            <td style="color:var(--accent)">~$315K</td>
+          </tr>
+          <tr>
+            <td>Scale (Month 18)</td>
+            <td>75</td>
+            <td>40</td>
+            <td style="color:var(--accent)">~$75,000</td>
+            <td style="color:var(--accent)">~$900K</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="card" style="border-color:var(--green-border)">
+        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px">MSSP economics are favorable</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> Low churn: MSSP invoices clients monthly, compliance stickiness</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> Natural expansion: each new client tenant is incremental ARR</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--green)">✓</span> White-label margin: MSSP absorbs the cost, marks up to client</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:var(--red-border)">
+        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:8px">Risks in the model</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px">
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> Price unconfirmed — could be $15 or $40, not $25</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> Tenants-per-MSSP may be lower for early design partners</li>
+          <li style="font-size:12px;color:var(--text-2);display:flex;gap:6px"><span style="color:var(--red)">⚠</span> MSSP sales cycle is 60–90 days — slow to first revenue</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. BUILD SEQUENCE -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>Recommended Build Sequence</h2>
+      <span class="tag tag-blue">Engineering Priority</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">The current prototype is a mock UI. The build sequence below is ordered to generate the fastest real signal with the least engineering investment before fundraising or design partner commitments.</p>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-label" style="color:var(--green)">Sprint 1<br/>Weeks 1–3</div>
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-content">
+          <h4>GitHub OAuth scan — PLG wedge</h4>
+          <p>Scan repos for AI agent configs, MCP manifests, <span class="mono">.claude</span> directories. Output: risk inventory with scores. No RMM, no PSA, no credit card. This validates assumption B1 (shadow AI discovery) and gives you real usage data before any MSSP call asks for a pilot. Build target: 2–3 weeks, one engineer.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-label" style="color:var(--accent)">Sprint 2<br/>Weeks 4–6</div>
+        <div class="tl-dot" style="background:var(--accent)"></div>
+        <div class="tl-content">
+          <h4>ConnectWise Manage integration — MSSP ticket auto-create</h4>
+          <p>On any SecurityEvent with severity ≥ high, auto-create a ConnectWise ticket with tenant, agent, severity, and recommended action pre-filled. This is the single integration that makes the MSSP motion real — every vCISO uses ConnectWise. Build target: 2 weeks, one engineer with ConnectWise sandbox access.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-label" style="color:var(--blue)">Sprint 3<br/>Weeks 7–9</div>
+        <div class="tl-dot" style="background:var(--blue)"></div>
+        <div class="tl-content">
+          <h4>Office Hours enforcement — real policy push</h4>
+          <p>Replace the mock toggle with a real policy that blocks AI agent access outside the configured schedule. Delivery: RMM endpoint policy or local agent (TBD based on design partner feedback from Weeks 1–6). This is the narrowest wedge with the highest demo credibility — "we just blocked Cursor on your client's machine at 11pm."</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-label" style="color:var(--purple)">Sprint 4<br/>Weeks 10–12</div>
+        <div class="tl-dot" style="background:var(--purple)"></div>
+        <div class="tl-content">
+          <h4>Compliance log export — SOC 2 / CMMC artifact</h4>
+          <p>Every blocked event formatted as a signed, timestamped audit log exportable as PDF or JSON. This closes assumption A1 (audit requirement) and turns the product from a security tool into a compliance tool — two separate budget lines in an MSSP's client invoice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. KEY DECISIONS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2>Four Decisions That Need an Owner Before Work Begins</h2>
+      <span class="tag tag-red">CEO Action Required</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Each of these decisions blocks a downstream action. They cannot be deferred past the first design partner call.</p>
+
+    <!-- D1 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D1</div>
+        <h4>Build order: PLG wedge first or MSSP integration first?</h4>
+        <span class="tag tag-amber">Decide Week 1</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">Option A — PLG First</div>
+          GitHub scan → real product in 3 weeks → SMB users validate assumption B1 → case studies for MSSP calls. Risk: MSSP prospects ask for ConnectWise integration you don't have.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Option B — MSSP First</div>
+          ConnectWise integration → real MSSP pilot in 6 weeks → first paying customer sooner. Risk: no PLG flywheel, slower inbound, engineering is heavier.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Option C — Parallel</div>
+          One engineer on GitHub scan, one on ConnectWise. Faster but requires two engineers from day one. Only viable if funded.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Recommendation:</span>
+        <span style="font-size:12px;color:var(--text-2)">PLG first (Option A). GitHub scan is 3 weeks vs. 6, produces real usage data, and closes assumption A6 (product reality) before MSSP pilot requests land. Present GitHub scan results in MSSP discovery calls as proof of the product working in the wild.</span>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D2</div>
+        <h4>Pricing: validate $20–30 MSSP tier or set two-tier model now?</h4>
+        <span class="tag tag-amber">Decide Before Call 1</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">Option A — Single tier</div>
+          $25/tenant/month flat. Simple to explain, easy to invoice. Risk: leaves money on the table if compliance adds significant value to some buyers.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Option B — Two tiers</div>
+          $15/tenant visibility only, $30/tenant enforcement + compliance log. Mirrors how SIEM vendors price. Risk: adds friction to the pitch; MSSP has to choose.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Option C — Let prospects name it</div>
+          Don't anchor in the first three calls. Ask: "What would you charge your client for this?" Use the answer as the price. Risk: no anchor may stall the conversation.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Recommendation:</span>
+        <span style="font-size:12px;color:var(--text-2)">Option C for calls 1–3. Let prospects define the value. After three calls, pick the tier model that matches what they said. Never anchor before you have evidence. If asked directly, say "design partner pricing is flexible — let's talk about what makes sense for your client base."</span>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D3</div>
+        <h4>Channel boundary: where does PLG self-serve end and MSSP begin?</h4>
+        <span class="tag tag-amber">Decide Before PLG Launch</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">The Risk</div>
+          If PLG has no ceiling, MSSPs will see it as competitive. A 30-person software company paying $30/month direct is a client an MSSP could be billing $500+/month for managed security. Channel conflict kills the MSSP motion.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Proposed Boundary</div>
+          Self-serve: companies with &lt;50 employees and &lt;5 "tenant" profiles. Above either threshold, the product gates and routes to MSSP or enterprise pricing. The gate is enforced in-product, not by sales.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">MSSP Messaging</div>
+          "SecureLayer self-serve exists for companies too small for managed security. When they grow, we route them to you. You get a warm inbound lead — not a lost client."
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Recommendation:</span>
+        <span style="font-size:12px;color:var(--text-2)">Define the boundary (&lt;50 employees / &lt;5 tenants) before PLG launches and surface it explicitly in every MSSP discovery call. Show MSSPs the in-product gate. Absence of a clear boundary is the single biggest channel conflict risk.</span>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="decision no-break">
+      <div class="decision-head">
+        <div class="d-num">D4</div>
+        <h4>Funding: bootstrap through design partners or raise a pre-seed round?</h4>
+        <span class="tag tag-red">Decide Month 2</span>
+      </div>
+      <div class="decision-body">
+        <div class="d-col">
+          <div class="d-col-label">Bootstrap Path</div>
+          3–5 design partners at $500–1,000/month each (early access fee). Covers one engineer for 6 months. Slower but no dilution. Requires closing design partners before engineering starts.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Pre-Seed Path</div>
+          $500K–$1.5M at idea stage on the strength of the market thesis and founding team. Runs parallel engineering (PLG + MSSP). Requires a compelling pitch before product evidence.
+        </div>
+        <div class="d-col">
+          <div class="d-col-label">Hybrid Path</div>
+          Bootstrap to first 3 paying design partners → use revenue + traction as evidence for a seed round. Stronger position, longer runway before dilution.
+        </div>
+      </div>
+      <div class="decision-rec">
+        <span class="rec-tag">Recommendation:</span>
+        <span style="font-size:12px;color:var(--text-2)">Hybrid path. Use the GitHub scan (Sprint 1) as the proof point. Close 2–3 MSSP design partners with a nominal early-access fee while the MSSP integration is being built (Sprints 2–3). Arrive at seed fundraising with: live PLG product, 2–3 signed MSSP design partners, documented active threat signals, and a validated price point. That story closes a seed round at significantly better terms than an idea-stage pitch.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. RISK SUMMARY -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2>Top Risks — CEO View</h2>
+      <span class="tag tag-red">Prioritized</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Rank</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--red);font-weight:800">1</td>
+            <td>Product doesn't exist — pilot request arrives before anything is deployable</td>
+            <td style="color:var(--red)">High (certain without sprint 1)</td>
+            <td style="color:var(--red)">Kills MSSP credibility</td>
+            <td>Build GitHub scan first. Have something real before call 3.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--red);font-weight:800">2</td>
+            <td>Auditor accepts a policy doc instead of enforcement logs — compliance narrative fails</td>
+            <td style="color:var(--accent)">Medium</td>
+            <td style="color:var(--red)">Removes primary close argument</td>
+            <td>Interview one auditor before call 2. One confirmed answer closes this permanently.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--accent);font-weight:800">3</td>
+            <td>MSSP solves the problem by banning AI tools — market shrinks</td>
+            <td style="color:var(--accent)">Medium</td>
+            <td style="color:var(--accent)">Reduces TAM to companies that cannot ban</td>
+            <td>Big vendor acquisitions suggest "manage not ban." Probe in every call.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--accent);font-weight:800">4</td>
+            <td>PLG free-to-paid conversion stalls — user sees risk but can't unilaterally enforce</td>
+            <td style="color:var(--accent)">Medium-High</td>
+            <td style="color:var(--accent)">PLG motion doesn't generate revenue</td>
+            <td>Add "share report" upgrade trigger alongside "enforce." Creates internal champion.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--accent);font-weight:800">5</td>
+            <td>Platform vendor (CrowdStrike, Palo Alto) ships enforcement before SecureLayer scales</td>
+            <td style="color:var(--text-3)">Low (18–36 month integration lag)</td>
+            <td style="color:var(--red)">Existential if SecureLayer has &lt;20 customers</td>
+            <td>Speed to 20 paying MSSP partners is the only mitigation. Window is open — use it.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-3);font-weight:800">6</td>
+            <td>EDR positioning creates false expectations in technical buyers</td>
+            <td style="color:var(--accent)">Medium</td>
+            <td style="color:var(--text-3)">Objection in sales calls, not existential</td>
+            <td>A/B test "AI-SPM" vs "EDR for AI agents" framing across first 3 calls.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8. CEO VERDICT -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">8</div>
+      <h2>CEO Verdict</h2>
+      <span class="tag tag-green">Go — With Conditions</span>
+    </div>
+
+    <div class="verdict-block verdict-go" style="margin-bottom:12px">
+      <h3>✓ Go — The concept is sound and the timing is right</h3>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px">
+        The market signal is real. Auditors are asking. Vendors are acquiring. Active threats are documented. The MSSP channel is confirmed as the right distribution motion. The enforcement gap is open and the window is measured in months, not years.
+      </p>
+      <p style="font-size:13px;color:var(--text-2);line-height:1.7">
+        The concept passes the fundamental test: <strong style="color:var(--text)">there is a real problem, a specific buyer who feels it, a credible product that solves it, and a business model that makes the unit economics work.</strong> That is not obvious for most early-stage security concepts — it is here.
+      </p>
+    </div>
+
+    <div class="verdict-block verdict-risk">
+      <h3>⚠ Conditions — Three gates before committing design resources</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">1.</span>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Run the 3 MSSP discovery calls first.</strong> Come out knowing whether Q1 (incident?) and Q3 (price?) are confirmed. Do not commission design work before at least 2 of 3 calls validate the core pain. The GTM brief and outreach templates are ready — use them.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">2.</span>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Interview one auditor before call 2.</strong> A single auditor interview either confirms Motion C as a door opener or reframes it as a supporting argument. The entire compliance narrative depends on this one conversation.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:var(--accent);flex-shrink:0">3.</span>
+          <div style="font-size:12px;color:var(--text-2);line-height:1.6"><strong style="color:var(--text)">Build the GitHub scan (Sprint 1) before any design sprint begins.</strong> It is a 3-week engineering task that converts the prototype from a demo to a product. It also produces real usage data that makes every subsequent design decision evidence-based rather than assumption-based.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. NEXT 30 DAYS -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">9</div>
+      <h2>Next 30 Days — Owner and Due Date for Each Action</h2>
+      <span class="tag tag-blue">Execution</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Owner</th><th>Due</th><th>Output</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Send outreach emails to 3 MSSP vCISO targets</td>
+            <td>Sharon (Founder)</td>
+            <td>Week 1</td>
+            <td>3 discovery calls booked</td>
+          </tr>
+          <tr>
+            <td>Interview one SOC 2 / CMMC auditor</td>
+            <td>Sharon</td>
+            <td>Before call 2</td>
+            <td>A1 assumption confirmed or reframed</td>
+          </tr>
+          <tr>
+            <td>Decide D1: PLG first vs. MSSP first</td>
+            <td>CEO</td>
+            <td>Week 1</td>
+            <td>Engineering sprint plan locked</td>
+          </tr>
+          <tr>
+            <td>Run 3 MSSP discovery calls</td>
+            <td>Sharon + Sales Lead</td>
+            <td>Week 2–3</td>
+            <td>Q1 and Q3 confirmed or adjusted</td>
+          </tr>
+          <tr>
+            <td>Build GitHub org scan (Sprint 1)</td>
+            <td>Engineering</td>
+            <td>Week 3</td>
+            <td>Live PLG product, first 5 test orgs scanned</td>
+          </tr>
+          <tr>
+            <td>Define PLG channel boundary (D3)</td>
+            <td>CEO</td>
+            <td>Before PLG launch</td>
+            <td>In-product gate spec written</td>
+          </tr>
+          <tr>
+            <td>Close 2–3 MSSP design partners (nominal fee)</td>
+            <td>Sharon</td>
+            <td>Week 4–6</td>
+            <td>First revenue, seed round evidence</td>
+          </tr>
+          <tr>
+            <td>Decide D4: funding path</td>
+            <td>CEO</td>
+            <td>Week 6</td>
+            <td>Bootstrap / pre-seed / hybrid — committed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>SecureLayer — CEO Concept Review — Founder Confidential</div>
+    <div>Pre-Design · Pre-Seed · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>

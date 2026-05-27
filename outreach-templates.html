@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — MSSP Outreach Templates</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .page-break{page-break-before:always}
+}
+
+:root{
+  --bg:#0d0f14;
+  --bg-2:#13161e;
+  --bg-3:#1a1e28;
+  --bg-4:#222636;
+  --accent:#f59e0b;
+  --accent-dim:rgba(245,158,11,.12);
+  --accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;
+  --text-2:#9ba3b8;
+  --text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);
+  --border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;
+  --red-dim:rgba(239,68,68,.1);
+  --red-border:rgba(239,68,68,.2);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,.1);
+  --green-border:rgba(34,197,94,.2);
+  --blue:#3b82f6;
+  --blue-dim:rgba(59,130,246,.1);
+  --blue-border:rgba(59,130,246,.2);
+}
+
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  font-size:13px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:900px;margin:0 auto;padding:48px 44px 72px}
+
+/* HEADER */
+.doc-header{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:32px;height:32px;background:var(--accent);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:16px;color:#000;flex-shrink:0;
+}
+.logo-name{font-size:15px;font-weight:700;line-height:1.2}
+.logo-sub{font-size:11px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.7}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* TITLE */
+.title-block{margin-bottom:36px}
+.doc-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-dim);border:1px solid var(--accent-border);
+  border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;
+  color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;
+}
+.title-block h1{font-size:28px;font-weight:900;line-height:1.15;margin-bottom:10px}
+.title-block h1 span{color:var(--accent)}
+.title-block p{font-size:14px;color:var(--text-2);line-height:1.6;max-width:680px}
+
+/* SECTION */
+.section{margin-bottom:36px}
+.section-head{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+.section-num{
+  width:24px;height:24px;border-radius:6px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#000;flex-shrink:0;
+}
+.section-head h2{font-size:16px;font-weight:700}
+.section-tag{
+  margin-left:auto;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:99px;
+}
+.tag-primary{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.tag-follow{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-notes{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+
+/* SUBJECT OPTIONS */
+.subject-row{
+  display:flex;flex-direction:column;gap:8px;margin-bottom:16px;
+}
+.subject-option{
+  display:flex;align-items:center;gap:12px;
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:8px;padding:10px 14px;
+}
+.subject-label{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--text-3);white-space:nowrap;min-width:60px;
+}
+.subject-text{
+  font-size:13px;color:var(--text);font-family:'JetBrains Mono',monospace;
+}
+.subject-note{
+  margin-left:auto;font-size:11px;color:var(--text-3);white-space:nowrap;
+}
+
+/* EMAIL BODY */
+.email-wrap{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:12px;overflow:hidden;
+}
+.email-meta{
+  background:var(--bg-3);border-bottom:1px solid var(--border-2);
+  padding:14px 20px;display:flex;flex-direction:column;gap:5px;
+}
+.email-meta-row{
+  display:flex;gap:10px;font-size:12px;
+}
+.email-field{color:var(--text-3);min-width:50px;font-weight:600}
+.email-value{color:var(--text-2);font-family:'JetBrains Mono',monospace;font-size:11px}
+.email-body{
+  padding:24px 28px;
+  font-size:13px;line-height:1.85;color:var(--text-2);
+}
+.email-body p{margin-bottom:14px}
+.email-body p:last-child{margin-bottom:0}
+.email-body .highlight{color:var(--text);font-weight:500}
+.email-body .accent{color:var(--accent);font-weight:600}
+.email-body .sig{
+  margin-top:24px;padding-top:16px;
+  border-top:1px solid var(--border);
+  font-size:12px;color:var(--text-3);line-height:1.7;
+}
+.email-body .sig strong{color:var(--text-2);display:block;font-size:13px;margin-bottom:2px}
+
+/* ANNOTATION BAR */
+.annotation-bar{
+  background:var(--bg-3);border-top:1px solid var(--border-2);
+  padding:12px 20px;display:flex;flex-wrap:wrap;gap:10px;
+}
+.annotation{
+  display:flex;align-items:center;gap:6px;font-size:11px;
+}
+.ann-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ann-text{color:var(--text-3)}
+.ann-text strong{color:var(--text-2)}
+
+/* NOTES */
+.note-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.note-card{
+  background:var(--bg-2);border:1px solid var(--border-2);
+  border-radius:8px;padding:14px 16px;
+}
+.note-card h4{font-size:12px;font-weight:700;margin-bottom:6px}
+.note-card ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.note-card ul li{font-size:12px;color:var(--text-2);display:flex;align-items:flex-start;gap:6px}
+.note-card ul li::before{content:'→';color:var(--accent);flex-shrink:0}
+
+/* PERSONALIZATION TABLE */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{
+  text-align:left;padding:8px 12px;font-size:10px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);
+  border-bottom:1px solid var(--border-2);
+}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2);line-height:1.5}
+td:first-child{color:var(--text);font-weight:500}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden}
+
+/* FOOTER */
+.doc-footer{
+  margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11px;color:var(--text-3);
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security Platform — Stealth</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>MSSP Outreach Templates</strong><br/>
+      Audience: MSSP Leaders / vCISOs<br/>
+      Date: May 2026<br/>
+      Use: Discovery Phase — Cold Outreach
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="doc-label">✉ Outreach</div>
+    <h1>MSSP Leader <span>Cold Email Templates</span></h1>
+    <p>Three templates for the discovery phase: a primary cold intro, a follow-up if no reply after 5 days, and a referral variant if reaching out via a mutual connection. Personalization notes follow each template.</p>
+  </div>
+
+  <!-- SECTION 1 — PRIMARY EMAIL -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>Primary Cold Intro — MSSP Leader</h2>
+      <span class="section-tag tag-primary">Send First</span>
+    </div>
+
+    <!-- Subject options -->
+    <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Subject line options — A/B test across sends</div>
+    <div class="subject-row">
+      <div class="subject-option">
+        <span class="subject-label">Option A</span>
+        <span class="subject-text">Your clients' AI agents are running. Nobody's watching.</span>
+        <span class="subject-note">Highest open rate — pattern interrupt</span>
+      </div>
+      <div class="subject-option">
+        <span class="subject-label">Option B</span>
+        <span class="subject-text">New security revenue line for SMB clients — AI agent governance</span>
+        <span class="subject-note">Revenue-first framing</span>
+      </div>
+      <div class="subject-option">
+        <span class="subject-label">Option C</span>
+        <span class="subject-text">Quick question about Copilot and Cursor on your clients' endpoints</span>
+        <span class="subject-note">Curiosity, low commitment</span>
+      </div>
+    </div>
+
+    <!-- Email body -->
+    <div class="email-wrap">
+      <div class="email-meta">
+        <div class="email-meta-row"><span class="email-field">To:</span><span class="email-value">[First Name] [Last Name] — [Title], [MSSP Name]</span></div>
+        <div class="email-meta-row"><span class="email-field">From:</span><span class="email-value">Sharon Dagan &lt;sharon@securelayer.io&gt;</span></div>
+        <div class="email-meta-row"><span class="email-field">Subj:</span><span class="email-value">Your clients' AI agents are running. Nobody's watching.</span></div>
+      </div>
+      <div class="email-body">
+
+        <p><span class="highlight">[First Name],</span></p>
+
+        <p>
+          Across the SMB clients your team protects today, there's a good chance <span class="highlight">Claude Code, GitHub Copilot, and Cursor are already installed on developer endpoints</span> — with broad file-system and shell access, running during and after business hours, with no audit trail and no policy governing what they can do.
+        </p>
+
+        <p>
+          Your RMM sees a process. Your SIEM sees nothing. And your next SOC 2 auditor is already asking: <span class="accent">"What controls do you have over AI agent access?"</span>
+        </p>
+
+        <p>
+          I'm the founder of <span class="highlight">SecureLayer</span> — a stealth-stage company building the <span class="accent">enforcement layer for AI agents in managed environments</span>. Think of it as EDR for the agentic era: real-time risk scoring per agent, time-based access control (office hours enforcement), and a compliance artifact your clients can hand to an auditor — all delivered as a white-label add-on through your existing PSA and RMM stack.
+        </p>
+
+        <p>
+          We're designed specifically for the MSSP model: <span class="highlight">per-tenant pricing your clients can absorb, 15-minute onboarding through ConnectWise or NinjaOne, no endpoint agents to deploy</span>. It's a new security revenue line you can add to every SMB invoice — with the risk scorecard to justify it at every QBR.
+        </p>
+
+        <p>
+          I'm speaking with a small number of MSSP leaders this month to pressure-test our model before we open wider access. I think you'll find the conversation worth 20 minutes — even if only to tell me what we're getting wrong.
+        </p>
+
+        <p>
+          Would a short call this week or next work?
+        </p>
+
+        <div class="sig">
+          <strong>Sharon Dagan</strong>
+          Founder, SecureLayer<br/>
+          sharon@securelayer.io<br/>
+          <span style="color:var(--accent);font-size:11px">securelayer.io/demo</span> — interactive prototype, no login required
+        </div>
+
+      </div>
+      <div class="annotation-bar">
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--accent)"></div>
+          <span class="ann-text"><strong>Hook:</strong> names the tools they already know are there</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--red)"></div>
+          <span class="ann-text"><strong>Pain:</strong> audit question they can't answer</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--blue)"></div>
+          <span class="ann-text"><strong>Stealth:</strong> "stealth-stage" signals early + exclusive</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--green)"></div>
+          <span class="ann-text"><strong>Revenue:</strong> new invoice line item framing</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--purple,#a855f7)"></div>
+          <span class="ann-text"><strong>CTA:</strong> one ask, low commitment, honest framing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — FOLLOW-UP -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>Follow-Up — No Reply After 5 Days</h2>
+      <span class="section-tag tag-follow">Send Day 6</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Short, new angle, no guilt. Reference a real market signal (acquisition wave) to reopen the conversation without repeating the first email.</p>
+
+    <div class="email-wrap">
+      <div class="email-meta">
+        <div class="email-meta-row"><span class="email-field">Subj:</span><span class="email-value">Re: Your clients' AI agents are running. Nobody's watching.</span></div>
+      </div>
+      <div class="email-body">
+
+        <p><span class="highlight">[First Name],</span></p>
+
+        <p>
+          Following up with one data point I thought you'd find relevant: <span class="highlight">Palo Alto Networks, CrowdStrike, and Cisco are all in active acquisition mode this quarter, buying startups that provide AI agent observability.</span> Every major platform is racing to add this to their stack.
+        </p>
+
+        <p>
+          What none of them have shipped yet is <span class="accent">enforcement</span> — the ability to actually block an agent, enforce time-based access, or produce a compliance artifact your auditor accepts. That's the gap SecureLayer fills, and based on what we're seeing in the market, the window to lead with this in your client base is measured in months, not years.
+        </p>
+
+        <p>
+          Still happy to do a 20-minute call. If now isn't the right time, a quick reply pointing me to who handles new security tooling evaluation at [MSSP Name] would be genuinely helpful.
+        </p>
+
+        <div class="sig">
+          <strong>Sharon Dagan</strong>
+          Founder, SecureLayer — sharon@securelayer.io
+        </div>
+
+      </div>
+      <div class="annotation-bar">
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--accent)"></div>
+          <span class="ann-text"><strong>New angle:</strong> market validation via acquisition wave, not repetition</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--blue)"></div>
+          <span class="ann-text"><strong>Urgency:</strong> "months, not years" window — honest and real</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--green)"></div>
+          <span class="ann-text"><strong>Soft redirect:</strong> asks for the right contact if they're not the buyer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — REFERRAL VARIANT -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Referral Variant — Warm Introduction</h2>
+      <span class="section-tag tag-notes">Use When Referred</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Use when reaching out via a mutual contact. Name the referral in the first sentence. Shorter than cold — trust is already established.</p>
+
+    <div class="email-wrap">
+      <div class="email-meta">
+        <div class="email-meta-row"><span class="email-field">Subj:</span><span class="email-value">[Mutual Contact] suggested I reach out — AI agent security for your SMB clients</span></div>
+      </div>
+      <div class="email-body">
+
+        <p><span class="highlight">[First Name],</span></p>
+
+        <p>
+          <span class="highlight">[Mutual Contact]</span> suggested I reach out — they thought our timing might overlap with something on your radar.
+        </p>
+
+        <p>
+          I'm building <span class="highlight">SecureLayer</span>, a stealth-stage company focused on one specific problem: <span class="accent">AI agents — Copilot, Claude Code, Cursor — are running unmanaged on developer endpoints across SMB environments, and the MSSP carrying that risk currently has no tool to govern them.</span>
+        </p>
+
+        <p>
+          We've built the enforcement layer: time-based access control, per-agent risk scoring, and a compliance log that satisfies the SOC 2 / CMMC question auditors are already asking. It sits on top of your existing ConnectWise or NinjaOne stack — <span class="highlight">15 minutes to onboard a client, $20–30/tenant/month, white-label ready.</span>
+        </p>
+
+        <p>
+          We're selectively onboarding MSSP design partners this quarter — firms that will help us shape the product in exchange for early pricing. Would a 20-minute call make sense?
+        </p>
+
+        <div class="sig">
+          <strong>Sharon Dagan</strong>
+          Founder, SecureLayer<br/>
+          sharon@securelayer.io &nbsp;·&nbsp; <span style="color:var(--accent)">securelayer.io/demo</span>
+        </div>
+
+      </div>
+      <div class="annotation-bar">
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--accent)"></div>
+          <span class="ann-text"><strong>Referral first:</strong> name-drops in sentence one, highest trust signal</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--green)"></div>
+          <span class="ann-text"><strong>Design partner:</strong> exclusive framing, not "buy my product"</span>
+        </div>
+        <div class="annotation">
+          <div class="ann-dot" style="background:var(--blue)"></div>
+          <span class="ann-text"><strong>Price anchored:</strong> $20–30 stated clearly — removes ambiguity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — PERSONALIZATION GUIDE -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Personalization Guide</h2>
+      <span class="section-tag tag-notes">Before Every Send</span>
+    </div>
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px">Spend 5 minutes on LinkedIn or the MSSP's website before sending. One personalized sentence in the first paragraph doubles reply rates. Replace the bracketed section below with what you find.</p>
+
+    <div class="tbl-wrap" style="margin-bottom:20px">
+      <table>
+        <thead>
+          <tr><th>What to Look For</th><th>Where to Find It</th><th>How to Use It</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Client industry focus</td>
+            <td>MSSP website "Industries" or "Clients" page</td>
+            <td>"Given your focus on [healthcare/legal/fintech] clients, the compliance angle here is particularly relevant…"</td>
+          </tr>
+          <tr>
+            <td>Recent blog post or webinar</td>
+            <td>MSSP blog, LinkedIn posts</td>
+            <td>"I read your post on [topic] — your framing on [X] is exactly the problem we're solving at the agent layer."</td>
+          </tr>
+          <tr>
+            <td>Current PSA / RMM stack</td>
+            <td>LinkedIn job posts, partner badges on website</td>
+            <td>"Since you're on ConnectWise, SecureLayer integrates natively — no new tooling to evaluate."</td>
+          </tr>
+          <tr>
+            <td>Team size / client count</td>
+            <td>LinkedIn, Crunchbase, website</td>
+            <td>Calibrate framing: &lt;20 clients → "hands-on vCISO" framing; 50+ clients → "scale across your portfolio" framing</td>
+          </tr>
+          <tr>
+            <td>Recent hire or job post</td>
+            <td>LinkedIn Jobs</td>
+            <td>Hiring a "cloud security engineer"? "I saw you're expanding your cloud security practice — this fits that motion."</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Do / Don't -->
+    <div class="note-grid">
+      <div class="note-card" style="border-color:var(--green-border)">
+        <h4 style="color:var(--green)">Do</h4>
+        <ul>
+          <li>Name the specific AI tools (Copilot, Cursor, Claude Code) — generic "AI" doesn't land</li>
+          <li>Reference the audit question — it's the one forcing function they already feel</li>
+          <li>Mention the demo URL — give them something to explore before a call</li>
+          <li>Ask for 20 minutes, not a demo — lower commitment = higher reply rate</li>
+          <li>Invite pushback — "even if only to tell me what we're getting wrong" disarms defensiveness</li>
+          <li>Send Tuesday–Thursday, 7–9am or 3–5pm prospect local time</li>
+        </ul>
+      </div>
+      <div class="note-card" style="border-color:var(--red-border)">
+        <h4 style="color:var(--red)">Don't</h4>
+        <ul>
+          <li>Don't pitch the full product in email — the goal is the call, not the close</li>
+          <li>Don't use "I" as the first word — starts the email in the wrong frame</li>
+          <li>Don't say "revolutionary" or "game-changing" — kills credibility instantly</li>
+          <li>Don't attach the one-pager to the cold email — it triggers spam filters and feels presumptuous</li>
+          <li>Don't describe the product as "live" or "deployed" — it's a prototype; stealth framing protects this</li>
+          <li>Don't send more than 2 follow-ups — 3rd touch should be a LinkedIn message, not another email</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 — RESPONSE HANDLING -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>Response Handling — What to Say When They Reply</h2>
+      <span class="section-tag tag-notes">After the Reply</span>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden">
+        <div style="background:var(--green-dim);border-bottom:1px solid var(--green-border);padding:10px 16px;font-size:11px;font-weight:700;color:var(--green)">REPLY TYPE: "Interested — let's talk"</div>
+        <div style="padding:14px 16px;font-size:12px;color:var(--text-2);line-height:1.6">
+          Reply within 2 hours. Send a Calendly link with 3 specific slots. In the same reply, send the one-pager and the demo URL. Subject: <span style="font-family:'JetBrains Mono',monospace;font-size:11px">Re: — looking forward to it, here's context ahead of our call</span>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden">
+        <div style="background:var(--accent-dim);border-bottom:1px solid var(--accent-border);padding:10px 16px;font-size:11px;font-weight:700;color:var(--accent)">REPLY TYPE: "Send me more info first"</div>
+        <div style="padding:14px 16px;font-size:12px;color:var(--text-2);line-height:1.6">
+          Don't send a deck. Send: (1) the one-pager PDF, (2) the demo URL, (3) one sentence: "Happy to walk through anything on a call — does [specific day] work?" Keep the call alive; don't let async kill the momentum.
+        </div>
+      </div>
+
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden">
+        <div style="background:var(--blue-dim);border-bottom:1px solid var(--blue-border);padding:10px 16px;font-size:11px;font-weight:700;color:var(--blue)">REPLY TYPE: "Not the right person — try [Name]"</div>
+        <div style="padding:14px 16px;font-size:12px;color:var(--text-2);line-height:1.6">
+          Gold. Reply: "Thank you — really appreciate the redirect." Then email [Name] using the referral variant (Template 3), opening with "[Original Contact] suggested I reach out." You've just converted a cold email into a warm intro.
+        </div>
+      </div>
+
+      <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden">
+        <div style="background:var(--red-dim);border-bottom:1px solid var(--red-border);padding:10px 16px;font-size:11px;font-weight:700;color:var(--red)">REPLY TYPE: "We already handle this" or "Not a priority"</div>
+        <div style="padding:14px 16px;font-size:12px;color:var(--text-2);line-height:1.6">
+          Don't argue. Ask one question: <span style="color:var(--text);font-style:italic">"Genuinely curious — what are you using today to govern AI agent behavior on client endpoints? I'm trying to understand the landscape."</span> If they answer, you get competitive intelligence. If they don't, you've left the door open gracefully. Log the objection in your discovery notes.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>SecureLayer — MSSP Outreach Templates — Confidential</div>
+    <div>Discovery Phase · May 2026 · securelayer.io</div>
+  </div>
+
+</div>
+</body>
+</html>

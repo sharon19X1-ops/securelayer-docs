@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SecureLayer — Business Model Research</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --amber-border: #fcd34d;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--gray-800);
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page layout ── */
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    border-bottom: 3px solid var(--amber);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+  .cover-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+  .cover h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--gray-900);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .cover h2 {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--gray-600);
+    margin-bottom: 24px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+  .cover-meta span strong { color: var(--gray-600); }
+
+  /* ── Section structure ── */
+  section { margin-bottom: 40px; }
+
+  h3 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 6px;
+  }
+
+  p { color: var(--gray-700); margin-bottom: 10px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── Q&A blocks ── */
+  .qa-block {
+    margin-bottom: 28px;
+    border-left: 3px solid var(--gray-200);
+    padding-left: 16px;
+  }
+  .qa-block.highlight { border-left-color: var(--amber); }
+
+  .q-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 4px;
+  }
+  .q-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+
+  .a-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+  .a-text {
+    font-size: 13px;
+    color: var(--gray-700);
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .insight {
+    font-size: 12.5px;
+    color: var(--gray-600);
+    background: var(--amber-light);
+    border: 1px solid var(--amber-border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    line-height: 1.5;
+  }
+  .insight strong { color: var(--amber); }
+
+  /* ── Signal table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  th {
+    background: var(--gray-100);
+    text-align: left;
+    padding: 9px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: top;
+    color: var(--gray-700);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .signal-red   { color: var(--red);   font-weight: 700; }
+  .signal-amber { color: var(--amber); font-weight: 700; }
+  .signal-green { color: var(--green); font-weight: 700; }
+
+  /* ── Call-out box ── */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .callout-red    { background: var(--red-light);   border: 1px solid #fca5a5; }
+  .callout-green  { background: var(--green-light);  border: 1px solid #86efac; }
+  .callout-amber  { background: var(--amber-light);  border: 1px solid var(--amber-border); }
+  .callout-blue   { background: var(--blue-light);   border: 1px solid #93c5fd; }
+  .callout-gray   { background: var(--gray-50);      border: 1px solid var(--gray-200); }
+  .callout h5 {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .callout-red h5    { color: var(--red); }
+  .callout-green h5  { color: var(--green); }
+  .callout-amber h5  { color: var(--amber); }
+  .callout-blue h5   { color: var(--blue); }
+  .callout-gray h5   { color: var(--gray-600); }
+  .callout p { font-size: 13px; margin-bottom: 6px; }
+
+  /* ── Model flow ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 16px 0;
+  }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-num {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--amber);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .flow-content strong { display: block; font-size: 13px; color: var(--gray-900); margin-bottom: 2px; }
+  .flow-content span { font-size: 12px; color: var(--gray-500); }
+
+  /* ── Action items ── */
+  .action-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .action-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--gray-700);
+    align-items: flex-start;
+  }
+  .action-list li .badge {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--gray-800);
+    color: #fff;
+    margin-top: 1px;
+    letter-spacing: 0.04em;
+  }
+  .action-list li .badge.now { background: var(--amber); }
+  .action-list li .badge.soon { background: var(--blue); }
+  .action-list li .badge.after { background: var(--gray-400); }
+
+  /* ── Mono ── */
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+    font-size: 11px;
+    color: var(--gray-400);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { font-size: 13px; }
+    .page { padding: 0; max-width: 100%; }
+    section { page-break-inside: avoid; }
+    .cover { page-break-after: avoid; }
+    @page { margin: 20mm 18mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-tag">Research Paper · Business Model Discovery</div>
+    <h1>SecureLayer</h1>
+    <h2>AI Agent Security Management — Business Model Validation<br>Office Hours Session Findings</h2>
+    <div class="cover-meta">
+      <span><strong>Date:</strong> May 25, 2026</span>
+      <span><strong>Method:</strong> YC Office Hours — 5 Forcing Questions (Startup Mode)</span>
+      <span><strong>Target market:</strong> MSSPs &amp; SMBs</span>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <section>
+    <h3>Product Context</h3>
+    <p>
+      SecureLayer is an integrated security management layer designed for MSSPs (Managed Security Service Providers)
+      and SMBs. It manages AI agents — Claude Code, GitHub Copilot, Cursor, MCP servers, and custom connectors —
+      running on developer endpoints, providing office hours enforcement, skill scanning, policy enforcement,
+      multi-tenant visibility, and integration with PSA/SIEM/RMM platforms.
+    </p>
+    <p>
+      This session applied the YC Office Hours methodology to stress-test the business model before any
+      sales or go-to-market investment. The goal: distinguish validated demand from inferred demand,
+      and identify the narrowest viable wedge for monetization.
+    </p>
+  </section>
+
+  <!-- Q&A SESSION -->
+  <section>
+    <h3>Session Transcript — The Five Forcing Questions</h3>
+
+    <!-- Q1 -->
+    <div class="qa-block">
+      <div class="q-label">Q1 · Demand Reality</div>
+      <div class="q-text">
+        What's the strongest evidence you have that an MSSP or SMB would actually pay for SecureLayer —
+        not "sounds interesting," not "we should look into this," but would be genuinely upset if it disappeared tomorrow?
+      </div>
+      <div class="a-label">Answer</div>
+      <div class="a-text">
+        "The demand is inferred — AI agent sprawl is growing, someone must need this."
+      </div>
+      <div class="insight">
+        <strong>Facilitator note:</strong> This is the most common early-stage failure pattern —
+        <em>solution in search of a problem</em>. A growing market does not equal paying customers.
+        Buyers act on pain they feel today, not trends they read about. No validated demand has been
+        established yet. This is the most important gap to close before any pricing or GTM investment.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qa-block">
+      <div class="q-label">Q2 · Status Quo</div>
+      <div class="q-text">
+        What are MSSPs or SMBs doing right now to manage AI agents on their endpoints — even badly?
+        What does that workaround cost them?
+      </div>
+      <div class="a-label">Answer</div>
+      <div class="a-text">
+        "They have no process at all — AI agents run unmanaged and nobody's tracking them."
+      </div>
+      <div class="insight">
+        <strong>Facilitator note:</strong> "No process" is a double-edged finding. It confirms a genuine
+        gap — but it also means there is no burning urgency yet. If nobody is being held accountable
+        for an AI agent incident, there is no trigger to buy. The key question this raises:
+        <em>who gets fired when an AI agent causes a breach?</em> If the answer is unclear,
+        the buying urgency is also unclear. This gap may close rapidly as AI agents proliferate
+        and the first high-profile MSSP incident occurs.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qa-block highlight">
+      <div class="q-label">Q3 · Desperate Specificity</div>
+      <div class="q-text">
+        Name the actual human who needs SecureLayer most. Not "MSSPs" or "SMBs" — a title, a role,
+        a specific consequence they face. What keeps them up at night? What gets them fired?
+      </div>
+      <div class="a-label">Answer</div>
+      <div class="a-text">
+        "MSSP vCISO / Security Director — responsible for client security posture across 50–500 SMBs,
+        gets blamed when a client has an incident."
+      </div>
+      <div class="insight">
+        <strong>Facilitator note:</strong> This is the sharpest answer in the session.
+        A vCISO who manages 50–500 clients has a scalability problem — they cannot personally monitor
+        AI agent behavior across all clients. SecureLayer directly extends their capacity.
+        The "gets blamed" framing is the right career-consequence framing for a B2B security pitch.
+        This persona should anchor all sales conversations.
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qa-block highlight">
+      <div class="q-label">Q4 · Narrowest Wedge</div>
+      <div class="q-text">
+        What's the smallest version of SecureLayer that an MSSP vCISO would pay for this week —
+        before you build anything else? One thing. Something deliverable in days, not months.
+      </div>
+      <div class="a-label">Answer</div>
+      <div class="a-text">
+        "A combination: a visibility report showing all AI agents running across client environments,
+        plus a risk score per tenant/client that can justify the use and cost of the service."
+      </div>
+      <div class="insight">
+        <strong>Facilitator note:</strong> The key insight here is that the <em>risk score</em>
+        is doing the most strategic work — it is not just a feature, it is the
+        <strong>invoice justification</strong>. An MSSP vCISO can show their CFO or client:
+        "Our AI agent risk score across managed clients dropped from 7.2 to 2.1 since deployment."
+        That is a renewal conversation and an upsell conversation in one number.
+        The wedge answer was pushed to a combination; the sharper single wedge is the risk scorecard.
+        Visibility and control are the retained product. The risk score is the business case.
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qa-block">
+      <div class="q-label">Q5 · Observation &amp; Surprise</div>
+      <div class="q-text">
+        Have you sat with an MSSP vCISO and watched how they manage client security today —
+        without guiding them, without pitching? What surprised you?
+      </div>
+      <div class="a-label">Answer</div>
+      <div class="a-text">
+        "No — but I have close relationships and strong intuition from adjacent experience."
+      </div>
+      <div class="insight">
+        <strong>Facilitator note:</strong> Adjacent experience and relationships are real assets —
+        but they are not observation. The gap between intuition and direct observation is where
+        most business model assumptions collapse. Specifically, what is unknown: whether the vCISO
+        already has a workaround (a real competitor), whether they perceive AI agent security as
+        a priority category at all, and whether they would consume a risk report or ignore it.
+        This is the single largest unvalidated risk in the model.
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNAL SUMMARY -->
+  <section>
+    <h3>Signal Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Finding</th>
+          <th>Signal</th>
+          <th>Risk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Demand Reality</strong></td>
+          <td>Inferred from market trends, not validated behavior</td>
+          <td class="signal-red">🔴 Not validated</td>
+          <td>High — no confirmed willingness to pay</td>
+        </tr>
+        <tr>
+          <td><strong>Status Quo</strong></td>
+          <td>No process exists; AI agents run unmanaged</td>
+          <td class="signal-amber">🟡 Ambiguous</td>
+          <td>Medium — opportunity or apathy, unclear which</td>
+        </tr>
+        <tr>
+          <td><strong>Buyer Persona</strong></td>
+          <td>MSSP vCISO — gets blamed when a client has an incident</td>
+          <td class="signal-green">🟢 Sharp</td>
+          <td>Low — real person, real career consequence</td>
+        </tr>
+        <tr>
+          <td><strong>Wedge</strong></td>
+          <td>Risk scorecard per tenant = invoice justification</td>
+          <td class="signal-green">🟢 Strong insight</td>
+          <td>Low — clear value, deliverable quickly</td>
+        </tr>
+        <tr>
+          <td><strong>Observation</strong></td>
+          <td>Not done — running on adjacent intuition</td>
+          <td class="signal-red">🔴 Gap</td>
+          <td>High — all assumptions unconfirmed by direct observation</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- BUSINESS MODEL RECOMMENDATION -->
+  <section>
+    <h3>Business Model Recommendation</h3>
+
+    <div class="callout callout-amber">
+      <h5>Recommended Model</h5>
+      <p><strong>MSSP-channel, per-tenant SaaS with a risk scorecard wedge.</strong></p>
+      <p>
+        Charge the MSSP <strong>$20–30/tenant/month</strong>. They mark it up to $50–60/tenant/month
+        and present it to SMB clients as "AI Security Monitoring." At 80 tenants, this is
+        $1,600–2,400/month add-on per MSSP — meaningful without requiring procurement approval.
+      </p>
+    </div>
+
+    <h4 style="margin: 20px 0 12px;">The Proof-of-Value Loop</h4>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content">
+          <strong>Free AI Agent Risk Report (discovery wedge)</strong>
+          <span>Deliver a one-time risk scorecard for one client tenant — no contract, no friction. The vCISO sees what they don't know.</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content">
+          <strong>Urgency created by the score</strong>
+          <span>"Your AI agent risk score is 7.2/10 across 12 clients." That number creates a buying trigger — the vCISO has to act or document why they didn't.</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content">
+          <strong>Deploy SecureLayer → score improves month over month</strong>
+          <span>Office Hours enforcement, Skill Registry, and Policy Engine drive the score down over 30–90 days.</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-content">
+          <strong>Score = renewal conversation + client upsell justification</strong>
+          <span>"Score dropped from 7.2 to 2.1 since deployment." The vCISO shows this to their clients and their own management. SecureLayer becomes a retained asset, not a discretionary spend.</span>
+        </div>
+      </div>
+    </div>
+
+    <h4 style="margin: 20px 0 12px;">Pricing Sensitivity</h4>
+    <div class="callout callout-blue">
+      <h5>Key variable: compliance driver</h5>
+      <p>
+        If AI agent governance appears in a compliance framework (SOC 2, EU AI Act, NIST AI RMF),
+        pricing power shifts significantly:
+      </p>
+      <p>
+        <strong>Discretionary monitoring add-on</strong> → $20–30/tenant/month<br>
+        <strong>Compliance-required control</strong> → $50–75/tenant/month
+      </p>
+      <p>
+        This is a 2–3× revenue difference. Validate the compliance angle in discovery calls
+        by asking whether AI agent access controls have come up in any recent audit.
+      </p>
+    </div>
+  </section>
+
+  <!-- VALIDATION GATE -->
+  <section>
+    <h3>Validation Gate — Before Any Sales Investment</h3>
+
+    <div class="callout callout-red">
+      <h5>Critical Gap</h5>
+      <p>
+        The business model is currently built on inferred demand and adjacent intuition.
+        No MSSP vCISO has confirmed pain, expressed urgency, or indicated willingness to pay.
+        The three discovery calls below are the minimum required before any pricing, packaging,
+        or sales motion is committed to.
+      </p>
+    </div>
+
+    <h4 style="margin: 20px 0 12px;">Discovery Call Protocol</h4>
+    <p style="margin-bottom: 16px;">
+      Book 3 calls with MSSP vCISOs through existing relationships.
+      <strong>Do not pitch SecureLayer. Do not mention the product.</strong>
+      Ask them to walk through how they handle a client security incident involving a developer tool.
+      Listen for whether AI agents come up unprompted.
+    </p>
+
+    <div class="callout callout-gray">
+      <h5>The Single Most Important Question to Ask</h5>
+      <p style="font-style: italic; font-size: 14px; color: #374151;">
+        "Walk me through what happened the last time a client had a security incident
+        involving a developer tool or AI assistant."
+      </p>
+      <p>
+        If AI agents come up unprompted → demand is real.<br>
+        If you have to introduce the concept → awareness problem; education-led GTM needed first.<br>
+        If they describe a workaround you didn't know existed → real competitor; adjust the model.
+      </p>
+    </div>
+  </section>
+
+  <!-- ACTION ITEMS -->
+  <section>
+    <h3>Action Items</h3>
+    <ul class="action-list">
+      <li>
+        <span class="badge now">This week</span>
+        Identify 3 MSSP vCISO contacts through existing adjacent relationships. Book 45-minute discovery calls — no deck, no demo.
+      </li>
+      <li>
+        <span class="badge now">This week</span>
+        In each call, ask the standard incident walkthrough question. Record whether AI agents come up unprompted. Note exact language they use to describe the problem (or absence of it).
+      </li>
+      <li>
+        <span class="badge soon">After calls</span>
+        Based on findings, determine pricing tier: compliance-driven ($50–75/tenant/month) or proactive monitoring ($20–30/tenant/month).
+      </li>
+      <li>
+        <span class="badge soon">After calls</span>
+        Ask one call participant to accept a free AI Agent Risk Report for one of their clients. Deliver it manually (even as a formatted PDF). Observe their reaction — that is the real wedge test.
+      </li>
+      <li>
+        <span class="badge after">If validated</span>
+        Approach ConnectWise Invent or N-able TAP for channel partnership. MSSP-channel distribution removes the need for a direct salesforce and puts SecureLayer in front of thousands of vCISOs.
+      </li>
+      <li>
+        <span class="badge after">If validated</span>
+        Talk to one SOC 2 auditor. Ask if AI agent access controls have appeared in any recent client audit. If yes, the compliance wedge is real — reprice accordingly.
+      </li>
+    </ul>
+  </section>
+
+  <!-- OPEN QUESTIONS -->
+  <section>
+    <h3>Open Questions for Sales Team</h3>
+    <table>
+      <thead><tr><th>Question</th><th>Why it matters</th><th>How to answer it</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Is there a precedent MSSP incident involving an AI agent?</td>
+          <td>A visible incident creates urgency across the entire market</td>
+          <td>Search industry news; ask vCISOs in discovery calls</td>
+        </tr>
+        <tr>
+          <td>Does the vCISO have a budget line for "AI security"?</td>
+          <td>New categories often require creating a budget line — that's a longer sale</td>
+          <td>Ask directly in discovery calls: "Where would this come from in your budget?"</td>
+        </tr>
+        <tr>
+          <td>Is the SMB IT director a co-buyer or just an influencer?</td>
+          <td>Determines whether you need two sales motions or one</td>
+          <td>Map the buying process in one MSSP end-to-end</td>
+        </tr>
+        <tr>
+          <td>How does the MSSP currently bill clients for security add-ons?</td>
+          <td>SecureLayer needs to fit their existing billing model, not create a new one</td>
+          <td>Ask in discovery; request a sample invoice line item</td>
+        </tr>
+        <tr>
+          <td>Has AI agent governance appeared in any compliance audit?</td>
+          <td>Compliance driver = 2–3× pricing power</td>
+          <td>Ask a SOC 2 auditor; review EU AI Act applicability</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>SecureLayer — Business Model Research · May 25, 2026</span>
+    <span>Confidential · For internal and partner use</span>
+  </div>
+
+</div>
+</body>
+</html>
