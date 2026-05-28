@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer × Splunk × A1 — AI-Native EDR for the SIEM Era</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .no-break{page-break-inside:avoid}
+}
+:root{
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;--bg-4:#222636;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.12);--accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;--text-2:#9ba3b8;--text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);--border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;--red-dim:rgba(239,68,68,.1);--red-border:rgba(239,68,68,.22);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.1);--green-border:rgba(34,197,94,.25);
+  --blue:#3b82f6;--blue-dim:rgba(59,130,246,.1);--blue-border:rgba(59,130,246,.25);
+  --purple:#a855f7;--purple-dim:rgba(168,85,247,.1);--purple-border:rgba(168,85,247,.25);
+  --splunk:#65a637;--splunk-dim:rgba(101,166,55,.1);--splunk-border:rgba(101,166,55,.28);
+  --torq:#ff4e00;--torq-dim:rgba(255,78,0,.1);--torq-border:rgba(255,78,0,.25);
+}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:900px;margin:0 auto;padding:48px 44px 80px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* HEADER */
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px}
+.logo-pair{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo-mark{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0}
+.logo-x{font-size:14px;color:var(--text-3);font-weight:300}
+.logo-name{font-size:14px;font-weight:700;line-height:1.2}
+.logo-sub{font-size:10px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.8}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* HERO */
+.doc-label{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:26px;font-weight:900;line-height:1.2;margin-bottom:10px}
+h1 span{color:var(--accent)}
+.hero-sub{font-size:14px;color:var(--text-2);line-height:1.75;max-width:720px;margin-bottom:32px}
+
+/* CORE VP */
+.vp-block{background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:12px;padding:22px 26px;margin-bottom:32px}
+.vp-lead{font-size:15px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:10px}
+.vp-block p{font-size:13px;color:var(--text-2);line-height:1.75}
+.vp-block strong{color:var(--accent)}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:32px}
+.pillar{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px}
+.pillar-num{font-size:28px;font-weight:900;line-height:1;margin-bottom:8px;font-family:'JetBrains Mono',monospace}
+.pillar-title{font-size:12px;font-weight:700;margin-bottom:6px;line-height:1.4}
+.pillar-body{font-size:11px;color:var(--text-2);line-height:1.6}
+
+/* STACK DIAGRAM */
+.stack{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:0;margin-bottom:32px;border-radius:12px;overflow:hidden;border:1px solid var(--border-2)}
+.stack-step{padding:18px 12px;text-align:center}
+.stack-arrow{display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:18px;background:var(--bg-3);padding:0 4px;align-self:stretch}
+.stack-icon{font-size:20px;margin-bottom:6px}
+.stack-name{font-size:11px;font-weight:700;line-height:1.3;margin-bottom:3px}
+.stack-sub{font-size:10px;color:var(--text-3);line-height:1.4}
+
+/* BLIND SPOT */
+.blindspot{background:var(--red-dim);border:1px solid var(--red-border);border-radius:10px;padding:16px 20px;margin-bottom:32px}
+.blindspot h4{font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px}
+.bs-row{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--text-2);line-height:1.5;margin-bottom:5px}
+.bs-row:last-child{margin-bottom:0}
+
+/* SPLUNK INTEGRATION */
+.splunk-block{background:var(--splunk-dim);border:1px solid var(--splunk-border);border-radius:12px;overflow:hidden;margin-bottom:32px}
+.splunk-head{padding:14px 20px;border-bottom:1px solid var(--splunk-border);display:flex;align-items:center;gap:10px}
+.splunk-head h3{font-size:14px;font-weight:700;color:var(--splunk)}
+.splunk-body{padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.splunk-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.splunk-row{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--text-2);line-height:1.5;margin-bottom:5px}
+.splunk-row:last-child{margin-bottom:0}
+.code-block{background:var(--bg-4);border-radius:7px;padding:10px 12px;margin-top:8px}
+.code-block .mono{color:var(--splunk);line-height:1.7}
+
+/* USE CASE CARDS */
+.uc-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.uc-card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;overflow:hidden}
+.uc-head{padding:13px 16px;border-bottom:1px solid var(--border)}
+.uc-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.uc-title{font-size:12px;font-weight:700;line-height:1.4}
+.uc-body{padding:13px 16px}
+.uc-row{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--text-2);line-height:1.5;margin-bottom:5px}
+.uc-row:last-child{margin-bottom:0}
+.uc-arrow{flex-shrink:0;font-size:10px;margin-top:2px}
+.uc-gain{padding:10px 16px;font-size:11px;font-weight:600;border-top:1px solid var(--border);display:flex;align-items:flex-start;gap:6px}
+
+/* BA TABLE */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:12px;overflow:hidden;border:1px solid var(--border-2);margin-bottom:32px}
+.ba-col{}
+.ba-head{padding:13px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border-2)}
+.ba-row{display:flex;align-items:flex-start;gap:8px;padding:8px 18px;font-size:12px;color:var(--text-2);line-height:1.5;border-top:1px solid var(--border)}
+.ba-icon{flex-shrink:0;font-size:12px;margin-top:1px}
+.ba-divider{width:1px;background:var(--border-2)}
+
+/* BIZ CASE */
+.biz-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:32px}
+.biz-card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:16px}
+.biz-icon{font-size:22px;margin-bottom:8px}
+.biz-title{font-size:12px;font-weight:700;margin-bottom:6px;line-height:1.4}
+.biz-body{font-size:11px;color:var(--text-2);line-height:1.6}
+
+/* CLOSING */
+.closing{background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;padding:22px 26px;margin-bottom:16px}
+
+/* FOOTER */
+.doc-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo-pair">
+      <div class="logo-mark" style="background:var(--accent);color:#000">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security Platform</div>
+      </div>
+      <div class="logo-x">×</div>
+      <div class="logo-mark" style="background:var(--splunk);color:#fff">Sp</div>
+      <div>
+        <div class="logo-name">Splunk</div>
+        <div class="logo-sub">Security SIEM</div>
+      </div>
+      <div class="logo-x">×</div>
+      <div class="logo-mark" style="background:var(--torq);color:#fff">A1</div>
+      <div>
+        <div class="logo-name">A1 — Torq SOAR</div>
+        <div class="logo-sub">Managed Security</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>Sales Pitch — Splunk SIEM Integration</strong><br/>
+      Internal · Pre-Sales · May 2026
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="doc-label">◎ Value Proposition · Splunk Edition</div>
+  <h1>Splunk sees every threat<br/><span>except the one growing fastest.</span></h1>
+  <p class="hero-sub">A1's Splunk deployment ingests logs from endpoints, identity, cloud, and network. It correlates. It alerts. It has no data source for AI agents — and no correlation rule can fire on data that never arrives. SecureLayer is the AI agent telemetry layer that Splunk is missing. Together, A1 delivers complete SIEM coverage for the first time.</p>
+
+  <!-- CORE VP -->
+  <div class="vp-block">
+    <div class="vp-lead">The one-line value proposition for A1's Splunk clients:</div>
+    <p><strong>SecureLayer is the EDR for AI agents — and it speaks Splunk natively.</strong> Every AI agent event SecureLayer detects fires into Splunk via HEC in Splunk CIM-normalized format. A1's existing correlation searches, Splunk ES notable events, and dashboard content apply immediately — with zero custom integration work. Splunk gains a new threat category. A1 gains a managed service built on infrastructure its clients already pay for.</p>
+  </div>
+
+  <!-- THREE PILLARS -->
+  <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">Three reasons this makes A1's Splunk investment more valuable</div>
+  <div class="pillars no-break">
+    <div class="pillar" style="border-color:var(--splunk-border)">
+      <div class="pillar-num" style="color:var(--splunk-dim);-webkit-text-stroke:1px var(--splunk)">01</div>
+      <div class="pillar-title" style="color:var(--splunk)">Splunk gains a data source it cannot build itself</div>
+      <div class="pillar-body">No Splunk add-on, no technology partner, and no existing endpoint agent generates AI agent telemetry. SecureLayer is the only source. Adding it to Splunk expands what A1's SIEM can see — permanently.</div>
+    </div>
+    <div class="pillar" style="border-color:var(--accent-border)">
+      <div class="pillar-num" style="color:var(--accent-dim);-webkit-text-stroke:1px var(--accent)">02</div>
+      <div class="pillar-title" style="color:var(--accent)">CIM-normalized — works with A1's existing content</div>
+      <div class="pillar-body">SecureLayer events land in Splunk as CIM-normalized alerts: action, dest, severity, src_user, vendor. A1's existing Splunk ES correlation searches, risk-based alerting, and dashboards pick them up immediately. No new detection content to write.</div>
+    </div>
+    <div class="pillar" style="border-color:var(--torq-border)">
+      <div class="pillar-num" style="color:var(--torq-dim);-webkit-text-stroke:1px var(--torq)">03</div>
+      <div class="pillar-title" style="color:var(--torq)">Splunk alert → Torq → full response chain</div>
+      <div class="pillar-body">SecureLayer fires into Splunk. Splunk fires a notable event. Torq picks it up and runs the response playbook — Teams approval, Entra ID action, MCP server isolation. All three A1 layers benefit from one new data source.</div>
+    </div>
+  </div>
+
+  <!-- WHAT SPLUNK CANNOT SEE -->
+  <div class="blindspot no-break">
+    <h4>⚠ What Splunk is missing today — and why no existing add-on fixes it</h4>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An AI agent (Claude Code, Cursor, Copilot) authenticating with a stolen token — no login event fires, no Splunk auth log entry exists. The agent is a process, not a user session.</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>A prompt injection attack delivering malicious instructions to an agent mid-session — no network event, no file hash, no URL. Nothing Splunk can ingest from existing sources.</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An MCP server exfiltrating database records via tool calls — traffic looks like normal API usage. No Splunk network rule fires. No anomaly in endpoint logs.</div>
+    <div class="bs-row"><span style="color:var(--red);flex-shrink:0">✗</span>An AI agent running a <span class="mono">shell-exec-sudo</span> skill at 2am — the process is whitelisted. Splunk sees a legitimate executable doing what it was allowed to do. No alert.</div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--red-border);font-size:12px;color:var(--text-2)">These are not Splunk gaps — they are data source gaps. Splunk cannot correlate data it never receives. SecureLayer is the sensor that generates that data.</div>
+  </div>
+
+  <!-- THE FULL STACK -->
+  <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">The complete A1 stack — SecureLayer feeds everything downstream</div>
+  <div class="stack no-break" style="margin-bottom:32px">
+    <div class="stack-step" style="background:var(--accent-dim)">
+      <div class="stack-icon">⬡</div>
+      <div class="stack-name" style="color:var(--accent)">SecureLayer</div>
+      <div class="stack-sub">Detects AI agent threat, scores risk, fires to Splunk HEC</div>
+    </div>
+    <div class="stack-arrow">→</div>
+    <div class="stack-step" style="background:var(--splunk-dim)">
+      <div class="stack-icon">📊</div>
+      <div class="stack-name" style="color:var(--splunk)">Splunk</div>
+      <div class="stack-sub">Ingests CIM event, correlates with endpoint + identity data, fires notable</div>
+    </div>
+    <div class="stack-arrow">→</div>
+    <div class="stack-step" style="background:var(--torq-dim)">
+      <div class="stack-icon">⚡</div>
+      <div class="stack-name" style="color:var(--torq)">Torq</div>
+      <div class="stack-sub">Picks up Splunk notable, creates case, enriches, runs playbook</div>
+    </div>
+    <div class="stack-arrow">→</div>
+    <div class="stack-step" style="background:var(--green-dim)">
+      <div class="stack-icon">✓</div>
+      <div class="stack-name" style="color:var(--green)">A1 Response</div>
+      <div class="stack-sub">Teams approval, agent blocked, compliance log, KPI tracked</div>
+    </div>
+  </div>
+
+  <!-- SPLUNK INTEGRATION DETAIL -->
+  <div class="splunk-block no-break">
+    <div class="splunk-head">
+      <div style="font-size:18px">📡</div>
+      <h3>Native Splunk Integration — How SecureLayer Connects</h3>
+    </div>
+    <div class="splunk-body">
+      <div>
+        <h4 style="color:var(--splunk)">How events reach Splunk</h4>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>HTTP Event Collector (HEC) — industry-standard Splunk ingest</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>Splunk CIM-normalized fields — works with existing content packs</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>Sourcetype: <span class="mono">slb:alert</span> — searchable and reportable immediately</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>Index: <span class="mono">security</span> — lands in A1's existing security index</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>Latency: &lt;100ms from detection to Splunk ingest</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">→</span>Retry + dead-letter queue — no missed events on Splunk downtime</div>
+        <div class="code-block">
+          <div class="mono">sourcetype="slb:alert"<br/>| where severity IN ("CRITICAL","HIGH")<br/>| table _time, src_user, dest, action,<br/>&nbsp;&nbsp;rule_id, att_ck_id, tenant_id</div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:var(--splunk)">What A1 gets in Splunk immediately</h4>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>AI agent risk dashboard — all tenants, live event feed</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>MITRE ATT&CK technique tagged per event — works with Splunk ES threat intelligence</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>Correlation with existing endpoint + identity logs — same tenant, same timeframe</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>Risk-based alerting — SecureLayer score contributes to Splunk RBA risk score</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>Splunk ES notable events — triggers Torq via Splunk alert action or webhook</div>
+        <div class="splunk-row"><span style="color:var(--splunk);flex-shrink:0">✓</span>Compliance reports — all AI agent events per tenant, exportable for audit</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USE CASE EXTENSIONS -->
+  <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">A1's existing Splunk use cases — extended to AI agent threats</div>
+  <div class="uc-pair no-break">
+
+    <div class="uc-card">
+      <div class="uc-head" style="background:var(--blue-dim)">
+        <div class="uc-tag" style="color:var(--blue)">Use Case 1 — Extended</div>
+        <div class="uc-title">Impossible Travel → AI Agent Credential Anomaly</div>
+      </div>
+      <div class="uc-body">
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--splunk)">→</div>Splunk already fires on human impossible travel (auth logs)</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">+</div>SecureLayer fires when an AI agent authenticates outside office hours or accesses systems it has never touched — no auth log exists for this</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--splunk)">→</div>SecureLayer event lands in Splunk alongside the human auth event — Splunk correlates both on the same tenant, same timeframe</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Splunk notable fires → Torq picks up → same response playbook runs</div>
+      </div>
+      <div class="uc-gain" style="background:var(--splunk-dim);border-top-color:var(--splunk-border)">
+        <span style="color:var(--splunk)">↑</span>
+        <span style="color:var(--splunk)">Splunk now correlates human + AI agent anomalies on the same tenant. First time this is possible.</span>
+      </div>
+    </div>
+
+    <div class="uc-card">
+      <div class="uc-head" style="background:var(--red-dim)">
+        <div class="uc-tag" style="color:var(--red)">Use Case 2 — Extended</div>
+        <div class="uc-title">Phishing Triage → AI Agent Prompt Injection</div>
+      </div>
+      <div class="uc-body">
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--splunk)">→</div>Splunk already detects phishing via email logs and Defender signals</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--accent)">+</div>SecureLayer detects prompt injection — malicious instructions delivered to an AI agent mid-session, no email, no URL, no IOC for Splunk to ingest from existing sources</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--splunk)">→</div>SecureLayer fires a <span class="mono">PI-001a</span> (T1566 — Phishing variant) event to Splunk — same index, same dashboard, new threat class</div>
+        <div class="uc-row"><div class="uc-arrow" style="color:var(--torq)">→</div>Splunk notable → Torq → agent session terminated, analyst notified via Teams</div>
+      </div>
+      <div class="uc-gain" style="background:var(--splunk-dim);border-top-color:var(--splunk-border)">
+        <span style="color:var(--splunk)">↑</span>
+        <span style="color:var(--splunk)">Prompt injection — the phishing equivalent for AI agents — appears in Splunk for the first time. Same MITRE framework. Same Torq playbook.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">A1's Splunk coverage — before and after SecureLayer</div>
+  <div class="ba-grid no-break">
+    <div class="ba-col" style="background:var(--bg-2)">
+      <div class="ba-head" style="color:var(--splunk);border-bottom:1px solid var(--border-2)">Splunk today — what A1 can see</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Human login anomalies (auth logs, Defender)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Phishing + malicious email (email gateway, Defender)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Endpoint process telemetry (EDR feeds)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Network anomalies (firewall, proxy logs)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Cloud workload events (Azure, AWS)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--red)">✗</div><span style="color:var(--text-3)">AI agent behavior — zero data source exists</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--red)">✗</div><span style="color:var(--text-3)">MCP server tool calls — invisible to all log sources</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--red)">✗</div><span style="color:var(--text-3)">AI agent skill risk scoring — not a concept in any SIEM today</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--red)">✗</div><span style="color:var(--text-3)">Prompt injection events — no log format for this threat class</span></div>
+    </div>
+    <div class="ba-divider"></div>
+    <div class="ba-col" style="background:var(--bg-3)">
+      <div class="ba-head" style="color:var(--accent);border-bottom:1px solid var(--border-2)">Splunk + SecureLayer — what A1 gains</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Human login anomalies (unchanged)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Phishing + malicious email (unchanged)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Endpoint process telemetry (unchanged)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Network anomalies (unchanged)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--green)">✓</div>Cloud workload events (unchanged)</div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--accent)">+</div><span style="color:var(--accent)">AI agent behavior — CIM events via SecureLayer HEC feed</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--accent)">+</div><span style="color:var(--accent)">MCP server tool call anomalies — scored + classified</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--accent)">+</div><span style="color:var(--accent)">10-dimension skill risk score — contributes to Splunk RBA</span></div>
+      <div class="ba-row"><div class="ba-icon" style="color:var(--accent)">+</div><span style="color:var(--accent)">Prompt injection events — MITRE T1566 variant, searchable</span></div>
+    </div>
+  </div>
+
+  <!-- BIZ CASE FOR A1 -->
+  <div style="font-size:11px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;margin-top:32px">The business case for A1 — three outcomes</div>
+  <div class="biz-grid no-break">
+    <div class="biz-card" style="border-color:var(--splunk-border)">
+      <div class="biz-icon">📊</div>
+      <div class="biz-title" style="color:var(--splunk)">Splunk ROI compounds</div>
+      <div class="biz-body">Every Splunk licence A1's clients are already paying for gets more value. SecureLayer adds a new threat category to an existing investment — no new SIEM required, no new analyst training. A1 justifies Splunk renewal with expanded coverage.</div>
+    </div>
+    <div class="biz-card" style="border-color:var(--accent-border)">
+      <div class="biz-icon">💰</div>
+      <div class="biz-title" style="color:var(--accent)">New managed service line at QBR</div>
+      <div class="biz-body">A1 adds "AI Agent Security — Powered by Splunk + SecureLayer" as a billable managed service. $20–30/tenant/month added to the Splunk-based SOC package. Clients are already asking about AI governance — A1 has an answer before any competitor does.</div>
+    </div>
+    <div class="biz-card" style="border-color:var(--torq-border)">
+      <div class="biz-icon">⚡</div>
+      <div class="biz-title" style="color:var(--torq)">Torq playbooks fire on richer data</div>
+      <div class="biz-body">Splunk notables now include AI agent events. Torq picks them up through the same Splunk → Torq integration A1 already runs. No new Torq configuration — the playbooks A1 built for Impossible Travel and Phishing Triage now also run for AI agent threats.</div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">The pitch in three sentences</div>
+    <p style="font-size:13px;color:var(--text);line-height:1.8;margin-bottom:10px">
+      Splunk is A1's SIEM — but a SIEM is only as complete as the data sources that feed it. AI agents are the fastest-growing attack surface in every SMB environment A1 manages, and they generate zero logs that Splunk can currently ingest. SecureLayer closes that gap with a native Splunk HEC feed — CIM-normalized, MITRE ATT&CK-tagged, and compatible with every Splunk ES correlation rule A1 has already written.
+    </p>
+    <p style="font-size:13px;color:var(--text-2);line-height:1.8">
+      The result: <strong style="color:var(--text)">SecureLayer + Splunk + Torq + A1 is the only managed security stack that sees, logs, correlates, and responds to both human threats and AI agent threats — through a single SIEM, a single SOAR, and a single QBR conversation.</strong>
+    </p>
+  </div>
+
+  <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:14px 20px;display:flex;align-items:center;gap:16px;margin-top:16px">
+    <div style="font-size:22px">🔗</div>
+    <div>
+      <div style="font-size:12px;font-weight:700;margin-bottom:2px">See SecureLayer live</div>
+      <div class="mono" style="color:var(--accent)">https://sharon19x1-ops.github.io/securelayer-demo/</div>
+    </div>
+    <div style="margin-left:auto;font-size:11px;color:var(--text-2);text-align:right;line-height:1.6">All 8 views · MSSP/SMB toggle<br/>No login required</div>
+  </div>
+
+  <div class="doc-footer">
+    <div>SecureLayer × Splunk × A1 — Sales Pitch · Confidential</div>
+    <div>securelayer.io · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
