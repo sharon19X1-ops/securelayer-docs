@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — MSSP Technical Response Brief</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#0d0f14!important}
+  .no-break{page-break-inside:avoid}
+  .page-break{page-break-before:always}
+}
+:root{
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;--bg-4:#222636;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.12);--accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;--text-2:#9ba3b8;--text-3:#5a6380;
+  --border:rgba(255,255,255,0.06);--border-2:rgba(255,255,255,0.1);
+  --red:#ef4444;--red-dim:rgba(239,68,68,.1);--red-border:rgba(239,68,68,.22);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.1);--green-border:rgba(34,197,94,.25);
+  --blue:#3b82f6;--blue-dim:rgba(59,130,246,.1);--blue-border:rgba(59,130,246,.25);
+  --purple:#a855f7;--purple-dim:rgba(168,85,247,.1);--purple-border:rgba(168,85,247,.25);
+  --orange:#f97316;--orange-dim:rgba(249,115,22,.1);--orange-border:rgba(249,115,22,.25);
+}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:920px;margin:0 auto;padding:48px 44px 80px}
+.mono{font-family:'JetBrains Mono',monospace;font-size:11px}
+
+/* HEADER */
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:1px solid var(--border-2);margin-bottom:36px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#000;flex-shrink:0}
+.logo-name{font-size:15px;font-weight:700}
+.logo-sub{font-size:11px;color:var(--text-3)}
+.doc-meta{text-align:right;font-size:11px;color:var(--text-3);line-height:1.8}
+.doc-meta strong{color:var(--text-2);font-weight:600}
+
+/* TITLE */
+.title-block{margin-bottom:36px}
+.doc-label{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:28px;font-weight:900;line-height:1.15;margin-bottom:10px}
+h1 span{color:var(--accent)}
+.title-sub{font-size:13px;color:var(--text-2);line-height:1.65;max-width:720px}
+
+/* SECTIONS */
+.section{margin-bottom:40px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.section-num{width:24px;height:24px;border-radius:6px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#000;flex-shrink:0}
+.section-head h2{font-size:16px;font-weight:700}
+.tag{margin-left:auto;font-size:10px;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.tag-green{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.tag-amber{background:var(--accent-dim);color:var(--accent);border:1px solid var(--accent-border)}
+.tag-red{background:var(--red-dim);color:var(--red);border:1px solid var(--red-border)}
+.tag-blue{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
+.tag-orange{background:var(--orange-dim);color:var(--orange);border:1px solid var(--orange-border)}
+
+/* QUESTION CARDS */
+.q-card{background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.q-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px}
+.q-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:99px;flex-shrink:0;margin-top:1px}
+.q-text{font-size:13px;font-weight:600;line-height:1.5;font-style:italic;color:var(--text-2)}
+.q-body{padding:16px 18px}
+.q-body p{font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:10px}
+.q-body p:last-child{margin-bottom:0}
+.q-body strong{color:var(--text)}
+.q-concern{background:var(--red-dim);border:1px solid var(--red-border);border-radius:7px;padding:10px 12px;margin-top:10px;font-size:11px;color:var(--text-2);line-height:1.6}
+.q-concern span{color:var(--red);font-weight:700}
+.q-good{background:var(--green-dim);border:1px solid var(--green-border);border-radius:7px;padding:10px 12px;margin-top:10px;font-size:11px;color:var(--text-2);line-height:1.6}
+.q-good span{color:var(--green);font-weight:700}
+
+/* SKILL SCORE TABLE */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:8px 12px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);border-bottom:1px solid var(--border-2)}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2);line-height:1.5}
+td:first-child{color:var(--text);font-weight:500}
+tr:last-child td{border-bottom:none}
+.tbl-wrap{background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.score-bar{display:inline-flex;align-items:center;gap:6px}
+.score-dot{width:8px;height:8px;border-radius:50%}
+
+/* PHASE TIMELINE */
+.phase-row{display:grid;grid-template-columns:120px 1fr;gap:0;border-radius:10px;overflow:hidden;border:1px solid var(--border-2);margin-bottom:10px}
+.phase-label{padding:14px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border-right:1px solid var(--border-2)}
+.phase-content{padding:14px 16px;background:var(--bg-2)}
+.phase-content h4{font-size:12px;font-weight:700;margin-bottom:5px}
+.phase-content p{font-size:12px;color:var(--text-2);line-height:1.5}
+.deliverable{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--text-2);margin-top:4px}
+
+/* CONCERN REGISTER */
+.concern-block{background:var(--bg-2);border-radius:10px;overflow:hidden;border:1px solid var(--border-2);margin-bottom:10px}
+.concern-head{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.concern-num{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.concern-head h4{font-size:12px;font-weight:700;flex:1}
+.concern-body{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.c-col{padding:12px 14px;font-size:11px;color:var(--text-2);line-height:1.6}
+.c-col:first-child{border-right:1px solid var(--border)}
+.c-col-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.concern-mitigation{padding:10px 14px;font-size:11px;color:var(--text-2);display:flex;gap:7px}
+
+/* QUESTIONS WE NEED */
+.ask-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-2);line-height:1.5}
+.ask-row:last-child{border-bottom:none}
+.ask-num{font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0;padding-top:1px}
+.ask-row strong{color:var(--text)}
+
+/* FOOTER */
+.doc-footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border-2);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-3)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-sub">AI Agent Security — Stealth Stage</div>
+      </div>
+    </div>
+    <div class="doc-meta">
+      <strong>MSSP Technical Response Brief</strong><br/>
+      Internal — Pre-MVP · Design Partner Discovery<br/>
+      May 2026 · Reference: MSSP Feedback v1
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="doc-label">◎ Technical Response + Concern Register</div>
+    <h1>Answering the MSSP's <span>Four Technical Questions</span><br/>Before MVP Phase 1 Begins</h1>
+    <p class="title-sub">The MSSP prospect responded with interest and four substantive technical questions. This document applies the office-hours methodology — what we know, what we're assuming, where we must be honest — and frames the response alongside an internal concern register for the engineering team before Phase 1 sprint work begins.</p>
+  </div>
+
+  <!-- CONTEXT -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">0</div>
+      <h2>What the MSSP Said — Verbatim</h2>
+      <span class="tag tag-green">Signal: Interested, Not Committed</span>
+    </div>
+
+    <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:18px 20px;margin-bottom:14px">
+      <div style="font-size:10px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">MSSP Feedback · 28 May 2026</div>
+      <p style="font-size:13px;color:var(--text);font-style:italic;line-height:1.8;border-left:3px solid var(--accent);padding-left:14px">
+        "Hi, that's interesting. Is it already a working, deployed product? How does it manage the endpoint AI agents automatically beyond monitoring filesystem and network activity? There isn't much technical info in the PDF — I am baffled by the skills detection capability. Do I guess correctly: can it leverage existing RMM agents to run software, block usage, or run scripts with privilege over thousands of endpoints concurrently? I'd be quite excited about real-world experience with this. Esp. how it self-protects against compromised endpoints, false positives, and disruption of operations."
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Strong signal</div>
+        <p style="font-size:11px;color:var(--text-2);line-height:1.5">Unsolicited interest, unprompted technical depth, explicit excitement about real-world use. The word "baffled" means they want more detail — not that they're sceptical.</p>
+      </div>
+      <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Risk: over-promise</div>
+        <p style="font-size:11px;color:var(--text-2);line-height:1.5">They're asking about a product that is partially designed and partially built. The answers must be honest about what is live vs. what is in the Phase 1 build plan.</p>
+      </div>
+      <div style="background:var(--blue-dim);border:1px solid var(--blue-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Right ask to make</div>
+        <p style="font-size:11px;color:var(--text-2);line-height:1.5">They are precisely the design partner this process is targeting. Their questions are the right engineering validation prompts. We need them as a pilot customer, not just a prospect.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">1</div>
+      <h2>Q1 — "Is it already a working, deployed product?"</h2>
+      <span class="tag tag-amber">Answer: Honest + Specific</span>
+    </div>
+
+    <div class="q-card no-break">
+      <div class="q-head">
+        <span class="q-badge" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)">What is real</span>
+        <div class="q-text">Three things exist today: a full interactive prototype (all 8 product views, live at a public URL), a detailed architecture specification (v6.0, covering RMM deployment, PSA integration, SIEM output, and the skill-scoring engine), and a 10-dimension risk model implemented in the prototype. These are not vaporware — the architecture is engineering-ready.</div>
+      </div>
+      <div class="q-body">
+        <p><strong>The honest answer to send the MSSP:</strong> "We have a fully interactive prototype that demonstrates every product workflow — you can use it today at [URL]. The underlying architecture (v6.0) is a complete engineering specification covering RMM deployment, PSA integration (ConnectWise, Autotask, NinjaOne), SIEM output (Splunk, Sentinel, Elastic), and the skill-scoring engine. We are currently in the pre-production build phase — Phase 1 engineering begins immediately, with a pilotable product targeting 12 weeks. We are actively seeking 2–3 design partners to co-develop Phase 1 around real MSSP environments. That is why we want this conversation."</p>
+        <div class="q-concern">
+          <span>⚠ Internal: Do NOT say</span> "we're in beta" or "we have early customers." Neither is true yet. "Pre-production, design partner stage" is precise and credible. An MSSP who has deployed dozens of security tools knows the difference — and will respect the honesty over a spin.
+        </div>
+        <div class="q-good">
+          <span>✓ Opportunity:</span> Turn this into the design partner ask. "We don't have production deployments — yet. We want you to be the first. In exchange, you get direct input into the product roadmap, early-access pricing, and a capability no competing MSSP has for at least 18 months."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">2</div>
+      <h2>Q2 — "How does it manage AI agents beyond monitoring filesystem and network activity?"</h2>
+      <span class="tag tag-blue">Answer: Semantic Enforcement Layer</span>
+    </div>
+
+    <div class="q-card no-break">
+      <div class="q-head">
+        <span class="q-badge" style="background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border)">Core differentiator</span>
+        <div class="q-text">This is the most important technical question. It goes to the heart of what is different about AI agent security vs. traditional EDR.</div>
+      </div>
+      <div class="q-body">
+        <p><strong>Traditional EDR (CrowdStrike, SentinelOne):</strong> monitors at the OS layer — what process is running, what file it touched, what network call it made. It knows an AI agent is running because it sees <span class="mono">claude-code</span> or <span class="mono">cursor</span> as a process. It cannot tell you <em>what that agent was instructed to do</em> or <em>what skill it invoked</em>. A <span class="mono">shell-exec-sudo</span> call looks the same as a legitimate terminal command.</p>
+        <p><strong>SecureLayer operates one level up — at the semantic layer.</strong> The Hook agent sits between the AI agent and the action it's about to take. It intercepts at the IDE plugin layer (VS Code extension, JetBrains plugin, Cursor integration) and at the MCP server interface — before any filesystem write, process spawn, or network call is made. It sees the <em>intent</em> (the skill being invoked, the tool call being made, the permission being requested) and applies a policy decision before the action executes.</p>
+        <p><strong>What this means in practice:</strong></p>
+        <p style="margin-left:12px">→ <strong>Skill-level enforcement:</strong> when <span class="mono">env-reader</span> is invoked for the first time, SecureLayer scores it across 10 dimensions (credential access: 10/10, permission scope: 9/10, reversibility: 9/10) and auto-blocks before the agent reads a single environment variable.<br/>→ <strong>Office hours enforcement:</strong> a policy rule says "no AI agent actions outside 08:00–18:00." The Hook intercepts any agent invocation at 11pm and returns a policy-denial to the IDE — the developer sees "blocked by policy" before any code executes.<br/>→ <strong>MCP server interception:</strong> when a Claude Code agent calls the <span class="mono">browser-fetch</span> MCP tool (network egress: 9/10, supply chain risk: 8/10), SecureLayer intercepts the tool call, scores it, and either approves, holds for MSSP review, or blocks — before the HTTP request leaves the machine.</p>
+        <div class="q-good">
+          <span>✓ Key phrase to use with the MSSP:</span> "We don't monitor what happened — we enforce what's allowed to happen. The difference is the enforcement layer sits between the AI agent's intent and the system action, not after the action."
+        </div>
+        <div class="q-concern">
+          <span>⚠ Internal: Phase 1 honesty.</span> The runtime Hook (IDE plugin + MCP interceptor) is a Sprint 3 deliverable (Weeks 7–9). Phase 1 Sprints 1–2 operate at the manifest/declaration level — we detect what agents and MCP servers declare they can do, score it, and surface it. Runtime interception (blocking mid-action) comes in Sprint 3. Be clear with the MSSP: Phase 1 pilot starts with discovery + policy configuration, enforcement follow on in Sprint 3.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: SKILLS -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">3</div>
+      <h2>Q3 — "I am baffled by the skills detection capability"</h2>
+      <span class="tag tag-purple">Answer: Explain the Model</span>
+    </div>
+
+    <div class="q-card no-break">
+      <div class="q-head">
+        <span class="q-badge" style="background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)">Needs clearest explanation</span>
+        <div class="q-text">The MSSP is not confused — they're asking for the technical definition. "Skills" is SecureLayer's term for the individual capabilities an AI agent can invoke. This maps directly to what MSSPs already know as "tool calls" or "agent actions."</div>
+      </div>
+      <div class="q-body">
+        <p><strong>A "skill" in SecureLayer = a discrete capability an AI agent can invoke.</strong> Examples: <span class="mono">browser-fetch</span> (fetch a URL), <span class="mono">git-push</span> (push code to a repo), <span class="mono">env-reader</span> (read environment variables), <span class="mono">shell-exec-sudo</span> (run a shell command with elevated privilege). These are the atomic actions that AI agents like Claude Code, Cursor, and GitHub Copilot are instructed to perform.</p>
+        <p><strong>The SecureLayer skill registry</strong> maintains a real-time inventory of every skill observed across all tenants — when it was first seen, last used, how many times invoked, which agent type invoked it, and its current policy status (auto-approved / pending review / blocked).</p>
+        <p><strong>Each skill is scored across 10 risk dimensions:</strong></p>
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="margin-bottom:14px">
+      <table>
+        <thead>
+          <tr><th>Dimension</th><th>What It Measures</th><th>Example: shell-exec-sudo</th><th>Example: inline-suggest</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Permission Scope</td>
+            <td>What system permissions the skill requests</td>
+            <td><span style="color:var(--red)">10 / 10 — critical</span></td>
+            <td><span style="color:var(--green)">1 / 10 — safe</span></td>
+          </tr>
+          <tr>
+            <td>Network Egress</td>
+            <td>Does it make outbound connections?</td>
+            <td><span style="color:var(--green)">2 / 10</span></td>
+            <td><span style="color:var(--green)">2 / 10</span></td>
+          </tr>
+          <tr>
+            <td>Credential Access</td>
+            <td>Does it read env vars or secret stores?</td>
+            <td><span style="color:var(--green)">1 / 10</span></td>
+            <td><span style="color:var(--green)">1 / 10</span></td>
+          </tr>
+          <tr>
+            <td>File System Reach</td>
+            <td>Breadth of file paths accessed</td>
+            <td><span style="color:var(--accent)">5 / 10</span></td>
+            <td><span style="color:var(--green)">1 / 10</span></td>
+          </tr>
+          <tr>
+            <td>Shell Execution</td>
+            <td>Does it spawn subprocesses or shell?</td>
+            <td><span style="color:var(--red)">10 / 10 — critical</span></td>
+            <td><span style="color:var(--green)">1 / 10</span></td>
+          </tr>
+          <tr>
+            <td>Sub-skill Depth</td>
+            <td>How many nested skills are invoked</td>
+            <td><span style="color:var(--red)">3 levels deep</span></td>
+            <td><span style="color:var(--green)">0 levels</span></td>
+          </tr>
+          <tr>
+            <td>Identity Verifiability</td>
+            <td>Can the skill identity be verified?</td>
+            <td><span style="color:var(--accent)">Medium risk</span></td>
+            <td><span style="color:var(--green)">Low risk</span></td>
+          </tr>
+          <tr>
+            <td>Supply Chain Risk</td>
+            <td>Dependency chain provenance score</td>
+            <td><span style="color:var(--accent)">Medium</span></td>
+            <td><span style="color:var(--green)">Low</span></td>
+          </tr>
+          <tr>
+            <td>Prompt Injection Risk</td>
+            <td>Susceptibility to injected instructions</td>
+            <td><span style="color:var(--red)">High — sudo escalation via injection</span></td>
+            <td><span style="color:var(--green)">Low</span></td>
+          </tr>
+          <tr>
+            <td>Reversibility</td>
+            <td>Can actions taken by this skill be undone?</td>
+            <td><span style="color:var(--red)">10 / 10 — irreversible</span></td>
+            <td><span style="color:var(--green)">N/A — read-only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+      <div style="background:var(--red-dim);border:1px solid var(--red-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;color:var(--red);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Auto-blocked (score ≥ 8.0)</div>
+        <div class="mono" style="margin-bottom:4px">shell-exec-sudo → 9.8 → BLOCKED</div>
+        <div class="mono" style="margin-bottom:4px">env-reader → 9.2 → BLOCKED</div>
+        <p style="font-size:11px;color:var(--text-2);margin-top:6px">No human review required. Blocked before first execution. MSSP notified via PSA ticket + Torq webhook.</p>
+      </div>
+      <div style="background:var(--green-dim);border:1px solid var(--green-border);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;color:var(--green);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Auto-approved (score ≤ 3.0)</div>
+        <div class="mono" style="margin-bottom:4px">inline-suggest → 1.3 → AUTO-APPROVED</div>
+        <div class="mono" style="margin-bottom:4px">code-completion → 1.8 → AUTO-APPROVED</div>
+        <p style="font-size:11px;color:var(--text-2);margin-top:6px">No MSSP intervention needed. Logged for audit but never surfaces as a ticket. Analyst time spent only on real risk.</p>
+      </div>
+    </div>
+
+    <div style="background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:8px;padding:12px 14px">
+      <div style="font-size:10px;font-weight:700;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Pending review (score 3.1–7.9) → MSSP decision queue</div>
+      <p style="font-size:11px;color:var(--text-2);line-height:1.6">Skills in this band get a ConnectWise ticket (or Torq case) with full score breakdown, rule flags (e.g. SI-002 = supply chain risk, PI-003 = prompt injection susceptibility), and a recommended action. The MSSP approves or blocks from the dashboard or directly from the ticket — one click. Approved skills are remembered per-tenant; they never resurface unless the skill's behaviour changes.</p>
+    </div>
+  </div>
+
+  <!-- Q4: RMM -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">4</div>
+      <h2>Q4 — "Can it leverage RMM to run software, block usage, run scripts with privilege over thousands of endpoints? Self-protect against compromised endpoints and false positives?"</h2>
+      <span class="tag tag-green">Answer: Yes to RMM · Nuanced on Self-Protection</span>
+    </div>
+
+    <div class="q-card no-break">
+      <div class="q-head">
+        <span class="q-badge" style="background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)">RMM answer: Yes</span>
+        <div class="q-text">The MSSP guessed correctly on RMM leverage. This is a core design pillar of the v6 architecture — not an afterthought. The platform is built for MSSP-scale deployment via the tools MSSPs already operate.</div>
+      </div>
+      <div class="q-body">
+        <p><strong>RMM deployment is native in the architecture (v6).</strong> The Hook agent deploys via NinjaOne, Datto RMM, N-able N-central, Kaseya VSA, or ConnectWise RMM. The deployment script runs with system privilege, installs the Hook as a system service (launchd / systemd / Windows Service), deploys the IDE extension (VS Code via <span class="mono">code --install-extension</span>, JetBrains plugin JAR, Cursor integration), and reports back to the RMM within 60 seconds of success. One RMM script, thousands of endpoints — exactly what the MSSP asked about.</p>
+        <p><strong>RMM-visible health reporting:</strong> every endpoint shows heartbeat status (alive / not responding), hook version, active/paused/error state, and last-event timestamp in the RMM console. If a hook goes offline, the MSSP sees an alert in NinjaOne or ConnectWise — the same alert channel they already monitor.</p>
+        <p><strong>On self-protection against compromised endpoints:</strong> this requires an honest, layered answer.</p>
+        <p style="margin-left:12px">→ <strong>Phase 1 (no endpoint hook):</strong> no endpoint-level self-protection concern exists because the manifest scanner runs cloud-side. The MSSP console and all policy enforcement happen server-side — nothing on the endpoint can disable what it cannot reach.<br/>→ <strong>Phase 2 (runtime Hook):</strong> the Hook binary is signed (code-signing certificate), the system service runs under a dedicated service account (not a developer account), and macOS TamperProtection / Windows Protected Process can be leveraged. If the Hook is killed by a compromised process, the RMM health report immediately shows "not responding" — triggering an MSSP alert. The cloud-side policy is the authoritative source; the hook is a local enforcer. A compromised endpoint that silences the hook cannot forge an "all-clear" to the server.</p>
+
+        <div class="q-good">
+          <span>✓ Key phrase for the MSSP:</span> "The policy is enforced cloud-side, not just on the endpoint. If the local hook is silenced, the MSSP dashboard shows the gap — it doesn't silently fail safe. An offline hook is a visible alert, not an invisible bypass."
+        </div>
+
+        <p style="margin-top:10px"><strong>On false positives and operational disruption — this is the most operationally sensitive concern:</strong></p>
+        <p style="margin-left:12px">→ The 10-dimension scoring model with tunable auto-approve threshold is specifically designed to prevent analyst fatigue. Low-risk skills (score ≤ 3.0) never generate a ticket.<br/>→ The MSSP can tune the threshold per tenant — a more risk-tolerant tenant has a higher auto-approve ceiling; a regulated financial client has a lower one.<br/>→ <strong>Break-glass for developers:</strong> a blocked developer can raise a ticket directly from their IDE ("request approval") which routes to the MSSP queue with full context. The MSSP approves in one click; the approval persists for that skill + that tenant forever.<br/>→ Office Hours enforcement is off by default. The MSSP enables it per tenant, per policy — it is never automatically applied across a fleet.</p>
+
+        <div class="q-concern">
+          <span>⚠ Internal concern:</span> The MSSP's false-positive worry is legitimate and should be treated as a first-class engineering requirement, not a sales objection to manage. If Phase 1 generates noisy tickets on legitimate developer workflows, we lose the design partner. The auto-approve threshold must be conservative (default: block only score ≥ 8.0) and the MSSP must be able to tune it from day one. This is a Sprint 1 product decision — not a Sprint 3 refinement.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERNAL CONCERN REGISTER -->
+  <div class="section page-break">
+    <div class="section-head">
+      <div class="section-num">5</div>
+      <h2>Internal Concern Register — Before Phase 1 Engineering Begins</h2>
+      <span class="tag tag-red">Engineering · Pre-Sprint</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:16px;line-height:1.7">These are the concerns raised by the MSSP's questions — and by the architectural review — that must be resolved before or during Sprint 1. They are not blockers to starting, but each has a specific owner and a specific sprint deadline.</p>
+
+    <!-- C1 -->
+    <div class="concern-block no-break">
+      <div class="concern-head">
+        <div class="concern-num" style="background:var(--red);color:#fff">C1</div>
+        <h4>Phase 1 has no runtime enforcement — but the MSSP thinks it does</h4>
+        <span class="tag tag-red">Sprint 1 · Communication Risk</span>
+      </div>
+      <div class="concern-body">
+        <div class="c-col">
+          <div class="c-col-label">The gap</div>
+          Sprints 1–2 (manifest scan + ConnectWise integration) give the MSSP visibility and ticketing — not blocking. The MSSP's question about "blocking usage over thousands of endpoints" describes a Sprint 3 capability. If they pilot Phase 1 expecting Sprint 3, they will be disappointed.
+        </div>
+        <div class="c-col">
+          <div class="c-col-label">Mitigation</div>
+          Set expectations explicitly in the follow-up: "Phase 1 pilot gives you: full AI agent + MCP inventory across your clients, risk scoring, ConnectWise ticket auto-creation, and compliance log. Active blocking (the Hook) arrives in Sprint 3, 7–9 weeks in. We want you involved in testing both phases."
+        </div>
+      </div>
+      <div class="concern-mitigation">
+        <span style="color:var(--red);font-weight:700;flex-shrink:0">Owner:</span>
+        Sharon (Founder) — address in the reply email before any pilot agreement is signed. Do not let this ambiguity persist into the design partner contract.
+      </div>
+    </div>
+
+    <!-- C2 -->
+    <div class="concern-block no-break">
+      <div class="concern-head">
+        <div class="concern-num" style="background:var(--red);color:#fff">C2</div>
+        <h4>False positive risk is the #1 operational threat to the design partnership</h4>
+        <span class="tag tag-red">Sprint 1 · Product Decision</span>
+      </div>
+      <div class="concern-body">
+        <div class="c-col">
+          <div class="c-col-label">The risk</div>
+          If the skill scoring model auto-blocks a legitimate developer workflow (e.g. a <span class="mono">git-push</span> flagged because it runs a pre-commit shell hook), the MSSP gets an angry client call within hours. One false positive at pilot stage destroys the design partner relationship.
+        </div>
+        <div class="c-col">
+          <div class="c-col-label">Required before Sprint 1 ships</div>
+          (a) Default auto-block threshold must be conservative: ≥ 8.0 only. (b) Auto-approve threshold must be clearly defined: ≤ 3.0. (c) The pending review band (3.1–7.9) must generate a ticket but NOT block execution until the MSSP explicitly approves blocking. (d) Developer break-glass must exist from day one.
+        </div>
+      </div>
+      <div class="concern-mitigation">
+        <span style="color:var(--red);font-weight:700;flex-shrink:0">Owner:</span>
+        Engineering Lead — threshold values must be locked in the Sprint 1 spec, not left as config defaults to be tuned later.
+      </div>
+    </div>
+
+    <!-- C3 -->
+    <div class="concern-block no-break">
+      <div class="concern-head">
+        <div class="concern-num" style="background:var(--accent);color:#000">C3</div>
+        <h4>MCP server interception (runtime) requires a proxy architecture — not trivial</h4>
+        <span class="tag tag-amber">Phase 2 · Architecture Decision</span>
+      </div>
+      <div class="concern-body">
+        <div class="c-col">
+          <div class="c-col-label">The technical challenge</div>
+          MCP servers communicate via stdio (local) or HTTP. Runtime interception without a hook agent requires either (a) a local proxy that sits between the IDE and MCP server, or (b) an IDE extension that wraps MCP calls before they leave the plugin. Option (a) is transparent to the agent; option (b) requires per-IDE plugin development. Neither is trivial.
+        </div>
+        <div class="c-col">
+          <div class="c-col-label">Phase 1 scope (safe)</div>
+          Phase 1 only does manifest-based MCP detection — parse .mcp.json and tool declaration files, score declared capabilities. No runtime interception in Phase 1. Phase 2 decides between proxy vs. IDE-extension approach based on what the design partner's environment looks like (which IDEs, which MCP servers).
+        </div>
+      </div>
+      <div class="concern-mitigation">
+        <span style="color:var(--accent);font-weight:700;flex-shrink:0">Owner:</span>
+        Engineering Lead — architecture decision for Phase 2 proxy vs. IDE extension must be made at the Sprint 3 design review, not before. Ask the MSSP which IDEs their developer clients use in the follow-up call.
+      </div>
+    </div>
+
+    <!-- C4 -->
+    <div class="concern-block no-break">
+      <div class="concern-head">
+        <div class="concern-num" style="background:var(--accent);color:#000">C4</div>
+        <h4>Self-protection against compromised endpoints is a Phase 2 problem only</h4>
+        <span class="tag tag-amber">Phase 2 · Be Honest</span>
+      </div>
+      <div class="concern-body">
+        <div class="c-col">
+          <div class="c-col-label">What we can say now</div>
+          Phase 1 has no endpoint hook, so no endpoint-level self-protection risk. Cloud-side enforcement is inherently resilient — an endpoint cannot forge an approval. This is actually a strength of the Phase 1 architecture: no footprint to compromise.
+        </div>
+        <div class="c-col">
+          <div class="c-col-label">What Phase 2 must resolve</div>
+          Code-signed binary, system service account (not developer account), TamperProtection API usage where available, hook-offline alert via RMM within 60 seconds. The offline alert IS the self-protection mechanism — silence is visible, not invisible. This must be specified before the Phase 2 runtime sensor design starts.
+        </div>
+      </div>
+      <div class="concern-mitigation">
+        <span style="color:var(--accent);font-weight:700;flex-shrink:0">Owner:</span>
+        Engineering Lead — Phase 2 spec must include binary signing + TamperProtection requirements. Sharon to communicate Phase 1 advantage (no footprint = no endpoint risk) in the MSSP reply.
+      </div>
+    </div>
+
+    <!-- C5 -->
+    <div class="concern-block no-break">
+      <div class="concern-head">
+        <div class="concern-num" style="background:var(--blue);color:#fff">C5</div>
+        <h4>We don't know their RMM platform or PSA — critical unknowns before pilot scoping</h4>
+        <span class="tag tag-blue">Discovery · Ask Now</span>
+      </div>
+      <div class="concern-body">
+        <div class="c-col">
+          <div class="c-col-label">Why this matters</div>
+          The architecture supports NinjaOne, Datto, N-able, Kaseya, ConnectWise RMM — but each has a different deployment script. PSA adapters exist for ConnectWise, Autotask, HaloPSA, Syncro — but building the wrong one first delays the pilot by weeks. We have one guess: the MSSP mentioned "RMM agents" without specifying which.
+        </div>
+        <div class="c-col">
+          <div class="c-col-label">What to ask</div>
+          "Before we scope the pilot, three quick questions: (1) Which RMM platform are you running? (2) Which PSA? (3) How many developer endpoints do your target SMB clients have on average?" These three answers define which integration to build first and exactly how fast the pilot can deploy.
+        </div>
+      </div>
+      <div class="concern-mitigation">
+        <span style="color:var(--blue);font-weight:700;flex-shrink:0">Owner:</span>
+        Sharon — include these three questions in the reply email. Do not scope the pilot without them. The wrong RMM assumption wastes a sprint.
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 COMMITMENT -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">6</div>
+      <h2>What Phase 1 Delivers — The Honest Pilot Commitment</h2>
+      <span class="tag tag-green">Design Partner Offer</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-2);margin-bottom:14px">This is what the MSSP gets if they agree to be a design partner. No more, no less. Each sprint is a pilotable deliverable — not a slide deck.</p>
+
+    <div class="phase-row" style="border-color:var(--green-border)">
+      <div class="phase-label" style="background:var(--green-dim);color:var(--green)">Sprint 1<br/>Weeks 1–3</div>
+      <div class="phase-content">
+        <h4>AI agent + MCP server inventory across all pilot tenants</h4>
+        <p>GitHub OAuth scan surfaces every AI agent config and MCP server manifest across the MSSP's pilot clients. Scored, ranked by risk, visible in the dashboard. MSSP sees shadow AI they didn't know was running.</p>
+        <div class="deliverable"><span style="color:var(--green)">✓</span> Full risk inventory with 10-dimension scores per skill</div>
+        <div class="deliverable"><span style="color:var(--green)">✓</span> MCP server manifest detection and scoring</div>
+        <div class="deliverable"><span style="color:var(--green)">✓</span> MSSP dashboard — multi-tenant view across all pilot clients</div>
+      </div>
+    </div>
+
+    <div class="phase-row" style="border-color:var(--accent-border)">
+      <div class="phase-label" style="background:var(--accent-dim);color:var(--accent)">Sprint 2<br/>Weeks 4–6</div>
+      <div class="phase-content">
+        <h4>PSA integration — auto-ticket creation on high-severity events</h4>
+        <p>High-risk skills (score ≥ 8.0) generate ConnectWise (or preferred PSA) tickets automatically — pre-filled with tenant, agent, risk score, MITRE ATT&CK technique, and recommended remediation. The MSSP's existing queue, their existing workflow.</p>
+        <div class="deliverable"><span style="color:var(--accent)">✓</span> Auto-ticket creation on CRITICAL + HIGH severity skills</div>
+        <div class="deliverable"><span style="color:var(--accent)">✓</span> MITRE ATT&CK technique mapped per rule flag</div>
+        <div class="deliverable"><span style="color:var(--accent)">✓</span> Webhook to Torq (or any SOAR) for orchestrated response</div>
+      </div>
+    </div>
+
+    <div class="phase-row" style="border-color:var(--blue-border)">
+      <div class="phase-label" style="background:var(--blue-dim);color:var(--blue)">Sprint 3<br/>Weeks 7–9</div>
+      <div class="phase-content">
+        <h4>Office Hours enforcement — first real blocking via RMM policy</h4>
+        <p>Real policy enforcement: AI agents blocked outside defined windows. Deployed via the MSSP's RMM. This is the first action taken at the endpoint level — not just observation and alerting.</p>
+        <div class="deliverable"><span style="color:var(--blue)">✓</span> RMM-deployed policy (NinjaOne / ConnectWise RMM / preferred platform)</div>
+        <div class="deliverable"><span style="color:var(--blue)">✓</span> Developer break-glass request → MSSP approval queue</div>
+        <div class="deliverable"><span style="color:var(--blue)">✓</span> Phase 2 runtime sensor API hook stub wired</div>
+      </div>
+    </div>
+
+    <div class="phase-row" style="border-color:var(--purple-border)">
+      <div class="phase-label" style="background:var(--purple-dim);color:var(--purple)">Sprint 4<br/>Weeks 10–12</div>
+      <div class="phase-content">
+        <h4>Compliance log export — audit artifact per tenant</h4>
+        <p>Every blocked event exported as a signed, timestamped PDF or JSON — ready for SOC 2 or CMMC audit. The MSSP can deliver this to clients at QBR as proof of AI agent governance.</p>
+        <div class="deliverable"><span style="color:var(--purple)">✓</span> Signed + timestamped compliance log per tenant</div>
+        <div class="deliverable"><span style="color:var(--purple)">✓</span> PDF / JSON export — auditor-ready</div>
+        <div class="deliverable"><span style="color:var(--purple)">✓</span> KPI dashboard: TTA / TTT / TTR for AI agent incidents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS WE NEED ANSWERED -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">7</div>
+      <h2>Questions to Ask the MSSP in the Follow-Up</h2>
+      <span class="tag tag-blue">Reply Email · Required</span>
+    </div>
+
+    <div style="background:var(--bg-2);border:1px solid var(--border-2);border-radius:10px;padding:4px 18px 4px">
+      <div class="ask-row">
+        <div class="ask-num">1</div>
+        <div><strong>Which RMM platform are you running?</strong> NinjaOne, Datto, N-able, Kaseya, ConnectWise, or other? This determines which deployment script we build first for the pilot — we support all major platforms but need to know your stack.</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-num">2</div>
+        <div><strong>Which PSA are you on?</strong> ConnectWise Manage, Autotask, HaloPSA, or Syncro? The ticket integration is built per-PSA and we want the pilot to drop into your existing queue from day one.</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-num">3</div>
+        <div><strong>Which AI coding tools are your developer clients running today?</strong> Claude Code, GitHub Copilot, Cursor, or others? And do any of them use MCP servers (tool integrations) that you're currently not monitoring?</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-num">4</div>
+        <div><strong>How many developer endpoints in a typical pilot client?</strong> 5–50 or 50–500? This sizes the Sprint 1 scan and determines whether we start with a single-client pilot or a multi-tenant rollout.</div>
+      </div>
+      <div class="ask-row">
+        <div class="ask-num">5</div>
+        <div><strong>Have you had an AI agent-related security incident or near-miss with any client?</strong> Even a "we were nervous" moment counts. This is the strongest signal for pricing and compliance framing — and it informs how urgently the pilot needs to move.</div>
+      </div>
+      <div class="ask-row" style="border-bottom:none">
+        <div class="ask-num">6</div>
+        <div><strong>Are auditors or clients already asking about AI agent governance?</strong> We hear this from every MSSP conversation — audit pressure is driving purchases before incidents force it. Knowing your specific audit context shapes which compliance artifacts we prioritise in Sprint 4.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>SecureLayer — MSSP Technical Response Brief — Internal Only</div>
+    <div>Pre-MVP · Phase 1 Design Partner Prep · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
