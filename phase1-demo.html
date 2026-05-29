@@ -6,7 +6,8 @@
 <title>SecureLayer — Phase 1 Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&f[]=general-sans@400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&display=swap');
 /* ===== DESIGN.md tokens ===== */
 :root{
   --bg:#0d0f14; --bg-2:#13161e; --bg-3:#1a1e28; --bg-4:#222736;
@@ -21,12 +22,13 @@
   --splunk:#7bc043; --splunk-dim:rgba(123,192,67,.14);
   --sidebar-w:248px; --header-h:60px; --beat-h:52px;
   --radius:8px; --radius-lg:12px;
-  --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  --font:'General Sans',system-ui,sans-serif; --display:'Satoshi','General Sans',sans-serif; --mono:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.55;font-weight:500;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .mono{font-family:var(--mono)}
+.logo-name,.page-head h1,.step h3,.cert h3,.alert h3,.beat-tag{font-family:var(--display);letter-spacing:-.01em}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
 ::-webkit-scrollbar-track{background:transparent}

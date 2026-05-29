@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — Sales Demo Script</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.12);--accent-border:rgba(245,158,11,.3);
+  --text:#e8eaf0;--text-2:#9ba3b8;--text-3:#5a6380;
+  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.12);
+  --green:#22c55e;--green-dim:rgba(34,197,94,.1);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{max-width:760px;margin:0 auto;padding:48px 32px 80px}
+.mono{font-family:'JetBrains Mono',monospace}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.mark{width:36px;height:36px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:18px}
+.head .nm{font-size:17px;font-weight:800}
+.head .sub{font-size:12px;color:var(--text-3)}
+h1{font-size:30px;font-weight:900;line-height:1.15;margin:18px 0 8px}
+.lead{font-size:15px;color:var(--text-2);margin-bottom:8px}
+.meta{font-size:13px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:28px}
+.demo-link{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;font-weight:800;font-size:13px;padding:9px 15px;border-radius:8px;text-decoration:none;margin-bottom:32px}
+.beat{background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;padding:20px 22px;margin-bottom:14px}
+.beat-num{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 11px;margin-bottom:10px}
+.beat h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.beat .click{font-size:12px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:12px}
+.say{font-size:14px;color:var(--text-2);line-height:1.65;padding-left:16px;border-left:2px solid var(--accent-border);margin:10px 0}
+.say + .say{margin-top:8px}
+.land{background:var(--green-dim);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:11px 14px;font-size:13.5px;color:var(--text);margin-top:12px}
+.land b{color:var(--green)}
+.section-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin:34px 0 14px}
+.qa{border-bottom:1px solid var(--border);padding:12px 0}
+.qa:last-child{border:none}
+.qa .q{font-weight:700;font-size:14px;margin-bottom:4px}
+.qa .a{font-size:13.5px;color:var(--text-2)}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--border-2);font-size:12px;color:var(--text-3);display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="head">
+    <div class="mark">S</div>
+    <div><div class="nm">SecureLayer</div><div class="sub">Sales Demo Script · Internal</div></div>
+  </div>
+
+  <h1>Phase 1 Demo — Talk Track</h1>
+  <p class="lead">A beat-by-beat script for walking an MSSP prospect through the Phase 1 demo. ~4 minutes. Click the numbered beat rail at the top of the demo to advance.</p>
+  <p class="meta">6 beats · Connect → Discover → Score → Splunk → Enforce → Audit</p>
+
+  <a class="demo-link" href="https://sharon19x1-ops.github.io/securelayer-docs/phase1-demo.html" target="_blank">▶ Open the demo ↗</a>
+
+  <div class="beat">
+    <div class="beat-num">Before you start · 10s</div>
+    <h2>Frame it</h2>
+    <p class="say">"This is SecureLayer running as your MSSP console, managing one of your SMB clients — BlueSky Software. Nothing is installed on their machines. Let me show you what we find and what you can do about it."</p>
+    <p class="say">"AI coding agents — Claude Code, Cursor, Copilot, MCP servers — are running in every client you manage. None of your current tools can see what they're allowed to do. That's the gap."</p>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 1 · Connect &amp; Scan · 45s</div>
+    <h2>Onboard a client</h2>
+    <div class="click">Click: "1 Connect"</div>
+    <p class="say">"Onboarding a client takes minutes. You authorize read-only access to their GitHub org — OAuth, no credentials stored, nothing pushed to endpoints."</p>
+    <p class="say">"We link the RMM you already run — NinjaOne here — so enforcement can ride that same pipe later. And we link their Splunk."</p>
+    <p class="say">"Then we scan: we read the repos for agent configs and parse MCP manifests to inventory every agent and skill. Cloud-side, under a minute."</p>
+    <div class="land"><b>Land it:</b> "Phase 1 has zero endpoint footprint. There's nothing on a developer's laptop to break or disable. The Phase 2 runtime sensor deploys later through the RMM that's already linked — no re-onboarding."</div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 2 · Discover · 40s</div>
+    <h2>Show the shadow AI</h2>
+    <div class="click">Click: "2 Discover"</div>
+    <p class="say">"Here's BlueSky's AI posture — 7 agents, 3 MCP servers, 41 skills, all scored."</p>
+    <p class="say">Point at the red banner: "This one matters. <span class="mono">browser-fetch</span> is an MCP server running under a developer account that was never registered with you. Network egress, credential access. This is shadow AI — until this scan, nobody knew it existed."</p>
+    <p class="say">"Notice four skills are already auto-blocked. You didn't have to triage them."</p>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 3 · Score · 50s · THE differentiator</div>
+    <h2>The skill score</h2>
+    <div class="click">Click: "3 Score"</div>
+    <p class="say">"This is what nobody else does. CrowdStrike and Wiz tell you an agent is risky. We score every individual skill across 10 dimensions."</p>
+    <p class="say">Point at the gauge: "<span class="mono">browser-fetch</span> scores 6.8. You see exactly why — network egress 9, supply chain 8, prompt injection 7. Not a black box."</p>
+    <p class="say">"The policy is automatic: 8.0+ blocked before it runs — <span class="mono">shell-exec-sudo</span> at 9.8. Under 3.0 auto-approved, so analysts never waste time on autocomplete."</p>
+    <div class="land"><b>Land it:</b> "Your team only ever looks at the middle band. That's the difference between an alert firehose and a queue a human can actually clear."</div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 4 · Splunk · 50s · for the Splunk shop</div>
+    <h2>Lands in their SIEM</h2>
+    <div class="click">Click: "4 Splunk"</div>
+    <p class="say">"You already run Splunk. We don't ask you to leave it."</p>
+    <p class="say">Point at the setup card: "One-time setup — point us at your HEC endpoint, pick the index. Every skill event then flows in CIM-normalized and MITRE-tagged."</p>
+    <p class="say">Point at the flow: "The skill score becomes a risk contribution on the agent's risk object in your RBA. Crosses threshold, fires a risk notable — in the model your analysts already use. Then hands off to Torq."</p>
+    <div class="land"><b>Land it:</b> "We're a contributor to your SIEM, not a new pane of glass. That's the whole integration philosophy."</div>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 5 · Enforce · 35s</div>
+    <h2>Enforce via their RMM</h2>
+    <div class="click">Click: "5 Enforce"</div>
+    <p class="say">"Detection is table stakes. Here's enforcement: block AI agents outside office hours, pushed through NinjaOne to all 14 endpoints. No new agent."</p>
+    <p class="say">Point at break-glass: "The guardrail that keeps you out of trouble — a blocked developer requests access from their IDE, lands in your queue with context, one click to approve, and it sticks. Enforce without angry client calls."</p>
+  </div>
+
+  <div class="beat">
+    <div class="beat-num">Beat 6 · Audit · 30s · the budget unlock</div>
+    <h2>Audit-ready proof</h2>
+    <div class="click">Click: "6 Audit"</div>
+    <p class="say">"Every blocked and enforced event becomes a signed, timestamped log — SOC 2 CC6.1, logical access controls."</p>
+    <p class="say">"This is what you hand your client at the QBR: proof their AI agents are governed. It turns a security tool into a compliance line item — a second budget."</p>
+    <p class="say">"Phase 1 does one standard properly. CMMC and ISO come in Phase 2."</p>
+  </div>
+
+  <div class="beat" style="border-color:var(--accent-border)">
+    <div class="beat-num">Close · 20s</div>
+    <h2>The ask</h2>
+    <p class="say">"In four minutes: we found shadow AI you couldn't see, scored every skill, fed it into your Splunk, enforced a policy through your RMM, and produced an audit artifact for your client — and nothing was installed on a single endpoint."</p>
+    <p class="say"><b style="color:var(--text)">"We're taking a small number of Phase 1 design partners. I'd like an environment like yours to be one of them. Can we scope a pilot?"</b></p>
+  </div>
+
+  <div class="section-label">Handling the obvious questions</div>
+  <div class="qa"><div class="q">"Is this shipping today?"</div><div class="a">"Phase 1 is in build — 12-week plan, co-developed with design partners. The discovery and scoring you just saw ships first; enforcement follows in the same cycle."</div></div>
+  <div class="qa"><div class="q">"How is this different from CrowdStrike / Wiz?"</div><div class="a">"They're built for an enterprise securing its own agents, on their platform, priced per enterprise. We're built for you — multi-tenant, riding your existing Splunk and RMM, per-tenant pricing, and we score at the skill level, not the asset level."</div></div>
+  <div class="qa"><div class="q">"What about false positives?"</div><div class="a">"Conservative by default — auto-block only at 8.0+, and break-glass means a developer is never stuck. You tune the threshold per client."</div></div>
+  <div class="qa"><div class="q">"Which RMM / PSA / SIEM do you support?"</div><div class="a">"Splunk, Sentinel, Elastic on the SIEM side; ConnectWise, Autotask, NinjaOne, Kaseya on RMM/PSA. Tell me your stack and that's the integration we build first for the pilot."</div></div>
+
+  <div class="foot">
+    <div>SecureLayer — Sales Demo Script — Confidential</div>
+    <div>securelayer.io · May 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
