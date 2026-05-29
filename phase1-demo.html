@@ -275,7 +275,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
       <div class="beat-tag">◉ Beat 1 — Onboard a client (no endpoint agent)</div>
       <div class="page-head">
         <h1>Connect BlueSky Software</h1>
-        <p>How an MSSP brings a client online. Phase 1 is cloud-side discovery — the MSSP authorizes read access, SecureLayer scans, and risk appears in minutes. Nothing is installed on developer machines.</p>
+        <p>How an MSSP brings a client online. Phase 1 is cloud-side discovery — the MSSP authorizes read access, SecureLayer scans, and risk appears in minutes. No new agent is installed on developer machines for discovery.</p>
       </div>
 
       <div class="steps">
@@ -319,7 +319,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         </div>
       </div>
 
-      <div class="note"><b>Phase 1 has no endpoint footprint.</b> Discovery is OAuth + cloud-side scan — there is nothing on a developer's machine to break, slow down, or be disabled by a compromised host. The Phase 2 runtime sensor deploys later through the RMM that's already linked above — one toggle, no re-onboarding.</div>
+      <div class="note"><b>Phase 1 discovery has no endpoint footprint.</b> The scan is OAuth + cloud-side — nothing to install for discovery, and a compromised host can't disable it or forge an all-clear. Enforcement (Beat 5) is delivered through your existing RMM as policy, not a SecureLayer endpoint agent. The Phase 2 runtime sensor deploys later through that same RMM — one toggle, no re-onboarding. Coverage is scoped to the sources you connect.</div>
     </section>
 
     <!-- ===== BEAT 2: DISCOVER ===== -->
@@ -327,7 +327,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
       <div class="beat-tag">◉ Beat 2 — Discovery</div>
       <div class="page-head">
         <h1>Client posture — BlueSky Software</h1>
-        <p>Scan complete. SecureLayer inventoried every AI agent and MCP server reachable in this client's environment — including one nobody knew was running.</p>
+        <p>Scan complete. SecureLayer inventoried every AI agent and MCP server visible across the client's connected code and tooling — including one nobody knew was running.</p>
       </div>
 
       <div class="alert">
@@ -354,7 +354,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
             <tr class="clickable" data-go="skills">
               <td><span class="agent">browser-fetch</span><span class="shadow-flag">SHADOW</span></td>
               <td>MCP server</td><td class="mono" style="font-size:13px">DEVLAPTOP-A14</td><td>5</td>
-              <td><span class="badge b-red">6.8 high</span></td><td><span class="badge b-orange">pending review</span></td>
+              <td><span class="badge b-orange">6.8 review</span></td><td><span class="badge b-orange">pending review</span></td>
             </tr>
             <tr>
               <td><span class="agent">postgres-mcp · db-export</span></td><td>MCP server</td><td class="mono" style="font-size:13px">DBHOST-01</td><td>4</td>
@@ -362,7 +362,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
             </tr>
             <tr>
               <td><span class="agent">filesystem-mcp</span></td><td>MCP server</td><td class="mono" style="font-size:13px">multiple</td><td>3</td>
-              <td><span class="badge b-green">3.4 medium</span></td><td><span class="badge b-green">auto-approved</span></td>
+              <td><span class="badge b-orange">3.4 review</span></td><td><span class="badge b-orange">pending review</span></td>
             </tr>
             <tr class="grp"><td colspan="6">Agents · 7 discovered</td></tr>
             <tr class="clickable" data-go="skills">
@@ -375,11 +375,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
             </tr>
             <tr>
               <td><span class="agent">claude-code · file-write-bulk</span></td><td>Claude Code</td><td class="mono" style="font-size:13px">DEVLAPTOP-A14</td><td>4</td>
-              <td><span class="badge b-orange">5.4 medium</span></td><td><span class="badge b-orange">pending review</span></td>
+              <td><span class="badge b-orange">5.4 review</span></td><td><span class="badge b-orange">pending review</span></td>
             </tr>
             <tr>
               <td><span class="agent">claude-code · dependency-install</span></td><td>Claude Code</td><td class="mono" style="font-size:13px">BUILDBOX-02</td><td>2</td>
-              <td><span class="badge b-orange">6.1 medium</span></td><td><span class="badge b-orange">pending review</span></td>
+              <td><span class="badge b-orange">6.1 review</span></td><td><span class="badge b-orange">pending review</span></td>
             </tr>
             <tr>
               <td><span class="agent">claude-code · git-push</span></td><td>Claude Code</td><td class="mono" style="font-size:13px">DEVLAPTOP-A14</td><td>4</td>
@@ -412,10 +412,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
             <div class="gauge">
               <svg width="180" height="180" viewBox="0 0 180 180">
                 <circle cx="90" cy="90" r="78" fill="none" stroke="var(--bg-4)" stroke-width="13"/>
-                <circle cx="90" cy="90" r="78" fill="none" stroke="var(--red)" stroke-width="13" stroke-linecap="round"
+                <circle cx="90" cy="90" r="78" fill="none" stroke="var(--orange)" stroke-width="13" stroke-linecap="round"
                   stroke-dasharray="490" stroke-dashoffset="157"/>
               </svg>
-              <div class="val"><div class="n" style="color:var(--red)">6.8</div><div class="d">/ 10 overall</div></div>
+              <div class="val"><div class="n" style="color:var(--orange)">6.8</div><div class="d">/ 10 overall</div></div>
             </div>
             <div class="verdict" style="background:var(--orange-dim);color:var(--orange)">Pending review</div>
           </div>
@@ -461,10 +461,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         <h3>⛑ Critical action held — MSSP decision required</h3>
         <p><span class="mono" style="color:var(--text);font-weight:700">cursor · env-reader</span> on <span class="mono" style="color:var(--text)">DEVLAPTOP-A14</span> scored <b style="color:var(--text)">9.2</b> (credential access 10/10). Policy for this client is <b style="color:var(--text)">human-in-the-loop</b>: the action is paused, not silently blocked. A critical notification was pushed to the MSSP — you decide before anything is enforced.</p>
         <div class="acts">
-          <button class="btn-approve">Approve once</button>
-          <button class="btn-hold">Keep holding</button>
-          <button class="btn-block">Block + add policy</button>
-          <span class="decided" id="hitlDecided">✓ Decision recorded — logged to compliance &amp; pushed to Splunk</span>
+          <button class="btn-approve" data-dec="✓ Approved once — env-reader allowed for this session only · logged to compliance · pushed to Splunk">Approve once</button>
+          <button class="btn-hold" data-dec="⏸ Holding — action stays paused · developer notified · awaiting your evidence">Keep holding</button>
+          <button class="btn-block" data-dec="⛔ Blocked + policy added — env-reader now auto-blocks for this tenant · logged · pushed to Splunk">Block + add policy</button>
+          <span class="decided" id="hitlDecided"></span>
         </div>
       </div>
 
@@ -502,7 +502,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
       </div>
 
       <div class="flow-chain">
-        <div class="fc" style="background:var(--accent-dim)"><div class="ic">⬡</div><div class="nm" style="color:var(--accent)">SecureLayer</div><div class="sub">skill score 6.8 → HEC event</div></div>
+        <div class="fc" style="background:var(--accent-dim)"><div class="ic">⬡</div><div class="nm" style="color:var(--accent)">SecureLayer</div><div class="sub">critical skill → HEC event</div></div>
         <div class="fc"><div class="arr">→</div></div>
         <div class="fc" style="background:var(--splunk-dim)"><div class="ic">📊</div><div class="nm" style="color:var(--splunk)">Splunk RBA</div><div class="sub">risk added to risk object</div></div>
         <div class="fc"><div class="arr">→</div></div>
@@ -520,21 +520,24 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
   <span class="str">"src_user"</span>: <span class="str">"alice@bluesky.io"</span>,
   <span class="str">"dest"</span>: <span class="str">"DEVLAPTOP-A14"</span>,
   <span class="str">"vendor"</span>: <span class="str">"SecureLayer"</span>,
-  <span class="str">"severity"</span>: <span class="str">"high"</span>,
-  <span class="str">"skill_score"</span>: <span class="str">6.8</span>,
-  <span class="str">"rule_id"</span>: <span class="str">"SI-002"</span>,
-  <span class="str">"att_ck_id"</span>: <span class="str">"T1195.001"</span>,
+  <span class="str">"severity"</span>: <span class="str">"critical"</span>,
+  <span class="str">"agent"</span>: <span class="str">"cursor"</span>,
+  <span class="str">"skill"</span>: <span class="str">"env-reader"</span>,
+  <span class="str">"skill_score"</span>: <span class="str">9.2</span>,
+  <span class="str">"rule_id"</span>: <span class="str">"CE-001"</span>,
+  <span class="str">"att_ck_id"</span>: <span class="str">"T1552.001"</span>,
+  <span class="str">"risk_object"</span>: <span class="str">"cursor@bluesky-sw"</span>,
   <span class="str">"tenant_id"</span>: <span class="str">"bluesky-sw"</span>
 }</div>
         </div>
         <div class="card">
           <div class="card-h" style="font-family:var(--mono)">Analyst SPL — risk by agent</div>
-          <div class="spl"><span class="cmd">sourcetype</span>=<span class="str">"slb:alert"</span> severity IN(<span class="str">"high","critical"</span>)
-| <span class="cmd">stats</span> <span class="fn">max</span>(skill_score) <span class="cmd">as</span> risk
+          <div class="spl"><span class="cmd">sourcetype</span>=<span class="str">"slb:alert"</span> severity IN(<span class="str">"CRITICAL","HIGH"</span>)
+| <span class="cmd">stats</span> <span class="fn">max</span>(skill_score) <span class="cmd">as</span> risk_score
     <span class="fn">values</span>(rule_id) <span class="fn">values</span>(att_ck_id)
     <span class="cmd">by</span> tenant_id, agent
-| <span class="cmd">where</span> risk &gt;= <span class="str">6.0</span>
-| <span class="cmd">sort</span> - risk</div>
+| <span class="cmd">where</span> risk_score &gt;= <span class="str">8.0</span>
+| <span class="cmd">sort</span> - risk_score</div>
           <div class="callout">Same SPL conventions, same risk index. SecureLayer is a contributor — not a new pane of glass.</div>
         </div>
       </div>
@@ -543,7 +546,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         <div class="ttl"><span class="badge b-red">RISK NOTABLE</span> AI agent skill risk — bluesky-sw / browser-fetch</div>
         <div class="kv">
           <span class="k">Risk object</span><span class="v">agent:browser-fetch · tenant:bluesky-sw</span>
-          <span class="k">Contributing</span><span class="v">skill_score 6.8 (+ env-reader 9.2, shell-exec-sudo 9.8)</span>
+          <span class="k">Contributing</span><span class="v">env-reader 9.2, shell-exec-sudo 9.8, browser-fetch 6.8</span>
           <span class="k">MITRE ATT&CK</span><span class="v">T1195.001 · T1552.001 · T1059</span>
           <span class="k">Aggregate risk</span><span class="v">82 / 100 — threshold 75 exceeded</span>
         </div>
@@ -603,8 +606,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
           <h3>SOC 2 — CC6.1 Logical Access Controls</h3>
           <p>AI agent access governance evidence · BlueSky Software · period 2026-05-01 → 2026-05-29</p>
         </div>
-        <button class="exp">Export signed log ↓</button>
+        <button class="exp" id="exportBtn">Export signed log ↓</button>
       </div>
+      <div class="callout" id="exportMsg" style="display:none;color:var(--green);font-weight:700;margin:-4px 0 14px">✓ Signed log exported — <span class="mono">SOC2-CC6.1-BlueSky-2026-05.pdf</span> + <span class="mono">.json</span> · ready for the client QBR</div>
 
       <div class="card">
         <div class="card-h">Standard coverage</div>
@@ -661,7 +665,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
     var hb = e.target.closest('.hitl .acts button');
     if(hb){
       var dec = document.getElementById('hitlDecided');
-      if(dec){ dec.style.display='inline'; }
+      if(dec){ dec.textContent = hb.getAttribute('data-dec') || ''; dec.style.display='inline'; }
+      return;
+    }
+    var ex = e.target.closest('#exportBtn');
+    if(ex){
+      var m = document.getElementById('exportMsg');
+      if(m){ m.style.display='block'; }
+      return;
     }
   });
 })();
