@@ -3,140 +3,195 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SecureLayer — Sales Demo Script</title>
+<title>SecureLayer — Sales Demo Script (Presenter)</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;
-  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.12);--accent-border:rgba(245,158,11,.3);
-  --text:#e8eaf0;--text-2:#9ba3b8;--text-3:#5a6380;
-  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.12);
-  --green:#22c55e;--green-dim:rgba(34,197,94,.1);
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;--bg-4:#222736;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.13);--accent-border:rgba(245,158,11,.32);
+  --text:#eef1f7;--text-2:#aab2c6;--text-3:#727b91;
+  --border:rgba(255,255,255,0.08);--border-2:rgba(255,255,255,0.13);
+  --green:#2ecc71;--green-dim:rgba(46,204,113,.13);
+  --blue:#4d8dff;--blue-dim:rgba(77,141,255,.13);
 }
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
-.page{max-width:760px;margin:0 auto;padding:48px 32px 80px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
 .mono{font-family:'JetBrains Mono',monospace}
-.head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.mark{width:36px;height:36px;background:var(--accent);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:18px}
-.head .nm{font-size:17px;font-weight:800}
-.head .sub{font-size:12px;color:var(--text-3)}
-h1{font-size:30px;font-weight:900;line-height:1.15;margin:18px 0 8px}
-.lead{font-size:15px;color:var(--text-2);margin-bottom:8px}
-.meta{font-size:13px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:28px}
-.demo-link{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#000;font-weight:800;font-size:13px;padding:9px 15px;border-radius:8px;text-decoration:none;margin-bottom:32px}
-.beat{background:var(--bg-2);border:1px solid var(--border-2);border-radius:12px;padding:20px 22px;margin-bottom:14px}
-.beat-num{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 11px;margin-bottom:10px}
-.beat h2{font-size:18px;font-weight:800;margin-bottom:4px}
-.beat .click{font-size:12px;color:var(--text-3);font-family:'JetBrains Mono',monospace;margin-bottom:12px}
-.say{font-size:14px;color:var(--text-2);line-height:1.65;padding-left:16px;border-left:2px solid var(--accent-border);margin:10px 0}
-.say + .say{margin-top:8px}
-.land{background:var(--green-dim);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:11px 14px;font-size:13.5px;color:var(--text);margin-top:12px}
+
+/* sticky action bar */
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:12px 22px;background:rgba(13,15,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-2)}
+.bar .mark{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:16px}
+.bar .nm{font-weight:800;font-size:15px}
+.bar .sub{font-size:12px;color:var(--text-3);font-weight:600}
+.bar .sp{margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:7px;font:inherit;font-weight:800;font-size:13.5px;padding:9px 15px;border-radius:8px;cursor:pointer;text-decoration:none;border:1px solid transparent}
+.btn-go{background:var(--accent);color:#000}
+.btn-print{background:var(--bg-3);color:var(--text);border:1px solid var(--border-2)}
+
+.page{max-width:800px;margin:0 auto;padding:34px 26px 90px}
+h1{font-size:30px;font-weight:900;line-height:1.15;margin-bottom:8px}
+.lead{font-size:16px;color:var(--text-2);margin-bottom:18px;max-width:680px}
+
+/* map */
+.map{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.map .m{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;background:var(--bg-2);border:1px solid var(--border-2);border-radius:99px;padding:6px 13px}
+.map .m .n{width:19px;height:19px;border-radius:50%;background:var(--accent);color:#000;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+
+/* beat */
+.beat{background:var(--bg-2);border:1px solid var(--border-2);border-radius:13px;padding:22px 24px;margin-bottom:16px}
+.beat.accent{border-color:var(--accent-border)}
+.beat-top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.beat-num{font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 12px}
+.time{margin-left:auto;font-size:12px;font-weight:700;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.beat h2{font-size:20px;font-weight:800;margin-bottom:12px}
+.do{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;color:var(--blue);background:var(--blue-dim);border:1px solid rgba(77,141,255,.3);border-radius:8px;padding:9px 13px;margin-bottom:14px;font-family:'JetBrains Mono',monospace}
+.say{position:relative;font-size:16px;color:var(--text);line-height:1.7;padding:4px 0 4px 18px;border-left:3px solid var(--accent-border);margin:11px 0}
+.say .who{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:3px}
+.say .mono{color:var(--accent);font-weight:600;font-size:14px}
+.point{font-size:13px;font-weight:700;color:var(--text-2);font-style:italic;margin-bottom:2px}
+.land{background:var(--green-dim);border:1px solid rgba(46,204,113,.25);border-radius:9px;padding:13px 16px;font-size:15px;color:var(--text);margin-top:14px;line-height:1.6}
 .land b{color:var(--green)}
-.section-label{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin:34px 0 14px}
-.qa{border-bottom:1px solid var(--border);padding:12px 0}
-.qa:last-child{border:none}
-.qa .q{font-weight:700;font-size:14px;margin-bottom:4px}
-.qa .a{font-size:13.5px;color:var(--text-2)}
+
+.section-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin:36px 0 14px}
+.qa{background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:15px 18px;margin-bottom:10px}
+.qa .q{font-weight:800;font-size:15px;margin-bottom:5px}
+.qa .a{font-size:14.5px;color:var(--text-2);line-height:1.6}
 .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--border-2);font-size:12px;color:var(--text-3);display:flex;justify-content:space-between}
+
+/* PRINT — clean light cheat-sheet */
+@media print{
+  @page{margin:14mm}
+  body{background:#fff;color:#111;font-size:12pt}
+  .bar{display:none}
+  .page{max-width:none;padding:0}
+  .beat,.qa{background:#fff;border:1px solid #ccc;break-inside:avoid;margin-bottom:10px;padding:12px 14px}
+  .beat-num{color:#a05a00;background:#fff;border-color:#d0a000}
+  .do{color:#0040a0;background:#eef3ff;border-color:#aac0ee}
+  .say{color:#111;border-left-color:#d0a000}
+  .say .who{color:#666}
+  .say .mono{color:#a05a00}
+  .land{background:#eefaf0;border-color:#9ad0a8;color:#111}
+  .land b{color:#0a7a37}
+  h1{font-size:20pt}
+  .time{color:#666}
+  .map .m{background:#fff;border-color:#ccc}
+  .map .m .n{background:#d0a000;color:#000}
+}
 </style>
 </head>
 <body>
+
+<div class="bar">
+  <div class="mark">S</div>
+  <div><div class="nm">SecureLayer</div><div class="sub">Phase 1 Demo — Presenter Script</div></div>
+  <div class="sp"></div>
+  <a class="btn btn-go" href="https://sharon19x1-ops.github.io/securelayer-docs/phase1-demo.html" target="_blank">▶ Open demo ↗</a>
+  <button class="btn btn-print" onclick="window.print()">🖨 Print cheat-sheet</button>
+</div>
+
 <div class="page">
-
-  <div class="head">
-    <div class="mark">S</div>
-    <div><div class="nm">SecureLayer</div><div class="sub">Sales Demo Script · Internal</div></div>
-  </div>
-
   <h1>Phase 1 Demo — Talk Track</h1>
-  <p class="lead">A beat-by-beat script for walking an MSSP prospect through the Phase 1 demo. ~4 minutes. Click the numbered beat rail at the top of the demo to advance.</p>
-  <p class="meta">6 beats · Connect → Discover → Score → Splunk → Enforce → Audit</p>
+  <p class="lead">Beat-by-beat script for walking an MSSP prospect through the demo. About 4 minutes. Open the demo on one screen, keep this on the other. <b style="color:var(--text)">DO</b> = what to click. <b style="color:var(--text)">SAY</b> = what to say.</p>
 
-  <a class="demo-link" href="https://sharon19x1-ops.github.io/securelayer-docs/phase1-demo.html" target="_blank">▶ Open the demo ↗</a>
+  <div class="map">
+    <div class="m"><span class="n">1</span> Connect</div>
+    <div class="m"><span class="n">2</span> Discover</div>
+    <div class="m"><span class="n">3</span> Score</div>
+    <div class="m"><span class="n">4</span> Splunk</div>
+    <div class="m"><span class="n">5</span> Enforce</div>
+    <div class="m"><span class="n">6</span> Audit</div>
+  </div>
 
+  <!-- BEFORE -->
   <div class="beat">
-    <div class="beat-num">Before you start · 10s</div>
+    <div class="beat-top"><span class="beat-num">Before you start</span><span class="time">~10s</span></div>
     <h2>Frame it</h2>
-    <p class="say">"This is SecureLayer running as your MSSP console, managing one of your SMB clients — BlueSky Software. Nothing is installed on their machines. Let me show you what we find and what you can do about it."</p>
-    <p class="say">"AI coding agents — Claude Code, Cursor, Copilot, MCP servers — are running in every client you manage. None of your current tools can see what they're allowed to do. That's the gap."</p>
+    <div class="say"><span class="who">Say</span>"This is SecureLayer running as your MSSP console, managing one of your SMB clients — BlueSky Software. Nothing is installed on their machines. Let me show you what we find and what you can do about it."</div>
+    <div class="say"><span class="who">Say</span>"AI coding agents — Claude Code, Cursor, Copilot, MCP servers — are running in every client you manage. None of your current tools can see what they're allowed to do. That's the gap."</div>
   </div>
 
+  <!-- BEAT 1 -->
   <div class="beat">
-    <div class="beat-num">Beat 1 · Connect &amp; Scan · 45s</div>
+    <div class="beat-top"><span class="beat-num">Beat 1 — Connect &amp; Scan</span><span class="time">~45s</span></div>
     <h2>Onboard a client</h2>
-    <div class="click">Click: "1 Connect"</div>
-    <p class="say">"Onboarding a client takes minutes. You authorize read-only access to their GitHub org — OAuth, no credentials stored, nothing pushed to endpoints."</p>
-    <p class="say">"We link the RMM you already run — NinjaOne here — so enforcement can ride that same pipe later. And we link their Splunk."</p>
-    <p class="say">"Then we scan: we read the repos for agent configs and parse MCP manifests to inventory every agent and skill. Cloud-side, under a minute."</p>
-    <div class="land"><b>Land it:</b> "Phase 1 has zero endpoint footprint. There's nothing on a developer's laptop to break or disable. The Phase 2 runtime sensor deploys later through the RMM that's already linked — no re-onboarding."</div>
+    <div class="do">DO · Click "1 Connect"</div>
+    <div class="say"><span class="who">Say</span>"Onboarding a client takes minutes. You authorize read-only access to their GitHub org — OAuth, no credentials stored, nothing pushed to endpoints."</div>
+    <div class="say"><span class="who">Say</span>"We link the RMM you already run — NinjaOne here — so enforcement can ride that same pipe later. And we link their Splunk."</div>
+    <div class="say"><span class="who">Say</span>"Then we scan: we read the repos for agent configs and parse MCP manifests to inventory every agent and skill. Cloud-side, under a minute."</div>
+    <div class="land"><b>Land it:</b> "Phase 1 has zero endpoint footprint. Nothing on a developer's laptop to break or disable. The Phase 2 runtime sensor deploys later through the RMM that's already linked — no re-onboarding."</div>
   </div>
 
+  <!-- BEAT 2 -->
   <div class="beat">
-    <div class="beat-num">Beat 2 · Discover · 40s</div>
+    <div class="beat-top"><span class="beat-num">Beat 2 — Discover</span><span class="time">~40s</span></div>
     <h2>Show the shadow AI</h2>
-    <div class="click">Click: "2 Discover"</div>
-    <p class="say">"Here's BlueSky's AI posture — 7 agents, 3 MCP servers, 41 skills, all scored."</p>
-    <p class="say">Point at the red banner: "This one matters. <span class="mono">browser-fetch</span> is an MCP server running under a developer account that was never registered with you. Network egress, credential access. This is shadow AI — until this scan, nobody knew it existed."</p>
-    <p class="say">"Notice four skills are already auto-blocked. You didn't have to triage them."</p>
+    <div class="do">DO · Click "2 Discover"</div>
+    <div class="say"><span class="who">Say</span>"Here's BlueSky's full AI posture — 7 agents, 3 MCP servers, 41 skills, all scored."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at the red banner.</span>"This one matters. <span class="mono">browser-fetch</span> is an MCP server running under a developer account that was never registered with you. Network egress, credential access. This is shadow AI — until this scan, nobody knew it existed."</div>
+    <div class="say"><span class="who">Say</span>"And you can see the rest — all three MCP servers, all seven agents — each with its disposition already decided."</div>
   </div>
 
-  <div class="beat">
-    <div class="beat-num">Beat 3 · Score · 50s · THE differentiator</div>
-    <h2>The skill score</h2>
-    <div class="click">Click: "3 Score"</div>
-    <p class="say">"This is what nobody else does. CrowdStrike and Wiz tell you an agent is risky. We score every individual skill across 10 dimensions."</p>
-    <p class="say">Point at the gauge: "<span class="mono">browser-fetch</span> scores 6.8. You see exactly why — network egress 9, supply chain 8, prompt injection 7. Not a black box."</p>
-    <p class="say">"Under 3.0 auto-approved, so analysts never waste time on autocomplete. 8.0 and above is critical."</p>
-    <p class="say">Point at the HITL card: "Here's the part you control. <span class="mono">shell-exec-sudo</span> at 9.8 is auto-blocked by policy — but <span class="mono">env-reader</span> at 9.2 is <b style="color:var(--text)">held</b>: paused, with a critical notification pushed to you. You approve, keep holding, or block — a human decides before anything is enforced. You set that policy per client."</p>
+  <!-- BEAT 3 -->
+  <div class="beat accent">
+    <div class="beat-top"><span class="beat-num">Beat 3 — Score · THE differentiator</span><span class="time">~50s</span></div>
+    <h2>The skill score + human control</h2>
+    <div class="do">DO · Click "3 Score"</div>
+    <div class="say"><span class="who">Say</span>"This is what nobody else does. CrowdStrike and Wiz tell you an agent is risky. We score every individual skill across 10 dimensions."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at the gauge.</span>"<span class="mono">browser-fetch</span> scores 6.8. You see exactly why — network egress 9, supply chain 8, prompt injection 7. Not a black box."</div>
+    <div class="say"><span class="who">Say</span>"Under 3.0 auto-approved, so analysts never waste time on autocomplete. 8.0 and above is critical."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at the HITL card.</span>"Here's the part you control. <span class="mono">shell-exec-sudo</span> at 9.8 is auto-blocked by policy — but <span class="mono">env-reader</span> at 9.2 is <b style="color:var(--text)">held</b>: paused, with a critical notification pushed to you. You approve, keep holding, or block. A human decides before anything is enforced. You set that policy per client."</div>
     <div class="land"><b>Land it:</b> "Your team looks only at the middle band and stays in control of the critical edge. No black box blocking your client's developers behind your back."</div>
   </div>
 
+  <!-- BEAT 4 -->
   <div class="beat">
-    <div class="beat-num">Beat 4 · Splunk · 50s · for the Splunk shop</div>
+    <div class="beat-top"><span class="beat-num">Beat 4 — Splunk · for the Splunk shop</span><span class="time">~50s</span></div>
     <h2>Lands in their SIEM</h2>
-    <div class="click">Click: "4 Splunk"</div>
-    <p class="say">"You already run Splunk. We don't ask you to leave it."</p>
-    <p class="say">Point at the setup card: "One-time setup — point us at your HEC endpoint, pick the index. Every skill event then flows in CIM-normalized and MITRE-tagged."</p>
-    <p class="say">Point at the flow: "The skill score becomes a risk contribution on the agent's risk object in your RBA. Crosses threshold, fires a risk notable — in the model your analysts already use. Then hands off to Torq."</p>
+    <div class="do">DO · Click "4 Splunk"</div>
+    <div class="say"><span class="who">Say</span>"You already run Splunk. We don't ask you to leave it."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at the setup card.</span>"One-time setup — point us at your HEC endpoint, pick the index. Every skill event then flows in CIM-normalized and MITRE-tagged."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at the flow.</span>"The skill score becomes a risk contribution on the agent's risk object in your RBA. Crosses threshold, fires a risk notable — in the model your analysts already use. Then hands off to Torq."</div>
     <div class="land"><b>Land it:</b> "We're a contributor to your SIEM, not a new pane of glass. That's the whole integration philosophy."</div>
   </div>
 
+  <!-- BEAT 5 -->
   <div class="beat">
-    <div class="beat-num">Beat 5 · Enforce · 35s</div>
+    <div class="beat-top"><span class="beat-num">Beat 5 — Enforce</span><span class="time">~35s</span></div>
     <h2>Enforce via their RMM</h2>
-    <div class="click">Click: "5 Enforce"</div>
-    <p class="say">"Detection is table stakes. Here's enforcement: block AI agents outside office hours, pushed through NinjaOne to all 14 endpoints. No new agent."</p>
-    <p class="say">Point at break-glass: "The guardrail that keeps you out of trouble — a blocked developer requests access from their IDE, lands in your queue with context, one click to approve, and it sticks. Enforce without angry client calls."</p>
+    <div class="do">DO · Click "5 Enforce"</div>
+    <div class="say"><span class="who">Say</span>"Detection is table stakes. Here's enforcement: block AI agents outside office hours, pushed through NinjaOne to all 14 endpoints. No new agent."</div>
+    <div class="say"><span class="who">Say</span><span class="point">Point at break-glass.</span>"The guardrail that keeps you out of trouble — a blocked developer requests access from their IDE, lands in your queue with context, one click to approve, and it sticks. Enforce without angry client calls."</div>
   </div>
 
+  <!-- BEAT 6 -->
   <div class="beat">
-    <div class="beat-num">Beat 6 · Audit · 30s · the budget unlock</div>
+    <div class="beat-top"><span class="beat-num">Beat 6 — Audit · the budget unlock</span><span class="time">~30s</span></div>
     <h2>Audit-ready proof</h2>
-    <div class="click">Click: "6 Audit"</div>
-    <p class="say">"Every blocked and enforced event becomes a signed, timestamped log — SOC 2 CC6.1, logical access controls."</p>
-    <p class="say">"This is what you hand your client at the QBR: proof their AI agents are governed. It turns a security tool into a compliance line item — a second budget."</p>
-    <p class="say">"Phase 1 does one standard properly. CMMC and ISO come in Phase 2."</p>
+    <div class="do">DO · Click "6 Audit"</div>
+    <div class="say"><span class="who">Say</span>"Every blocked and enforced event becomes a signed, timestamped log — SOC 2 CC6.1, logical access controls."</div>
+    <div class="say"><span class="who">Say</span>"This is what you hand your client at the QBR: proof their AI agents are governed. It turns a security tool into a compliance line item — a second budget."</div>
+    <div class="say"><span class="who">Say</span>"Phase 1 does one standard properly. CMMC and ISO come in Phase 2."</div>
   </div>
 
-  <div class="beat" style="border-color:var(--accent-border)">
-    <div class="beat-num">Close · 20s</div>
+  <!-- CLOSE -->
+  <div class="beat accent">
+    <div class="beat-top"><span class="beat-num">Close</span><span class="time">~20s</span></div>
     <h2>The ask</h2>
-    <p class="say">"In four minutes: we found shadow AI you couldn't see, scored every skill, fed it into your Splunk, enforced a policy through your RMM, and produced an audit artifact for your client — and nothing was installed on a single endpoint."</p>
-    <p class="say"><b style="color:var(--text)">"We're taking a small number of Phase 1 design partners. I'd like an environment like yours to be one of them. Can we scope a pilot?"</b></p>
+    <div class="say"><span class="who">Say</span>"In four minutes: we found shadow AI you couldn't see, scored every skill, gave you a human checkpoint on the critical ones, fed it into your Splunk, enforced a policy through your RMM, and produced an audit artifact for your client — and nothing was installed on a single endpoint."</div>
+    <div class="say"><span class="who">Say</span><b style="color:var(--text)">"We're taking a small number of Phase 1 design partners. I'd like an environment like yours to be one of them. Can we scope a pilot?"</b></div>
   </div>
 
+  <!-- Q&A -->
   <div class="section-label">Handling the obvious questions</div>
   <div class="qa"><div class="q">"Is this shipping today?"</div><div class="a">"Phase 1 is in build — 12-week plan, co-developed with design partners. The discovery and scoring you just saw ships first; enforcement follows in the same cycle."</div></div>
   <div class="qa"><div class="q">"How is this different from CrowdStrike / Wiz?"</div><div class="a">"They're built for an enterprise securing its own agents, on their platform, priced per enterprise. We're built for you — multi-tenant, riding your existing Splunk and RMM, per-tenant pricing, and we score at the skill level, not the asset level."</div></div>
-  <div class="qa"><div class="q">"What about false positives?"</div><div class="a">"Conservative by default — auto-block only at 8.0+, and break-glass means a developer is never stuck. You tune the threshold per client."</div></div>
+  <div class="qa"><div class="q">"What about false positives?"</div><div class="a">"Conservative by default — auto-block only at 8.0+, and you can set critical actions to hold for your decision instead of blocking. Break-glass means a developer is never stuck. You tune the threshold per client."</div></div>
   <div class="qa"><div class="q">"Which RMM / PSA / SIEM do you support?"</div><div class="a">"Splunk, Sentinel, Elastic on the SIEM side; ConnectWise, Autotask, NinjaOne, Kaseya on RMM/PSA. Tell me your stack and that's the integration we build first for the pilot."</div></div>
 
   <div class="foot">
     <div>SecureLayer — Sales Demo Script — Confidential</div>
     <div>securelayer.io · May 2026</div>
   </div>
-
 </div>
 </body>
 </html>
