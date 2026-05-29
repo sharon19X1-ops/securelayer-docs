@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — Phase 1 Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* ===== DESIGN.md tokens ===== */
+:root{
+  --bg:#0d0f14; --bg-2:#13161e; --bg-3:#1a1e28; --bg-4:#222736;
+  --border:#2a2f3d; --border-2:#363d52;
+  --text:#e2e6f0; --text-2:#8b93a8; --text-3:#545c72;
+  --accent:#f59e0b; --accent-dim:rgba(245,158,11,.12); --accent-border:rgba(245,158,11,.3);
+  --green:#22c55e; --green-dim:rgba(34,197,94,.12);
+  --orange:#f97316; --orange-dim:rgba(249,115,22,.12);
+  --red:#ef4444; --red-dim:rgba(239,68,68,.12);
+  --blue:#3b82f6; --blue-dim:rgba(59,130,246,.12);
+  --purple:#a855f7; --purple-dim:rgba(168,85,247,.12);
+  --splunk:#65a637; --splunk-dim:rgba(101,166,55,.12);
+  --sidebar-w:230px; --header-h:56px; --beat-h:48px;
+  --radius:8px; --radius-lg:12px;
+  --font:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono)}
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ===== Layout shell ===== */
+.app{display:grid;grid-template-columns:var(--sidebar-w) 1fr;grid-template-rows:var(--header-h) var(--beat-h) 1fr;height:100vh;
+  grid-template-areas:"sidebar header" "sidebar beat" "sidebar main"}
+/* HEADER */
+.header{grid-area:header;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1px solid var(--border);background:var(--bg-2)}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-mark{width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px}
+.logo-name{font-weight:800;font-size:15px;letter-spacing:-.01em}
+.logo-stealth{font-size:10px;color:var(--text-3);font-weight:600}
+.mode-toggle{display:flex;background:var(--bg-3);border:1px solid var(--border);border-radius:99px;padding:2px;margin-left:8px}
+.mode-toggle button{font:inherit;font-size:11px;font-weight:600;color:var(--text-2);background:none;border:none;padding:4px 12px;border-radius:99px;cursor:pointer}
+.mode-toggle button.on{background:var(--accent);color:#000}
+.tenant-sel{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:6px 12px;font-size:12px;cursor:pointer}
+.tenant-sel .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.tenant-sel .chev{color:var(--text-3)}
+.live-pill{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--green);background:var(--green-dim);border:1px solid rgba(34,197,94,.25);border-radius:99px;padding:4px 10px}
+.live-pill .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* BEAT RAIL */
+.beat-rail{grid-area:beat;display:flex;align-items:center;gap:0;padding:0 20px;background:var(--bg-2);border-bottom:1px solid var(--border);overflow-x:auto}
+.beat{display:flex;align-items:center;gap:8px;padding:0 14px;height:100%;font-size:12px;color:var(--text-3);white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer}
+.beat:hover{color:var(--text-2)}
+.beat.on{color:var(--text);border-bottom-color:var(--accent)}
+.beat .num{width:18px;height:18px;border-radius:50%;background:var(--bg-4);color:var(--text-2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.beat.on .num{background:var(--accent);color:#000}
+.beat .arrow{color:var(--text-3);margin-left:6px}
+
+/* SIDEBAR */
+.sidebar{grid-area:sidebar;background:var(--bg-2);border-right:1px solid var(--border);padding:14px 10px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.nav-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);padding:12px 10px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);font-size:13px;color:var(--text-2);cursor:pointer;border:1px solid transparent}
+.nav-item:hover{background:var(--bg-3);color:var(--text)}
+.nav-item.on{background:var(--accent-dim);color:var(--accent);border-color:var(--accent-border);font-weight:600}
+.nav-item .ic{width:16px;text-align:center;font-size:14px}
+.nav-item.p2{color:var(--text-3);cursor:not-allowed}
+.nav-item.p2:hover{background:none;color:var(--text-3)}
+.p2-tag{margin-left:auto;font-size:9px;font-weight:700;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(168,85,247,.3);border-radius:99px;padding:1px 6px}
+.sidebar-foot{margin-top:auto;padding:12px 10px;font-size:10px;color:var(--text-3);border-top:1px solid var(--border)}
+
+/* MAIN */
+.main{grid-area:main;overflow-y:auto;padding:24px 28px}
+.panel{display:none}
+.panel.on{display:block;animation:fade .25s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.page-head{margin-bottom:20px}
+.page-head h1{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+.page-head p{font-size:13px;color:var(--text-2);max-width:680px}
+.beat-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:3px 10px;margin-bottom:12px}
+
+/* cards / grid */
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:1fr 1fr}
+.card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.stat .k{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.stat .v{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.stat .s{font-size:11px;color:var(--text-2);margin-top:6px}
+
+/* alert banner */
+.alert{display:flex;align-items:flex-start;gap:14px;background:var(--red-dim);border:1px solid rgba(239,68,68,.3);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:18px}
+.alert .ic{font-size:22px;flex-shrink:0}
+.alert h3{font-size:14px;font-weight:700;color:var(--red);margin-bottom:3px}
+.alert p{font-size:12.5px;color:var(--text-2);line-height:1.6}
+.alert .cta{margin-left:auto;align-self:center;background:var(--red);color:#fff;border:none;font:inherit;font-weight:600;font-size:12px;padding:8px 14px;border-radius:var(--radius);cursor:pointer;white-space:nowrap}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;padding:9px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);border-bottom:1px solid var(--border)}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-2)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr.clickable{cursor:pointer}
+.tbl tr.clickable:hover td{background:var(--bg-3)}
+.tbl td .agent{color:var(--text);font-weight:500;font-family:var(--mono);font-size:12px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:600;white-space:nowrap}
+.b-red{background:var(--red-dim);color:var(--red)}
+.b-orange{background:var(--orange-dim);color:var(--orange)}
+.b-green{background:var(--green-dim);color:var(--green)}
+.b-blue{background:var(--blue-dim);color:var(--blue)}
+.b-purple{background:var(--purple-dim);color:var(--purple)}
+.shadow-flag{font-size:10px;font-weight:700;color:var(--red);background:var(--red-dim);border:1px solid rgba(239,68,68,.3);border-radius:99px;padding:1px 7px;margin-left:8px}
+
+/* ===== SIGNATURE: skill-score gauge ===== */
+.score-wrap{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start}
+.score-orb{text-align:center}
+.gauge{position:relative;width:170px;height:170px;margin:0 auto}
+.gauge svg{transform:rotate(-90deg)}
+.gauge .val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge .val .n{font-size:42px;font-weight:800;font-family:var(--mono);line-height:1}
+.gauge .val .d{font-size:11px;color:var(--text-3);margin-top:2px}
+.verdict{margin-top:14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:6px 12px;border-radius:99px;display:inline-block}
+.dims{display:flex;flex-direction:column;gap:9px}
+.dim{display:grid;grid-template-columns:160px 1fr 34px;align-items:center;gap:12px}
+.dim .nm{font-size:12px;color:var(--text-2)}
+.dim .bar{height:8px;background:var(--bg-4);border-radius:4px;overflow:hidden}
+.dim .bar > span{display:block;height:100%;border-radius:4px}
+.dim .sc{font-size:12px;font-family:var(--mono);font-weight:600;text-align:right}
+.dim.p2 .nm{color:var(--text-3)}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.flag{font-size:11px;font-family:var(--mono);background:var(--bg-3);border:1px solid var(--border);border-radius:6px;padding:3px 8px;color:var(--text-2)}
+.flag b{color:var(--accent);font-weight:600}
+
+/* splunk view */
+.splunk-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.splunk-logo{width:26px;height:26px;border-radius:6px;background:var(--splunk);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px}
+.spl{background:#0a0c10;border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--text);overflow-x:auto;white-space:pre}
+.spl .cmd{color:var(--splunk)}
+.spl .fn{color:var(--blue)}
+.spl .str{color:var(--accent)}
+.spl .cmt{color:var(--text-3)}
+.flow-chain{display:flex;align-items:stretch;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin:16px 0}
+.fc{flex:1;padding:14px 12px;text-align:center}
+.fc+.fc{border-left:1px solid var(--border)}
+.fc .ic{font-size:18px;margin-bottom:5px}
+.fc .nm{font-size:11px;font-weight:700;margin-bottom:2px}
+.fc .sub{font-size:10px;color:var(--text-3);line-height:1.4}
+.fc .arr{color:var(--text-3)}
+.notable{background:var(--bg-2);border:1px solid rgba(239,68,68,.3);border-left:3px solid var(--red);border-radius:var(--radius);padding:14px 16px;margin-top:14px}
+.notable .ttl{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;margin-bottom:8px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:4px 12px;font-size:12px}
+.kv .k{color:var(--text-3)}
+.kv .v{color:var(--text);font-family:var(--mono);font-size:11.5px}
+.risk-meter{display:flex;align-items:center;gap:10px;margin-top:10px}
+.risk-meter .track{flex:1;height:10px;background:var(--bg-4);border-radius:5px;overflow:hidden}
+.risk-meter .track > span{display:block;height:100%;background:linear-gradient(90deg,var(--orange),var(--red));border-radius:5px}
+
+/* enforcement */
+.sched{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0}
+.day{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:10px 8px;text-align:center}
+.day .d{font-size:10px;color:var(--text-3);text-transform:uppercase;margin-bottom:6px}
+.day .win{font-size:11px;font-family:var(--mono);color:var(--green)}
+.day.off .win{color:var(--text-3)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px}
+.sw{width:38px;height:22px;background:var(--accent);border-radius:99px;position:relative;flex-shrink:0}
+.sw::after{content:'';position:absolute;top:2px;right:2px;width:18px;height:18px;background:#000;border-radius:50%}
+.sw.off{background:var(--bg-4)}
+.sw.off::after{right:auto;left:2px;background:var(--text-3)}
+.breakglass{background:var(--orange-dim);border:1px solid rgba(249,115,22,.3);border-radius:var(--radius);padding:14px 16px;margin-top:14px}
+
+/* compliance */
+.cert{display:flex;align-items:center;gap:14px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:14px}
+.cert .seal{width:46px;height:46px;border-radius:10px;background:var(--green-dim);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:22px}
+.cert h3{font-size:14px;font-weight:700}
+.cert p{font-size:12px;color:var(--text-2)}
+.cert .exp{margin-left:auto;background:var(--green);color:#04210f;border:none;font:inherit;font-weight:700;font-size:12px;padding:9px 16px;border-radius:var(--radius);cursor:pointer}
+.std-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.std-row:last-child{border-bottom:none}
+.std-row .nm{color:var(--text)}
+.std-row.dim .nm{color:var(--text-3)}
+.callout{font-size:11px;color:var(--text-3);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-mark">S</div>
+      <div>
+        <div class="logo-name">SecureLayer</div>
+        <div class="logo-stealth">EDR for the Agentic Era · Phase 1</div>
+      </div>
+    </div>
+    <div class="mode-toggle">
+      <button class="on">MSSP</button>
+      <button>SMB</button>
+    </div>
+    <div class="tenant-sel">
+      <span class="dot"></span> BlueSky Software <span class="chev">▾</span>
+    </div>
+    <div class="live-pill"><span class="pulse"></span> LIVE</div>
+  </header>
+
+  <!-- BEAT RAIL -->
+  <nav class="beat-rail" id="beatRail">
+    <div class="beat on" data-go="dashboard"><span class="num">1</span> Discover <span class="arrow">›</span></div>
+    <div class="beat" data-go="skills"><span class="num">2</span> Score <span class="arrow">›</span></div>
+    <div class="beat" data-go="splunk"><span class="num">3</span> Splunk <span class="arrow">›</span></div>
+    <div class="beat" data-go="enforce"><span class="num">4</span> Enforce <span class="arrow">›</span></div>
+    <div class="beat" data-go="audit"><span class="num">5</span> Audit</div>
+  </nav>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="nav-label">Phase 1</div>
+    <div class="nav-item on" data-go="dashboard"><span class="ic">▣</span> Dashboard</div>
+    <div class="nav-item" data-go="skills"><span class="ic">◎</span> Skill Registry</div>
+    <div class="nav-item" data-go="splunk"><span class="ic">📡</span> Integrations · Splunk</div>
+    <div class="nav-item" data-go="enforce"><span class="ic">🛡</span> Enforcement</div>
+    <div class="nav-item" data-go="audit"><span class="ic">📋</span> Compliance</div>
+    <div class="nav-label">Phase 2 — Coming</div>
+    <div class="nav-item p2"><span class="ic">📶</span> Runtime Sensor <span class="p2-tag">P2</span></div>
+    <div class="nav-item p2"><span class="ic">🔬</span> MCP Behavioral <span class="p2-tag">P2</span></div>
+    <div class="nav-item p2"><span class="ic">⚡</span> Mid-Session Detect <span class="p2-tag">P2</span></div>
+    <div class="sidebar-foot">Grounded in ARCHITECTURE_V6<br/>6 tenants · 23 agents · 41 skills</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ===== BEAT 1: DISCOVER ===== -->
+    <section class="panel on" id="dashboard">
+      <div class="beat-tag">◉ Beat 1 — Discovery</div>
+      <div class="page-head">
+        <h1>Client posture — BlueSky Software</h1>
+        <p>GitHub OAuth scan completed. No endpoint agent installed. SecureLayer inventoried every AI agent and MCP server reachable in this client's environment.</p>
+      </div>
+
+      <div class="alert">
+        <span class="ic">⚠️</span>
+        <div>
+          <h3>Shadow AI discovered — unsanctioned MCP server</h3>
+          <p><b class="mono" style="color:var(--text)">browser-fetch</b> MCP server is running under a developer account on <span class="mono">DEVLAPTOP-A14</span>. It has network egress + credential access and was never registered with the MSSP. Nobody knew it was there.</p>
+        </div>
+        <button class="cta" data-go="skills">Score it →</button>
+      </div>
+
+      <div class="grid g4" style="margin-bottom:18px">
+        <div class="card stat"><div class="k">Agents found</div><div class="v">7</div><div class="s">Claude Code, Cursor, Copilot, Codex</div></div>
+        <div class="card stat"><div class="k">MCP servers</div><div class="v" style="color:var(--orange)">3</div><div class="s">1 unsanctioned (shadow)</div></div>
+        <div class="card stat"><div class="k">High-risk skills</div><div class="v" style="color:var(--red)">4</div><div class="s">score ≥ 8.0 — auto-blocked</div></div>
+        <div class="card stat"><div class="k">Tenant risk</div><div class="v" style="color:var(--orange)">68</div><div class="s">feeds Splunk RBA →</div></div>
+      </div>
+
+      <div class="card">
+        <table class="tbl">
+          <thead><tr><th>Agent / asset</th><th>Type</th><th>Endpoint</th><th>Skills</th><th>Top risk</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr class="clickable" data-go="skills">
+              <td><span class="agent">browser-fetch</span><span class="shadow-flag">SHADOW</span></td>
+              <td>MCP server</td><td class="mono" style="font-size:12px">DEVLAPTOP-A14</td><td>5</td>
+              <td><span class="badge b-red">6.8 high</span></td><td><span class="badge b-orange">pending review</span></td>
+            </tr>
+            <tr class="clickable" data-go="skills">
+              <td><span class="agent">cursor · env-reader</span></td><td>Cursor agent</td><td class="mono" style="font-size:12px">DEVLAPTOP-A14</td><td>3</td>
+              <td><span class="badge b-red">9.2 critical</span></td><td><span class="badge b-red">auto-blocked</span></td>
+            </tr>
+            <tr class="clickable" data-go="skills">
+              <td><span class="agent">cursor · shell-exec-sudo</span></td><td>Cursor agent</td><td class="mono" style="font-size:12px">BUILDBOX-02</td><td>1</td>
+              <td><span class="badge b-red">9.8 critical</span></td><td><span class="badge b-red">auto-blocked</span></td>
+            </tr>
+            <tr>
+              <td><span class="agent">claude-code · git-push</span></td><td>Claude Code</td><td class="mono" style="font-size:12px">DEVLAPTOP-A14</td><td>4</td>
+              <td><span class="badge b-green">2.1 low</span></td><td><span class="badge b-green">auto-approved</span></td>
+            </tr>
+            <tr>
+              <td><span class="agent">copilot · inline-suggest</span></td><td>Copilot</td><td class="mono" style="font-size:12px">multiple</td><td>1</td>
+              <td><span class="badge b-green">1.3 low</span></td><td><span class="badge b-green">auto-approved</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== BEAT 2: SCORE ===== -->
+    <section class="panel" id="skills">
+      <div class="beat-tag">◉ Beat 2 — The Skill Score (what no one else has)</div>
+      <div class="page-head">
+        <h1>Skill score — <span class="mono">browser-fetch</span> · network-fetch</h1>
+        <p>Competitors score the <em>asset</em>. SecureLayer scores every <em>skill</em> across 10 dimensions and acts at that granularity — auto-approve ≤ 3.0, review 3.1–7.9, auto-block ≥ 8.0.</p>
+      </div>
+
+      <div class="card">
+        <div class="score-wrap">
+          <div class="score-orb">
+            <div class="gauge">
+              <svg width="170" height="170" viewBox="0 0 170 170">
+                <circle cx="85" cy="85" r="74" fill="none" stroke="var(--bg-4)" stroke-width="12"/>
+                <circle cx="85" cy="85" r="74" fill="none" stroke="var(--red)" stroke-width="12" stroke-linecap="round"
+                  stroke-dasharray="465" stroke-dashoffset="149"/>
+              </svg>
+              <div class="val"><div class="n" style="color:var(--red)">6.8</div><div class="d">/ 10 overall</div></div>
+            </div>
+            <div class="verdict" style="background:var(--orange-dim);color:var(--orange)">Pending review</div>
+          </div>
+          <div>
+            <div class="dims">
+              <div class="dim"><span class="nm">Permission Scope</span><span class="bar"><span style="width:60%;background:var(--orange)"></span></span><span class="sc" style="color:var(--orange)">6</span></div>
+              <div class="dim"><span class="nm">Network Egress</span><span class="bar"><span style="width:90%;background:var(--red)"></span></span><span class="sc" style="color:var(--red)">9</span></div>
+              <div class="dim"><span class="nm">Credential Access</span><span class="bar"><span style="width:70%;background:var(--orange)"></span></span><span class="sc" style="color:var(--orange)">7</span></div>
+              <div class="dim"><span class="nm">File System Reach</span><span class="bar"><span style="width:40%;background:var(--accent)"></span></span><span class="sc" style="color:var(--accent)">4</span></div>
+              <div class="dim"><span class="nm">Shell Execution</span><span class="bar"><span style="width:20%;background:var(--green)"></span></span><span class="sc" style="color:var(--green)">2</span></div>
+              <div class="dim"><span class="nm">Sub-skill Depth</span><span class="bar"><span style="width:30%;background:var(--green)"></span></span><span class="sc" style="color:var(--green)">3</span></div>
+              <div class="dim"><span class="nm">Identity Verifiability</span><span class="bar"><span style="width:50%;background:var(--accent)"></span></span><span class="sc" style="color:var(--accent)">5</span></div>
+              <div class="dim"><span class="nm">Supply Chain Risk</span><span class="bar"><span style="width:80%;background:var(--red)"></span></span><span class="sc" style="color:var(--red)">8</span></div>
+              <div class="dim"><span class="nm">Prompt Injection Risk</span><span class="bar"><span style="width:70%;background:var(--orange)"></span></span><span class="sc" style="color:var(--orange)">7</span></div>
+              <div class="dim p2"><span class="nm">Behavioral Anomaly <span class="p2-tag">P2</span></span><span class="bar"><span style="width:0%"></span></span><span class="sc" style="color:var(--text-3)">—</span></div>
+            </div>
+            <div class="flags">
+              <span class="flag"><b>SI-002</b> Supply chain · nested dependency → T1195.001</span>
+              <span class="flag"><b>PI-003</b> Prompt injection susceptibility → T1566</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:14px">
+        <div class="card">
+          <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">AUTO-BLOCKED (≥ 8.0) — same client</div>
+          <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)"><span class="mono" style="font-size:12px">shell-exec-sudo</span><span class="badge b-red">9.8 → blocked</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 0"><span class="mono" style="font-size:12px">env-reader</span><span class="badge b-red">9.2 → blocked</span></div>
+        </div>
+        <div class="card">
+          <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">AUTO-APPROVED (≤ 3.0) — no analyst time spent</div>
+          <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border)"><span class="mono" style="font-size:12px">git-push</span><span class="badge b-green">2.1 → approved</span></div>
+          <div style="display:flex;justify-content:space-between;padding:7px 0"><span class="mono" style="font-size:12px">inline-suggest</span><span class="badge b-green">1.3 → approved</span></div>
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:16px"><button class="cta" style="background:var(--splunk)" data-go="splunk">See it in Splunk →</button></div>
+    </section>
+
+    <!-- ===== BEAT 3: SPLUNK ===== -->
+    <section class="panel" id="splunk">
+      <div class="beat-tag" style="color:var(--splunk);background:var(--splunk-dim);border-color:rgba(101,166,55,.3)">◉ Beat 3 — Lands in the tool you already run</div>
+      <div class="splunk-head">
+        <div class="splunk-logo">Sp</div>
+        <div class="page-head" style="margin-bottom:0">
+          <h1>Splunk integration — risk-based alerting</h1>
+          <p>The skill score fires into your Splunk via HEC, CIM-normalized and MITRE-tagged. It contributes risk to the agent/tenant risk object — at threshold it becomes a risk notable in the model your analysts already use. No new console.</p>
+        </div>
+      </div>
+
+      <div class="flow-chain">
+        <div class="fc" style="background:var(--accent-dim)"><div class="ic">⬡</div><div class="nm" style="color:var(--accent)">SecureLayer</div><div class="sub">skill score 6.8 → HEC event</div></div>
+        <div class="fc"><div class="arr">→</div></div>
+        <div class="fc" style="background:var(--splunk-dim)"><div class="ic">📊</div><div class="nm" style="color:var(--splunk)">Splunk RBA</div><div class="sub">risk added to risk object</div></div>
+        <div class="fc"><div class="arr">→</div></div>
+        <div class="fc" style="background:var(--red-dim)"><div class="ic">🔔</div><div class="nm" style="color:var(--red)">Risk notable</div><div class="sub">threshold hit → fires</div></div>
+        <div class="fc"><div class="arr">→</div></div>
+        <div class="fc" style="background:var(--bg-3)"><div class="ic">⚡</div><div class="nm">Torq (downstream)</div><div class="sub">playbook · Phase 1+</div></div>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">HEC EVENT (sourcetype=slb:alert · index=security)</div>
+          <div class="spl"><span class="cmt"># CIM-normalized, per ARCHITECTURE_V6 SIEM formatter</span>
+{
+  <span class="str">"action"</span>: <span class="str">"blocked"</span>,
+  <span class="str">"src_user"</span>: <span class="str">"alice@bluesky.io"</span>,
+  <span class="str">"dest"</span>: <span class="str">"DEVLAPTOP-A14"</span>,
+  <span class="str">"vendor"</span>: <span class="str">"SecureLayer"</span>,
+  <span class="str">"severity"</span>: <span class="str">"high"</span>,
+  <span class="str">"skill_score"</span>: <span class="str">6.8</span>,
+  <span class="str">"rule_id"</span>: <span class="str">"SI-002"</span>,
+  <span class="str">"att_ck_id"</span>: <span class="str">"T1195.001"</span>,
+  <span class="str">"tenant_id"</span>: <span class="str">"bluesky-sw"</span>
+}</div>
+        </div>
+        <div class="card">
+          <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">ANALYST SPL — risk by agent</div>
+          <div class="spl"><span class="cmd">sourcetype</span>=<span class="str">"slb:alert"</span> severity IN(<span class="str">"high","critical"</span>)
+| <span class="cmd">stats</span> <span class="fn">max</span>(skill_score) <span class="cmd">as</span> risk
+    <span class="fn">values</span>(rule_id) <span class="fn">values</span>(att_ck_id)
+    <span class="cmd">by</span> tenant_id, agent
+| <span class="cmd">where</span> risk &gt;= <span class="str">6.0</span>
+| <span class="cmd">sort</span> - risk</div>
+          <div class="callout">Same SPL conventions, same risk index. SecureLayer is a contributor — not a new pane of glass.</div>
+        </div>
+      </div>
+
+      <div class="notable">
+        <div class="ttl"><span class="badge b-red">RISK NOTABLE</span> AI agent skill risk — bluesky-sw / browser-fetch</div>
+        <div class="kv">
+          <span class="k">Risk object</span><span class="v">agent:browser-fetch · tenant:bluesky-sw</span>
+          <span class="k">Contributing</span><span class="v">SecureLayer skill_score 6.8 (+ env-reader 9.2, shell-exec-sudo 9.8)</span>
+          <span class="k">MITRE ATT&CK</span><span class="v">T1195.001 · T1552.001 · T1059</span>
+          <span class="k">Aggregate risk</span><span class="v">82 / 100 — threshold 75 exceeded</span>
+        </div>
+        <div class="risk-meter"><span class="mono" style="font-size:11px;color:var(--text-3)">RBA</span><div class="track"><span style="width:82%"></span></div><span class="mono" style="font-size:12px;font-weight:600;color:var(--red)">82</span></div>
+      </div>
+      <div style="text-align:right;margin-top:16px"><button class="cta" data-go="enforce">Now enforce it →</button></div>
+    </section>
+
+    <!-- ===== BEAT 4: ENFORCE ===== -->
+    <section class="panel" id="enforce">
+      <div class="beat-tag">◉ Beat 4 — Enforce, via your RMM</div>
+      <div class="page-head">
+        <h1>Office Hours enforcement</h1>
+        <p>Detection is table stakes. SecureLayer enforces — policy pushed through the RMM you already deploy (NinjaOne / ConnectWise RMM). Block AI agent activity outside defined windows.</p>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="toggle-row">
+          <div><div style="font-weight:600;font-size:13px">Block AI agents outside office hours</div><div style="font-size:12px;color:var(--text-2)">BlueSky Software · pushed via NinjaOne to 14 endpoints</div></div>
+          <div class="sw"></div>
+        </div>
+        <div class="sched">
+          <div class="day"><div class="d">Mon</div><div class="win">08–18</div></div>
+          <div class="day"><div class="d">Tue</div><div class="win">08–18</div></div>
+          <div class="day"><div class="d">Wed</div><div class="win">08–18</div></div>
+          <div class="day"><div class="d">Thu</div><div class="win">08–18</div></div>
+          <div class="day"><div class="d">Fri</div><div class="win">08–18</div></div>
+          <div class="day off"><div class="d">Sat</div><div class="win">blocked</div></div>
+          <div class="day off"><div class="d">Sun</div><div class="win">blocked</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text-2)">Last block: <span class="mono">shell-exec-sudo</span> on <span class="mono">BUILDBOX-02</span> at <span class="mono">23:14</span> — outside window. Developer notified.</div>
+      </div>
+
+      <div class="breakglass">
+        <div style="font-weight:700;font-size:13px;color:var(--orange);margin-bottom:6px">⛑ Developer break-glass — false-positive guardrail</div>
+        <p style="font-size:12.5px;color:var(--text-2);line-height:1.6">A blocked developer requests approval from their IDE. It routes to the MSSP queue with full skill-score context. One click to approve; the approval persists for that skill + tenant. <b style="color:var(--text)">This is why enforcement won't generate angry client calls</b> — the concern your first technical reviewer raised.</p>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <span class="badge b-orange">1 pending request</span>
+          <span class="badge b-green">approve</span>
+          <span class="badge b-red">deny</span>
+        </div>
+      </div>
+      <div style="text-align:right;margin-top:16px"><button class="cta" style="background:var(--green);color:#04210f" data-go="audit">Generate audit proof →</button></div>
+    </section>
+
+    <!-- ===== BEAT 5: AUDIT ===== -->
+    <section class="panel" id="audit">
+      <div class="beat-tag" style="color:var(--green);background:var(--green-dim);border-color:rgba(34,197,94,.3)">◉ Beat 5 — Audit-ready proof</div>
+      <div class="page-head">
+        <h1>Compliance export</h1>
+        <p>Every blocked and enforced event becomes a signed, timestamped log — the proof an MSSP hands a client at QBR. Phase 1 ships one standard, done properly.</p>
+      </div>
+
+      <div class="cert">
+        <div class="seal">🛡</div>
+        <div>
+          <h3>SOC 2 — CC6.1 Logical Access Controls</h3>
+          <p>AI agent access governance evidence · BlueSky Software · period 2026-05-01 → 2026-05-29</p>
+        </div>
+        <button class="exp">Export signed log ↓</button>
+      </div>
+
+      <div class="card">
+        <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">STANDARD COVERAGE</div>
+        <div class="std-row"><span class="badge b-green">✓ active</span><span class="nm">SOC 2 — CC6.1 logical access controls</span><span class="mono" style="margin-left:auto;font-size:11px;color:var(--text-3)">signed PDF / JSON</span></div>
+        <div class="std-row dim"><span class="badge b-purple">P2</span><span class="nm">CMMC 2.0 — AC / AU practices</span><span class="mono" style="margin-left:auto;font-size:11px;color:var(--text-3)">Phase 2</span></div>
+        <div class="std-row dim"><span class="badge b-purple">P2</span><span class="nm">ISO 27001 — A.9 access control</span><span class="mono" style="margin-left:auto;font-size:11px;color:var(--text-3)">Phase 2</span></div>
+        <div class="callout">Phase 1 enforces one standard end-to-end rather than half-supporting many. Additional standards arrive in Phase 2.</div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="k mono" style="font-size:11px;color:var(--text-3);margin-bottom:10px">LOG SAMPLE — signed entries</div>
+        <table class="tbl">
+          <thead><tr><th>Timestamp</th><th>Event</th><th>Skill</th><th>Action</th><th>ATT&CK</th></tr></thead>
+          <tbody>
+            <tr><td class="mono" style="font-size:12px">2026-05-29 23:14:07Z</td><td>Out-of-hours block</td><td class="mono" style="font-size:12px">shell-exec-sudo</td><td><span class="badge b-red">blocked</span></td><td class="mono" style="font-size:11px">T1059</td></tr>
+            <tr><td class="mono" style="font-size:12px">2026-05-29 14:02:55Z</td><td>Credential access block</td><td class="mono" style="font-size:12px">env-reader</td><td><span class="badge b-red">blocked</span></td><td class="mono" style="font-size:11px">T1552.001</td></tr>
+            <tr><td class="mono" style="font-size:12px">2026-05-29 11:30:18Z</td><td>Shadow MCP flagged</td><td class="mono" style="font-size:12px">browser-fetch</td><td><span class="badge b-orange">review</span></td><td class="mono" style="font-size:11px">T1195.001</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:right;margin-top:16px"><button class="cta" data-go="dashboard">↺ Restart demo</button></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  var panels = document.querySelectorAll('.panel');
+  var navItems = document.querySelectorAll('.nav-item[data-go]');
+  var beats = document.querySelectorAll('.beat[data-go]');
+  function go(id){
+    panels.forEach(function(p){ p.classList.toggle('on', p.id===id); });
+    navItems.forEach(function(n){ n.classList.toggle('on', n.dataset.go===id); });
+    beats.forEach(function(b){ b.classList.toggle('on', b.dataset.go===id); });
+    document.querySelector('.main').scrollTop = 0;
+  }
+  document.body.addEventListener('click', function(e){
+    var t = e.target.closest('[data-go]');
+    if(t){ go(t.dataset.go); }
+    var sw = e.target.closest('.sw');
+    if(sw){ sw.classList.toggle('off'); }
+    var mode = e.target.closest('.mode-toggle button');
+    if(mode){ document.querySelectorAll('.mode-toggle button').forEach(function(b){b.classList.remove('on');}); mode.classList.add('on'); }
+  });
+})();
+</script>
+</body>
+</html>
