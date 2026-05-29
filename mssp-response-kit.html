@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SecureLayer — MSSP Response Kit (Sales)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;--bg-2:#13161e;--bg-3:#1a1e28;--bg-4:#222736;
+  --accent:#f59e0b;--accent-dim:rgba(245,158,11,.13);--accent-border:rgba(245,158,11,.32);
+  --text:#eef1f7;--text-2:#aab2c6;--text-3:#727b91;
+  --border:rgba(255,255,255,0.08);--border-2:rgba(255,255,255,0.13);
+  --green:#2ecc71;--green-dim:rgba(46,204,113,.13);--green-border:rgba(46,204,113,.3);
+  --blue:#4d8dff;--blue-dim:rgba(77,141,255,.13);
+}
+*{}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.mono{font-family:'JetBrains Mono',monospace}
+
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:12px;padding:12px 22px;background:rgba(13,15,20,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-2)}
+.bar .mark{width:30px;height:30px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;font-size:16px}
+.bar .nm{font-weight:800;font-size:15px}
+.bar .sub{font-size:12px;color:var(--text-3);font-weight:600}
+.bar .sp{margin-left:auto}
+.btn{display:inline-flex;align-items:center;gap:7px;font:inherit;font-family:inherit;font-weight:800;font-size:13.5px;padding:9px 15px;border-radius:8px;cursor:pointer;text-decoration:none;border:1px solid transparent}
+.btn-go{background:var(--accent);color:#000}
+.btn-ghost{background:var(--bg-3);color:var(--text);border:1px solid var(--border-2)}
+
+.page{max-width:820px;margin:0 auto;padding:34px 26px 90px}
+h1{font-size:30px;font-weight:900;line-height:1.15;margin-bottom:8px}
+.lead{font-size:16px;color:var(--text-2);margin-bottom:22px;max-width:700px}
+
+.quote{background:var(--bg-2);border:1px solid var(--border-2);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin-bottom:28px}
+.quote .who{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin-bottom:7px}
+.quote p{font-size:15px;font-style:italic;color:var(--text);line-height:1.7}
+
+.section-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);margin:32px 0 14px}
+
+.qa{background:var(--bg-2);border:1px solid var(--border-2);border-radius:13px;padding:20px 22px;margin-bottom:14px}
+.qa .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:99px;padding:4px 11px;margin-bottom:10px}
+.qa .they{font-size:14px;color:var(--text-2);margin-bottom:12px}
+.qa .they b{color:var(--text)}
+.qa .say-h{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:7px}
+.qa .say{font-size:16px;color:var(--text);line-height:1.7}
+.qa .say p{margin-bottom:9px}
+.qa .say p:last-child{margin-bottom:0}
+.qa .say .mono{color:var(--accent);font-weight:600;font-size:14px}
+.pillz{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.pillz span{font-size:12px;font-weight:700;background:var(--bg-3);border:1px solid var(--border-2);border-radius:99px;padding:4px 11px;color:var(--text-2)}
+
+/* email box */
+.email{background:var(--bg-2);border:1px solid var(--green-border);border-radius:13px;overflow:hidden;margin-bottom:14px}
+.email .eh{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--border);background:var(--green-dim)}
+.email .eh .t{font-weight:800;font-size:14px;color:var(--green)}
+.email .eh .cp{margin-left:auto}
+.email .body{padding:18px 20px;font-size:15px;line-height:1.7;white-space:pre-wrap;color:var(--text)}
+.email .body .mono{color:var(--accent);font-size:13.5px}
+.copied{font-size:12px;font-weight:700;color:var(--green);margin-left:8px;display:none}
+
+.ask{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);font-size:15px;color:var(--text-2);line-height:1.55}
+.ask:last-child{border:none}
+.ask .n{font-size:14px;font-weight:800;color:var(--accent);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.ask b{color:var(--text)}
+
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--border-2);font-size:12px;color:var(--text-3);display:flex;justify-content:space-between}
+
+@media print{
+  .bar{display:none}
+  body{background:#fff;color:#111;font-size:12pt}
+  .qa,.email,.quote{background:#fff;border:1px solid #ccc;break-inside:avoid}
+  .qa .say,.email .body,.quote p{color:#111}
+  .qa .tag{color:#a05a00;background:#fff;border-color:#d0a000}
+  .qa .say-h{color:#0a7a37}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="mark">S</div>
+  <div><div class="nm">SecureLayer</div><div class="sub">MSSP Response Kit — Sales</div></div>
+  <div class="sp"></div>
+  <a class="btn btn-go" href="https://sharon19x1-ops.github.io/securelayer-docs/phase1-demo.html" target="_blank">▶ Demo ↗</a>
+  <button class="btn btn-ghost" onclick="window.print()">🖨 Print</button>
+</div>
+
+<div class="page">
+  <h1>Answering the MSSP — Response Kit</h1>
+  <p class="lead">This prospect replied with genuine interest and four technical questions. That's a buying signal. Below: confident, honest answers to each, a ready-to-send reply you can paste, and the questions to put back to them. Goal of the reply: book a 30-minute call and offer a Phase 1 design-partner pilot.</p>
+
+  <div class="quote">
+    <div class="who">What they sent</div>
+    <p>"That's interesting. Is it already a working, deployed product? How does it manage the endpoint AI agents beyond monitoring filesystem and network activity? I'm baffled by the skills detection capability. Can it leverage existing RMM agents to run software, block usage, or run scripts with privilege over thousands of endpoints? I'd be quite excited about real-world experience — especially how it self-protects against compromised endpoints, false positives, and disruption of operations."</p>
+  </div>
+
+  <div class="section-label">The four questions — what to say</div>
+
+  <div class="qa">
+    <span class="tag">Q1 · Is it a real, deployed product?</span>
+    <div class="they"><b>They're really asking:</b> can I trust this is real, or is it a deck?</div>
+    <div class="say-h">Say this</div>
+    <div class="say">
+      <p>"Yes — there's a working product you can click through today, and I'll send you the link. The architecture is a complete engineering spec: RMM deployment, PSA integration (ConnectWise, Autotask, NinjaOne), SIEM output (Splunk, Sentinel, Elastic), and the skill-scoring engine."</p>
+      <p>"We're in the Phase 1 build and taking on a small number of design partners to develop it around real MSSP environments. That's exactly why I wanted to talk to you — I'd like yours to be one of them."</p>
+    </div>
+  </div>
+
+  <div class="qa">
+    <span class="tag">Q2 · Beyond monitoring filesystem &amp; network?</span>
+    <div class="they"><b>They're really asking:</b> how is this different from the EDR I already run?</div>
+    <div class="say-h">Say this</div>
+    <div class="say">
+      <p>"Traditional EDR sees that a process ran and what file it touched. SecureLayer works one level up — at the semantic layer, between the AI agent and the action it's about to take."</p>
+      <p>"We intercept at the IDE plugin and the MCP server interface, so we see the <em>intent</em> — the skill being invoked, the tool call, the permission requested — and apply a policy decision <em>before</em> the action runs. That's skill-level enforcement, office-hours enforcement, and MCP interception. Not just watching what happened — governing what's allowed to happen."</p>
+    </div>
+  </div>
+
+  <div class="qa">
+    <span class="tag">Q3 · The skills detection capability</span>
+    <div class="they"><b>They're really asking:</b> what exactly is a "skill" and how does scoring work?</div>
+    <div class="say-h">Say this</div>
+    <div class="say">
+      <p>"A 'skill' is a discrete capability an AI agent can invoke — <span class="mono">browser-fetch</span>, <span class="mono">git-push</span>, <span class="mono">env-reader</span>, <span class="mono">shell-exec-sudo</span>. We keep a live registry of every skill across all your tenants and score each one across 10 risk dimensions: permission scope, network egress, credential access, shell execution, prompt-injection susceptibility, and so on."</p>
+      <p>"The policy is automatic. Score 8.0+ is critical — you choose: auto-block, or hold it for your decision. 3.0 and under is auto-approved, so your analysts never touch autocomplete or routine git pushes. Everything in between routes to your review queue with the full score breakdown and the MITRE technique. Your team only ever looks at the middle band."</p>
+      <div class="pillz"><span>10-dimension score</span><span>auto-approve ≤ 3.0</span><span>review 3.1–7.9</span><span>critical ≥ 8.0 → block or hold</span><span>MITRE-tagged</span></div>
+    </div>
+  </div>
+
+  <div class="qa">
+    <span class="tag">Q4 · RMM leverage · self-protection · false positives</span>
+    <div class="they"><b>They're really asking:</b> can you deploy at my scale without breaking my clients?</div>
+    <div class="say-h">Say this</div>
+    <div class="say">
+      <p><b>On RMM — yes, you guessed right.</b> "Deployment is native to the RMM you already run — NinjaOne, Datto, N-able, Kaseya, ConnectWise. One script, thousands of endpoints, installed as a system service, with hook health visible in your RMM console."</p>
+      <p><b>On self-protection.</b> "Phase 1 has no endpoint agent at all — discovery is cloud-side, so there's nothing on the endpoint to compromise, and a compromised host can't forge an all-clear to us. In Phase 2 the runtime component is code-signed, runs under its own service account, and if it's ever silenced it shows up as an offline alert in your RMM. Silence is a visible alert, not an invisible bypass."</p>
+      <p><b>On false positives — this is the one we engineered hardest.</b> "We're conservative by default: auto-block only at 8.0+. For critical actions you can set a human-in-the-loop hold instead of a block — the action pauses and you get a notification to approve or deny. And any blocked developer has one-click break-glass straight to your queue. You tune the threshold per client. The whole point is to enforce without generating angry client calls."</p>
+    </div>
+  </div>
+
+  <div class="section-label">Ready-to-send reply (paste &amp; personalize)</div>
+  <div class="email">
+    <div class="eh"><span class="t">✉ Email draft</span><span class="cp"><button class="btn btn-ghost" onclick="copyEmail()">Copy</button><span class="copied" id="copied">✓ copied</span></span></div>
+    <div class="body" id="emailBody">Subject: Re: SecureLayer — answers + a 5-minute look
+
+Hi [Name],
+
+Great questions — they're exactly the right ones to ask. Short answers, then I'd love 30 minutes to show you the rest.
+
+1) Is it real? Yes — here's a working walkthrough you can click through in 2 minutes: https://sharon19x1-ops.github.io/securelayer-docs/phase1-demo.html. We're in the Phase 1 build and taking a few design partners; I'd like yours to be one.
+
+2) Beyond filesystem/network monitoring? We work at the semantic layer — between the AI agent and the action it's about to take. We see the skill being invoked and apply policy before it runs. Enforcement, not just monitoring.
+
+3) Skills detection? A "skill" is a capability an agent can invoke (e.g. shell-exec-sudo, env-reader). We score each one across 10 risk dimensions and auto-approve the safe ones, auto-block or hold the critical ones, and queue the rest with full context. Your analysts only review the middle band.
+
+4) RMM + self-protection + false positives? Native RMM deployment (NinjaOne/ConnectWise/etc.), one script across your fleet. Phase 1 has no endpoint agent, so nothing to compromise; Phase 2's runtime piece is signed and shows as an RMM alert if silenced. And false positives: conservative by default, critical actions can hold for your approval instead of blocking, with one-click developer break-glass.
+
+Worth a 30-minute call this week? I can walk you through the demo live and scope what a pilot in your environment looks like.
+
+Best,
+[Your name]</div>
+  </div>
+
+  <div class="section-label">Ask them back (qualify + scope the pilot)</div>
+  <div class="qa" style="border-color:var(--blue)">
+    <div class="ask"><span class="n">1</span><span><b>Which RMM are you running?</b> NinjaOne, Datto, N-able, Kaseya, ConnectWise? Tells us which deployment to build first.</span></div>
+    <div class="ask"><span class="n">2</span><span><b>Which PSA?</b> ConnectWise Manage, Autotask, HaloPSA, Syncro? So the pilot drops into your existing ticket queue.</span></div>
+    <div class="ask"><span class="n">3</span><span><b>Which AI tools are your clients running?</b> Claude Code, Copilot, Cursor — and any MCP servers you're not monitoring today?</span></div>
+    <div class="ask"><span class="n">4</span><span><b>How many developer endpoints in a typical client?</b> 5–50 or 50–500? Sizes the pilot.</span></div>
+    <div class="ask"><span class="n">5</span><span><b>Any AI-agent incident or near-miss with a client?</b> Even a "we were nervous" moment — it sharpens urgency and pricing.</span></div>
+    <div class="ask"><span class="n">6</span><span><b>Are auditors or clients already asking about AI agent governance?</b> Audit pressure is driving most of these conversations.</span></div>
+  </div>
+
+  <div class="foot">
+    <div>SecureLayer — MSSP Response Kit — Confidential</div>
+    <div>securelayer.io · May 2026</div>
+  </div>
+</div>
+
+<script>
+function copyEmail(){
+  var t = document.getElementById('emailBody').innerText;
+  navigator.clipboard.writeText(t).then(function(){
+    var c = document.getElementById('copied'); c.style.display='inline';
+    setTimeout(function(){ c.style.display='none'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
