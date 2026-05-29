@@ -478,7 +478,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         <div class="splunk-logo">Sp</div>
         <div class="page-head" style="margin-bottom:0">
           <h1>Splunk integration</h1>
-          <p>Set up once: point SecureLayer at your Splunk HEC. From then on every skill event flows in CIM-normalized and MITRE-tagged, contributing risk to the model your analysts already use.</p>
+          <p>Set up once: point SecureLayer at your Splunk HEC. Every skill event then flows in CIM-normalized and MITRE-tagged. <b style="color:var(--text)">Splunk alerts fire on the risk the skill score drives</b> — and any automation you already run (SOAR, ticketing, or a Splunk alert action) can act on them. No new console, no tool you don't already own.</p>
         </div>
       </div>
 
@@ -501,14 +501,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         </div>
       </div>
 
+      <div class="card-h" style="margin-bottom:10px">How a skill score becomes a Splunk alert</div>
       <div class="flow-chain">
-        <div class="fc" style="background:var(--accent-dim)"><div class="ic">⬡</div><div class="nm" style="color:var(--accent)">SecureLayer</div><div class="sub">critical skill → HEC event</div></div>
+        <div class="fc" style="background:var(--accent-dim)"><div class="ic">⬡</div><div class="nm" style="color:var(--accent)">SecureLayer</div><div class="sub">skill score → HEC event</div></div>
         <div class="fc"><div class="arr">→</div></div>
-        <div class="fc" style="background:var(--splunk-dim)"><div class="ic">📊</div><div class="nm" style="color:var(--splunk)">Splunk RBA</div><div class="sub">risk added to risk object</div></div>
+        <div class="fc" style="background:var(--splunk-dim)"><div class="ic">📊</div><div class="nm" style="color:var(--splunk)">Splunk</div><div class="sub">score raises the agent's risk</div></div>
         <div class="fc"><div class="arr">→</div></div>
-        <div class="fc" style="background:var(--red-dim)"><div class="ic">🔔</div><div class="nm" style="color:var(--red)">Risk notable</div><div class="sub">threshold hit → fires</div></div>
+        <div class="fc" style="background:var(--red-dim)"><div class="ic">🔔</div><div class="nm" style="color:var(--red)">Splunk alert</div><div class="sub">fires when risk crosses your threshold</div></div>
         <div class="fc"><div class="arr">→</div></div>
-        <div class="fc" style="background:var(--bg-3)"><div class="ic">⚡</div><div class="nm">Torq (downstream)</div><div class="sub">playbook · Phase 1+</div></div>
+        <div class="fc" style="background:var(--bg-3)"><div class="ic">⚙</div><div class="nm">Your tools</div><div class="sub">notify, ticket, or automate — with what you already run</div></div>
       </div>
 
       <div class="grid g2">
@@ -543,7 +544,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
       </div>
 
       <div class="notable">
-        <div class="ttl"><span class="badge b-red">RISK NOTABLE</span> AI agent skill risk — bluesky-sw / browser-fetch</div>
+        <div class="ttl"><span class="badge b-red">SPLUNK ALERT · fired</span> AI agent skill risk — bluesky-sw / browser-fetch</div>
         <div class="kv">
           <span class="k">Risk object</span><span class="v">agent:browser-fetch · tenant:bluesky-sw</span>
           <span class="k">Contributing</span><span class="v">env-reader 9.2, shell-exec-sudo 9.8, browser-fetch 6.8</span>
