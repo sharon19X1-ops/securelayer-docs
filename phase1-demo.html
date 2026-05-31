@@ -260,10 +260,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
     <div class="nav-item" data-go="splunk"><span class="ic">📡</span> Splunk Integration</div>
     <div class="nav-item" data-go="enforce"><span class="ic">🛡</span> Enforcement</div>
     <div class="nav-item" data-go="audit"><span class="ic">📋</span> Compliance</div>
-    <div class="nav-label">Phase 2 — Coming</div>
-    <div class="nav-item p2"><span class="ic">📶</span> Runtime Sensor <span class="p2-tag">P2</span></div>
-    <div class="nav-item p2"><span class="ic">🔬</span> MCP Behavioral <span class="p2-tag">P2</span></div>
-    <div class="nav-item p2"><span class="ic">⚡</span> Mid-Session <span class="p2-tag">P2</span></div>
+    <div class="nav-item p2"><span class="ic">🗺</span> Phase 2 Roadmap <span class="p2-tag">P2</span></div>
     <div class="sidebar-foot">Grounded in ARCHITECTURE_V6<br/>BlueSky Software · 14 endpoints</div>
   </aside>
 
@@ -319,7 +316,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
         </div>
       </div>
 
-      <div class="note"><b>Phase 1 discovery has no endpoint footprint.</b> The scan is OAuth + cloud-side — nothing to install for discovery, and a compromised host can't disable it or forge an all-clear. Enforcement (Beat 5) is delivered through your existing RMM as policy, not a SecureLayer endpoint agent. The Phase 2 runtime sensor deploys later through that same RMM — one toggle, no re-onboarding. Coverage is scoped to the sources you connect.</div>
+      <div class="note"><b>Phase 1 discovery has no endpoint footprint.</b> The scan is OAuth + cloud-side — nothing to install for discovery, and a compromised host can't disable it or forge an all-clear. Enforcement (Beat 5) is delivered through your existing RMM as policy, not a SecureLayer endpoint agent. Coverage is scoped to the sources you connect.</div>
     </section>
 
     <!-- ===== BEAT 2: DISCOVER ===== -->
@@ -430,7 +427,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
               <div class="dim"><span class="nm">Identity Verifiability</span><span class="bar"><span style="width:50%;background:var(--accent)"></span></span><span class="sc" style="color:var(--accent)">5</span></div>
               <div class="dim"><span class="nm">Supply Chain Risk</span><span class="bar"><span style="width:80%;background:var(--red)"></span></span><span class="sc" style="color:var(--red)">8</span></div>
               <div class="dim"><span class="nm">Prompt Injection Risk</span><span class="bar"><span style="width:70%;background:var(--orange)"></span></span><span class="sc" style="color:var(--orange)">7</span></div>
-              <div class="dim p2"><span class="nm">Behavioral Anomaly <span class="p2-tag">P2</span></span><span class="bar"><span style="width:0%"></span></span><span class="sc" style="color:var(--text-3)">—</span></div>
+              <div class="dim"><span class="nm">Behavioral Anomaly</span><span class="bar"><span style="width:0%"></span></span><span class="sc" style="color:var(--text-3)">—</span></div>
             </div>
             <div class="flags">
               <span class="flag"><b>SI-002</b> Supply chain · nested dependency → T1195.001</span>
@@ -614,9 +611,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15
       <div class="card">
         <div class="card-h">Standard coverage</div>
         <div class="std-row"><span class="badge b-green">✓ active</span><span class="nm">SOC 2 — CC6.1 logical access controls</span><span class="mono" style="margin-left:auto;font-size:12px;font-weight:600;color:var(--text-2)">signed PDF / JSON</span></div>
-        <div class="std-row dim"><span class="badge b-purple">P2</span><span class="nm">CMMC 2.0 — AC / AU practices</span><span class="mono" style="margin-left:auto;font-size:12px;font-weight:600;color:var(--text-3)">Phase 2</span></div>
-        <div class="std-row dim"><span class="badge b-purple">P2</span><span class="nm">ISO 27001 — A.9 access control</span><span class="mono" style="margin-left:auto;font-size:12px;font-weight:600;color:var(--text-3)">Phase 2</span></div>
-        <div class="callout">Phase 1 enforces one standard end-to-end rather than half-supporting many. Additional standards arrive in Phase 2.</div>
+        <div class="callout">Phase 1 enforces one standard end-to-end rather than half-supporting many.</div>
       </div>
 
       <div class="card" style="margin-top:14px">
